@@ -1,22 +1,71 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-components';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import reset from 'styled-reset';
+
+import Theme from './styles/Theme';
+
+function AppRouter() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<div>Hi</div>} />
+      </Routes>
+    </Router>
+  )
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledThemeProvider theme={Theme}>
+      <MuiThemeProvider theme={muiTheme}>
+        <GlobalStyle />
+        <AppRouter />
+      </MuiThemeProvider>
+    </StyledThemeProvider>
   );
 }
+
+const muiTheme = createTheme({
+  palette: {
+    info: {
+      light: Theme.black,
+      main: Theme.firstGray,
+      dark: Theme.black,
+    },
+  },
+  typography: {
+    fontFamily: '"Noto Sans KR", sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 300,
+    fontWeightMedium: 400,
+    fontWeightBold: 300,
+  },
+});
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  i {
+    color: ${Theme.placeholderColor};
+  }
+
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+  }
+`;
 
 export default App;
