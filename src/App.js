@@ -4,12 +4,13 @@ import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/st
 import reset from 'styled-reset';
 
 import Theme from './styles/Theme';
+import Home from './pages/Home'
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<div>Hi</div>} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   )
@@ -60,6 +61,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-decoration: none;
+  }
+  
+  html {
+    font-family: 'Noto Sans KR', sans-serif;
   }
 
   body {
