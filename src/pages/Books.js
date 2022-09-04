@@ -4,7 +4,7 @@ import RENT_STATE from "../constant/RENT_STATE";
 import InfoListLayout from "../components/search/InfoListLayout";
 import PageTitle from "../components/PageTitle";
 
-function SearchAll() {
+function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
   const rentees = [
     {
@@ -28,31 +28,25 @@ function SearchAll() {
       authorName: "저자",
       rentState: RENT_STATE.UNRENTABLE,
     },
-    {
-      id: "4",
-      thumbnailUrl: "",
-      title: "기자재4",
-      rentState: RENT_STATE.UNRENTABLE,
-    },
   ];
 
   const initSearchList = async () => {};
   const loadSearchList = async () => {};
-  const initAllList = async () => {};
-  const loadAllList = async () => {};
+  const initBookList = async () => {};
+  const loadBookList = async () => {};
 
   return (
     <InfoListLayout
-      pageTitle={<PageTitle title={searchParams.get("keyword")} />}
-      listType="검색"
-      searchApiUrl={routes.searchAll}
+      pageTitle={<PageTitle title="도서 " />}
+      listType="도서"
+      searchApiUrl={routes.searchBooks}
       rentees={rentees}
       initSearchList={initSearchList}
       loadSearchList={loadSearchList}
-      initTypeList={initAllList}
-      loadTypeList={loadAllList}
+      initTypeList={initBookList}
+      loadTypeList={loadBookList}
     />
   );
 }
 
-export default SearchAll;
+export default Books;

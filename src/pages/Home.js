@@ -51,6 +51,11 @@ const SearchBarBox = styled.div`
   position: absolute;
   top: 40%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   @media screen and (max-width: 767px) {
     left: 10vw;
     width: 80vw;
@@ -63,9 +68,7 @@ const SearchBarBox = styled.div`
 `;
 
 const Logo = styled(LogoStyle)`
-  display: flex;
-  justify-content: center;
-
+  text-align: center;
   font-size: 48px;
   margin-bottom: 5px;
 `;

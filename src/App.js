@@ -14,6 +14,7 @@ import Theme from "./styles/Theme";
 import Home from "./pages/Home";
 import routes from "./routes";
 import SearchAll from "./pages/SearchAll";
+import Books from "./pages/Books";
 
 function AppRouter() {
   return (
@@ -21,7 +22,7 @@ function AppRouter() {
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
-        <Route path={routes.searchBooks} element={<SearchAll />} />
+        <Route path={routes.searchBooks} element={<Books />} />
         <Route path={routes.searchEquipments} element={<SearchAll />} />
         <Route path={`${routes.type}/:type`} element={<SearchAll />} />
       </Routes>
