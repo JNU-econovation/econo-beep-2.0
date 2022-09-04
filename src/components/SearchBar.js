@@ -59,6 +59,7 @@ const Icon = styled.div`
   align-items: center;
 
   margin-left: 15px;
+  margin-right: 5px;
   font-size: 24px;
 `;
 
