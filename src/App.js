@@ -1,28 +1,41 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-components';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import reset from 'styled-reset';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ThemeProvider as StyledThemeProvider,
+  createGlobalStyle,
+} from "styled-components";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import reset from "styled-reset";
+import { HelmetProvider } from "react-helmet-async";
 
-import Theme from './styles/Theme';
+import Theme from "./styles/Theme";
+import Home from "./pages/Home";
+import routes from "./routes";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<div>Hi</div>} />
+        <Route path={routes.home} element={<Home />} />
+        <Route path={routes.searchAll} element={<div>search</div>} />
+        <Route path={`${routes.type}/:type`} element={<div>type</div>} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 function App() {
   return (
-    <StyledThemeProvider theme={Theme}>
-      <MuiThemeProvider theme={muiTheme}>
-        <GlobalStyle />
-        <AppRouter />
-      </MuiThemeProvider>
-    </StyledThemeProvider>
+    <HelmetProvider>
+      <StyledThemeProvider theme={Theme}>
+        <MuiThemeProvider theme={muiTheme}>
+          <GlobalStyle />
+          <AppRouter />
+        </MuiThemeProvider>
+      </StyledThemeProvider>
+    </HelmetProvider>
   );
 }
 
@@ -60,6 +73,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-decoration: none;
+  }
+  
+  html {
+    font-family: 'Noto Sans KR', sans-serif;
   }
 
   body {
