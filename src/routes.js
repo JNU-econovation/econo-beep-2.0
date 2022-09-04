@@ -1,8 +1,8 @@
 const routes = {
   home: "/",
   searchAll: "/search",
-  searchBooks: "/search/books",
-  searchEquipments: "/search/equipments",
+  searchBooks: "/books",
+  searchEquipments: "/equipments",
   manager: "/manager",
   profile: "/profile",
   type: "/type",

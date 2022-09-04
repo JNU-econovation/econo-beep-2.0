@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import Body from "../components/Body";
 import Header from "../components/header/Header";
 import PageTitle from "../components/PageTitle";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/search/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
@@ -36,17 +37,6 @@ function Home() {
     </Body>
   );
 }
-
-const Body = styled.div`
-  width: 100vw;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-color: ${(props) => props.theme.bgColor};
-`;
 
 const MainPage = styled.div`
   width: 100vw;

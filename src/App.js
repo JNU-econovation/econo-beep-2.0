@@ -13,14 +13,17 @@ import { HelmetProvider } from "react-helmet-async";
 import Theme from "./styles/Theme";
 import Home from "./pages/Home";
 import routes from "./routes";
+import SearchAll from "./pages/SearchAll";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.searchAll} element={<div>search</div>} />
-        <Route path={`${routes.type}/:type`} element={<div>type</div>} />
+        <Route path={routes.searchAll} element={<SearchAll />} />
+        <Route path={routes.searchBooks} element={<SearchAll />} />
+        <Route path={routes.searchEquipments} element={<SearchAll />} />
+        <Route path={`${routes.type}/:type`} element={<SearchAll />} />
       </Routes>
     </Router>
   );
@@ -82,6 +85,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+  }
+  
+  button {
+    padding: 0;
   }
 `;
 

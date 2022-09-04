@@ -4,6 +4,11 @@ const Theme = {
   purple: "#8802FF",
   black: "#191A22",
   firstGray: "#7F7F7F",
+  secondGray: "#B9B9BB",
+
+  rentBlue: "#5566FF",
+  rentRed: "#ff6161",
+  rentGray: "#5D5E64",
 
   borderGray: "#E8E8E8",
   placeholderColor: "#AEAEAE",
