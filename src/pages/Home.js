@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
+import Category from "../components/home/Category";
 
 function Home() {
   return (
@@ -18,6 +19,13 @@ function Home() {
         </SearchBarBox>
         <PageBannerSlider />
       </MainPage>
+
+      <ExpendPage>
+        <Content>
+          <ContentTitle>카테고리</ContentTitle>
+          <Category />
+        </Content>
+      </ExpendPage>
     </Body>
   );
 }
@@ -37,6 +45,9 @@ const MainPage = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const SearchBarBox = styled.div`
@@ -60,6 +71,26 @@ const Logo = styled(LogoStyle)`
 
   font-size: 48px;
   margin-bottom: 5px;
+`;
+
+const ExpendPage = styled(MainPage)`
+  min-height: 100vh;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 750px;
+  margin-top: 50px;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentTitle = styled.div`
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: ${(props) => props.theme.black};
 `;
 
 export default Home;

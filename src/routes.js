@@ -1,10 +1,11 @@
 const routes = {
   home: "/",
-  searchAll: "/search/all",
+  searchAll: "/search",
   searchBooks: "/search/books",
   searchEquipments: "/search/equipments",
-  manager: "/search/equipments",
+  manager: "/manager",
   profile: "/profile",
+  type: "/type",
 };
-
+Object.freeze(routes);
 export default routes;

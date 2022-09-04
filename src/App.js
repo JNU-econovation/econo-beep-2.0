@@ -20,6 +20,7 @@ function AppRouter() {
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.searchAll} element={<div>search</div>} />
+        <Route path={`${routes.type}/:type`} element={<div>type</div>} />
       </Routes>
     </Router>
   );
