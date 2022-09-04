@@ -1,10 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-components';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import reset from 'styled-reset';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ThemeProvider as StyledThemeProvider,
+  createGlobalStyle,
+} from "styled-components";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import reset from "styled-reset";
+import { HelmetProvider } from "react-helmet-async";
 
-import Theme from './styles/Theme';
-import Home from './pages/Home'
+import Theme from "./styles/Theme";
+import Home from "./pages/Home";
 
 function AppRouter() {
   return (
@@ -13,17 +20,19 @@ function AppRouter() {
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 function App() {
   return (
-    <StyledThemeProvider theme={Theme}>
-      <MuiThemeProvider theme={muiTheme}>
-        <GlobalStyle />
-        <AppRouter />
-      </MuiThemeProvider>
-    </StyledThemeProvider>
+    <HelmetProvider>
+      <StyledThemeProvider theme={Theme}>
+        <MuiThemeProvider theme={muiTheme}>
+          <GlobalStyle />
+          <AppRouter />
+        </MuiThemeProvider>
+      </StyledThemeProvider>
+    </HelmetProvider>
   );
 }
 

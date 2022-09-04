@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Header from "../components/header/Header";
+import PageTitle from "../components/PageTitle";
 
 function Home() {
   return (
     <Body>
+      <PageTitle title="Home" />
       <MainPage>
         <Header />
       </MainPage>
