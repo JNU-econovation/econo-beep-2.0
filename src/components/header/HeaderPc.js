@@ -7,7 +7,7 @@ import LogoStyle from "../../styles/LogoStyle";
 function HeaderPc() {
   const navigate = useNavigate();
   return (
-    <Header>
+    <HeaderBox>
       <Logo onClick={() => navigate(routes.home)}>econoBeep</Logo>
       <ButtonBox>
         <MenuButton onClick={() => navigate(routes.searchBooks)}>
@@ -19,18 +19,18 @@ function HeaderPc() {
         <MenuButton onClick={() => navigate(routes.manager)}>관리자</MenuButton>
         <ProfileButton />
       </ButtonBox>
-    </Header>
+    </HeaderBox>
   );
 }
 
-const Header = styled.div`
+const HeaderBox = styled.div`
   @media screen and (max-width: 767px) {
     display: none;
   }
 
   @media screen and (min-width: 768px) {
     width: 100%;
-    padding: 10px 15px;
+    padding: 0px 15px;
 
     display: flex;
     justify-content: space-between;

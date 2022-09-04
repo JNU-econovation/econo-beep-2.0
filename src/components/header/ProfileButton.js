@@ -29,13 +29,13 @@ const Profile = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 10px;
+  padding: 14px;
   border: none;
 `;
 
 const NoLogo = styled.div`
-  width: 28px;
-  height: 28px;
+  width: ${(props) => props.theme.headerButtonSize};
+  height: ${(props) => props.theme.headerButtonSize};
   display: block;
   justify-content: center;
 `;
@@ -45,7 +45,7 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-size: 28px;
+  font-size: ${(props) => props.theme.headerButtonSize};
   cursor: pointer;
 `;
 export default ProfileButton;
