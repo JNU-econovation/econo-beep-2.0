@@ -4,6 +4,7 @@ import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
+import PageBannerSlider from "../components/home/PageBannerSlider";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
           <Logo>econoBeep</Logo>
           <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
         </SearchBarBox>
+        <PageBannerSlider />
       </MainPage>
     </Body>
   );

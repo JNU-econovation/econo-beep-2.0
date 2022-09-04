@@ -12,7 +12,7 @@ const Theme = {
   bluePurple: "linear-gradient(45deg, #001AFF 0%, #8F00FF 100%)",
 
   fontFamilyLogo: "'Rajdhani', sans-serif",
-  headerButtonSize: "30px",
+  headerButtonSize: "32px",
 };
 
 export default Theme;

@@ -49,6 +49,7 @@ const HeaderBox = styled.div`
   align-items: center;
 
   position: relative;
+  z-index: 1;
 `;
 
 const ButtonBox = styled.div`
@@ -74,6 +75,7 @@ const OpenMenuButton = styled.div`
 
 const MenuBox = styled.div`
   width: 100%;
+  background-color: ${(props) => props.theme.bgColor};
   border-top: ${(props) => props.theme.borderTop};
   box-shadow: ${(props) => props.theme.boxShadow};
 
