@@ -55,7 +55,7 @@ const MenuButton = styled.div`
   padding: 10px 0;
 
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
   text-align: center;
   color: ${(props) => props.theme.firstGray};
 

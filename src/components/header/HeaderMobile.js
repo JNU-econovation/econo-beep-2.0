@@ -98,7 +98,7 @@ const MenuButton = styled.div`
   align-items: center;
 
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   color: ${(props) => props.theme.firstGray};
 `;
 
