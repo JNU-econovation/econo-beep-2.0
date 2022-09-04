@@ -6,6 +6,7 @@ import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
 import Category from "../components/home/Category";
+import RecommendBookSlider from "../components/home/RecommendBookSlider";
 
 function Home() {
   return (
@@ -24,6 +25,10 @@ function Home() {
         <Content>
           <ContentTitle>카테고리</ContentTitle>
           <Category />
+        </Content>
+        <Content>
+          <ContentTitle>추천 도서</ContentTitle>
+          <RecommendBookSlider />
         </Content>
       </ExpendPage>
     </Body>
@@ -80,7 +85,7 @@ const ExpendPage = styled(MainPage)`
 const Content = styled.div`
   width: 100%;
   max-width: 750px;
-  margin-top: 50px;
+  margin-top: 60px;
   padding: 0 30px;
   display: flex;
   flex-direction: column;
