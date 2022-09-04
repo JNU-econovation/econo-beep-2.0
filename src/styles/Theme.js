@@ -4,6 +4,8 @@ const Theme = {
   purple: "#8802FF",
   black: "#191A22",
   firstGray: "#7F7F7F",
+
+  borderGray: "#E8E8E8",
   placeholderColor: "#AEAEAE",
 
   borderTop: "1px solid #F8F8F9",

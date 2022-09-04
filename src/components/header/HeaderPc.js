@@ -51,7 +51,6 @@ const ButtonBox = styled.div`
 
 const MenuButton = styled.div`
   width: 100px;
-  height: 100%;
   padding: 10px 0;
 
   font-size: 14px;

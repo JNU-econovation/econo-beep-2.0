@@ -7,6 +7,7 @@ import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
 import Category from "../components/home/Category";
 import RecommendBookSlider from "../components/home/RecommendBookSlider";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -30,6 +31,7 @@ function Home() {
           <ContentTitle>추천 도서</ContentTitle>
           <RecommendBookSlider />
         </Content>
+        <Footer />
       </ExpendPage>
     </Body>
   );
