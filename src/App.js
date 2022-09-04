@@ -12,12 +12,14 @@ import { HelmetProvider } from "react-helmet-async";
 
 import Theme from "./styles/Theme";
 import Home from "./pages/Home";
+import routes from "./routes";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path={routes.home} element={<Home />} />
+        <Route path={routes.searchAll} element={<div>search</div>} />
       </Routes>
     </Router>
   );
