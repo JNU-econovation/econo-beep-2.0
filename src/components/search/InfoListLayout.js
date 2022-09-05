@@ -1,10 +1,13 @@
+import styled from "styled-components";
+import ReactLoading from "react-loading";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+
 import Header from "../header/Header";
 import SearchBar from "./SearchBar";
 import RenteeInfo from "./RenteeInfo";
 import Body from "../Body";
-import styled from "styled-components";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import theme from "../../styles/Theme";
 
 function InfoListLayout({
   pageTitle,
@@ -17,14 +20,45 @@ function InfoListLayout({
   loadTypeList,
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isInitLoaded, setIsInitLoaded] = useState(false);
+  const target = useRef(null);
 
   useEffect(() => {
     if (!searchParams.get("keyword")) {
       initTypeList();
+      setIsInitLoaded(true);
     } else {
       initSearchList();
     }
-  }, [searchParams.get("keyword")]);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const loadRenteeList = () => {
+      if (!searchParams.get("keyword")) {
+        loadTypeList();
+        setIsInitLoaded(true);
+      } else {
+        loadSearchList();
+      }
+    };
+
+    const onIntersect = async ([entry], observer) => {
+      if (entry.isIntersecting && !isInitLoaded) {
+        observer.unobserve(entry.target);
+        await loadRenteeList();
+        observer.observe(entry.target);
+      }
+    };
+
+    let observer;
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, {
+        threshold: 0.5,
+      });
+      observer.observe(target.current);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
 
   return (
     <Body>
@@ -45,15 +79,14 @@ function InfoListLayout({
           />
         ))}
       </ResultBox>
-      {searchParams.get("keyword") ? (
-        <MoreRenteeButton onClick={loadSearchList}>
-          검색 결과 더 보기
-        </MoreRenteeButton>
-      ) : (
-        <MoreRenteeButton onClick={loadTypeList}>
-          {listType} 더 보기
-        </MoreRenteeButton>
-      )}
+      <div ref={target} style={{ padding: "20px" }}>
+        <ReactLoading
+          type="spin"
+          color={theme.firstGray}
+          width="28px"
+          height="28px"
+        />
+      </div>
     </Body>
   );
 }
@@ -72,21 +105,21 @@ const ResultBox = styled.div`
   align-items: center;
 `;
 
-const MoreRenteeButton = styled.button`
-  width: 85%;
-  height: 40px;
-  max-width: 400px;
-  
-  margin: 15px 0;
-  
-  border: 1px solid ${(props) => props.theme.firstGray};
-  border-radius: 10px;
-  
-  font-size: 16px;
-  font-weight: 500;
-  color: ${(props) => props.theme.firstGray};
-  background-color: ${(props) => props.theme.bgColor};
-  }
-`;
+// const MoreRenteeButton = styled.button`
+//   width: 85%;
+//   height: 40px;
+//   max-width: 400px;
+//
+//   margin: 15px 0;
+//
+//   border: 1px solid ${(props) => props.theme.firstGray};
+//   border-radius: 10px;
+//
+//   font-size: 16px;
+//   font-weight: 500;
+//   color: ${(props) => props.theme.firstGray};
+//   background-color: ${(props) => props.theme.bgColor};
+//   }
+// `;
 
 export default InfoListLayout;

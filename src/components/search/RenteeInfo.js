@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 import RENT_STATE from "../../constant/RENT_STATE";
 import { useNavigate } from "react-router-dom";
 
@@ -105,4 +106,4 @@ const RentInfoGray = styled(RentInfo)`
   color: ${(props) => props.theme.rentGray};
 `;
 
-export default RenteeInfo;
+export default React.memo(RenteeInfo);
