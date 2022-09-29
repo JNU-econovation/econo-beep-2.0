@@ -26,8 +26,10 @@ function SearchBar({ placeholder, searchApiUrl }) {
   useEffect(() => {
     if (searchParams.get("keyword")) {
       setInputKeyword(searchParams.get("keyword"));
+    } else {
+      setInputKeyword("");
     }
-  }, [searchParams.get("keyword")]);
+  }, [searchParams]);
 
   return (
     <SearchBox onKeyPress={onEnterPress}>

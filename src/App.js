@@ -62,7 +62,7 @@ const muiTheme = createTheme({
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  
+
   a {
     text-decoration: none;
     color: inherit;
@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     text-decoration: none;
   }
-  
+
   html {
     font-family: 'Noto Sans KR', sans-serif;
   }
@@ -87,7 +87,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
   }
-  
+
   button {
     padding: 0;
   }

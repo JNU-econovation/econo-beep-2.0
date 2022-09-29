@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 import Header from "../header/Header";
 import SearchBar from "./SearchBar";
 import RenteeInfo from "./RenteeInfo";
 import Body from "../Body";
 import theme from "../../styles/Theme";
+import PageTitle from "../PageTitle";
 
 function InfoListLayout({
   pageTitle,
@@ -24,24 +25,24 @@ function InfoListLayout({
   const target = useRef(null);
 
   useEffect(() => {
-    if (!searchParams.get("keyword")) {
+    if (searchParams.get("keyword") === null) {
       initTypeList();
       setIsInitLoaded(true);
-    } else {
+    } else if (searchParams.get("keyword")) {
       initSearchList();
+      setIsInitLoaded(true);
+    }
+  }, [searchParams]);
+
+  const loadRenteeList = useCallback(() => {
+    if (searchParams.get("keyword") === null) {
+      loadTypeList();
+    } else if (searchParams.get("keyword")) {
+      loadSearchList();
     }
   }, [searchParams]);
 
   useEffect(() => {
-    const loadRenteeList = () => {
-      if (!searchParams.get("keyword")) {
-        loadTypeList();
-        setIsInitLoaded(true);
-      } else {
-        loadSearchList();
-      }
-    };
-
     const onIntersect = async ([entry], observer) => {
       if (entry.isIntersecting && !isInitLoaded) {
         observer.unobserve(entry.target);
@@ -58,11 +59,11 @@ function InfoListLayout({
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target]);
+  }, [target, loadRenteeList]);
 
   return (
     <Body>
-      {pageTitle}
+      <PageTitle title={pageTitle} />
       <Header />
       <SearchBarHolder>
         <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
@@ -92,13 +93,16 @@ function InfoListLayout({
 }
 
 const SearchBarHolder = styled.div`
-  width: 90%;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 750px;
+  padding: 0 15px;
   margin: 20px 0;
 `;
 
 const ResultBox = styled.div`
   width: 100%;
+  max-width: 800px;
+  padding: 0 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;

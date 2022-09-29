@@ -1,43 +1,117 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import routes from "../routes";
 import RENT_STATE from "../constant/RENT_STATE";
 import InfoListLayout from "../components/search/InfoListLayout";
-import PageTitle from "../components/PageTitle";
 
 function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const rentees = [
-    {
-      id: "1",
-      thumbnailUrl: "",
-      title: "책1",
-      authorName: "저자",
-      rentState: RENT_STATE.RENTED,
-    },
-    {
-      id: "2",
-      thumbnailUrl: "",
-      title: "책2",
-      authorName: "저자",
-      rentState: RENT_STATE.RENTABLE,
-    },
-    {
-      id: "3",
-      thumbnailUrl: "",
-      title: "책3",
-      authorName: "저자",
-      rentState: RENT_STATE.UNRENTABLE,
-    },
-  ];
+  const [rentees, setRentees] = useState([]);
 
-  const initSearchList = async () => {};
-  const loadSearchList = async () => {};
-  const initBookList = async () => {};
-  const loadBookList = async () => {};
+  const initSearchList = () => {
+    setRentees([]);
+  };
+
+  const loadSearchList = () => {
+    const newRentees = [
+      {
+        id: "100",
+        title: "load search list",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "101",
+        title: "load search list",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "102",
+        title: "load search list",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "103",
+        title: "load search list",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "104",
+        title: "load search list",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+    ];
+    setRentees((rentees) => [...rentees, ...newRentees]);
+  };
+
+  const initBookList = () => {
+    // setRentees([]);
+    setRentees([
+      {
+        id: "1",
+        thumbnailUrl: "",
+        title: "책1",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "2",
+        thumbnailUrl: "",
+        title: "책2",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTABLE,
+      },
+      {
+        id: "3",
+        thumbnailUrl: "",
+        title: "책3",
+        authorName: "저자",
+        rentState: RENT_STATE.UNRENTABLE,
+      },
+    ]);
+  };
+
+  const loadBookList = () => {
+    const newRentees = [
+      {
+        id: "5",
+        thumbnailUrl: "",
+        title: "책5",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTED,
+      },
+      {
+        id: "6",
+        thumbnailUrl: "",
+        title: "책6",
+        authorName: "저자",
+        rentState: RENT_STATE.RENTABLE,
+      },
+      {
+        id: "7",
+        thumbnailUrl: "",
+        title: "책7",
+        authorName: "저자",
+        rentState: RENT_STATE.UNRENTABLE,
+      },
+    ];
+    setRentees((rentees) => [...rentees, ...newRentees]);
+  };
 
   return (
     <InfoListLayout
-      pageTitle={<PageTitle title="도서 " />}
+      key={
+        searchParams.get("keyword") !== null
+          ? `books?${searchParams.get("keyword")}`
+          : "books"
+      }
+      pageTitle={
+        searchParams.get("keyword") ? searchParams.get("keyword") : "도서"
+      }
       listType="도서"
       searchApiUrl={routes.searchBooks}
       rentees={rentees}

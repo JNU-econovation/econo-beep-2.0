@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import routes from "../routes";
 import RENT_STATE from "../constant/RENT_STATE";
 import InfoListLayout from "../components/search/InfoListLayout";
-import PageTitle from "../components/PageTitle";
-import { useState } from "react";
 
 function SearchAll() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,6 +39,7 @@ function SearchAll() {
       },
     ]);
   };
+
   const loadSearchList = async () => {
     const newRentees = [
       {
@@ -72,12 +72,13 @@ function SearchAll() {
     ];
     setRentees((rentees) => [...rentees, ...newRentees]);
   };
+
   const initAllList = async () => {};
   const loadAllList = async () => {};
 
   return (
     <InfoListLayout
-      pageTitle={<PageTitle title={searchParams.get("keyword")} />}
+      pageTitle={searchParams.get("keyword")}
       listType="검색"
       searchApiUrl={routes.searchAll}
       rentees={rentees}

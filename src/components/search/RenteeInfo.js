@@ -37,8 +37,7 @@ const InfoHolder = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 85%;
-  max-width: 800px;
+  width: 100%;
   padding: 20px 0;
   border-bottom: 0.2px solid darkgray;
 `;
