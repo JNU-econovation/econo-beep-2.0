@@ -32,7 +32,7 @@ function InfoListLayout({
       initSearchList();
       setIsInitLoaded(true);
     }
-  }, [searchParams]);
+  }, [searchParams.get("keyword")]);
 
   const loadRenteeList = useCallback(() => {
     if (searchParams.get("keyword") === null) {
@@ -40,7 +40,7 @@ function InfoListLayout({
     } else if (searchParams.get("keyword")) {
       loadSearchList();
     }
-  }, [searchParams]);
+  }, [searchParams.get("keyword")]);
 
   useEffect(() => {
     const onIntersect = async ([entry], observer) => {

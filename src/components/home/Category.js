@@ -12,7 +12,11 @@ function Category() {
         <Type
           key={item}
           onClick={() => {
-            navigate(`${routes.type}/${RENTEE_TYPES.URL[item]}`);
+            if (RENTEE_TYPES.URL[item] === "equipment") {
+              navigate(routes.searchEquipments);
+            } else {
+              navigate(`${routes.type}/${RENTEE_TYPES.URL[item]}`);
+            }
           }}
         >
           <TypeImg src={RENTEE_TYPES.ICON[item]} />

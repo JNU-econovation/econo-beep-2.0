@@ -16,6 +16,7 @@ import routes from "./routes";
 import SearchAll from "./pages/SearchAll";
 import Books from "./pages/Books";
 import Equipments from "./pages/Equipments";
+import Types from "./pages/Types";
 
 function AppRouter() {
   return (
@@ -25,6 +26,7 @@ function AppRouter() {
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.searchBooks} element={<Books />} />
         <Route path={routes.searchEquipments} element={<Equipments />} />
+        <Route path={`${routes.type}/:type`} element={<Types />} />
         <Route path={routes.searchEquipments} element={<SearchAll />} />
         <Route path={`${routes.type}/:type`} element={<SearchAll />} />
       </Routes>
