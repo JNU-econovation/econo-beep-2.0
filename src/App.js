@@ -13,14 +13,22 @@ import { HelmetProvider } from "react-helmet-async";
 import Theme from "./styles/Theme";
 import Home from "./pages/Home";
 import routes from "./routes";
+import SearchAll from "./pages/SearchAll";
+import Books from "./pages/Books";
+import Equipments from "./pages/Equipments";
+import Types from "./pages/Types";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.searchAll} element={<div>search</div>} />
-        <Route path={`${routes.type}/:type`} element={<div>type</div>} />
+        <Route path={routes.searchAll} element={<SearchAll />} />
+        <Route path={routes.searchBooks} element={<Books />} />
+        <Route path={routes.searchEquipments} element={<Equipments />} />
+        <Route path={`${routes.type}/:type`} element={<Types />} />
+        <Route path={routes.searchEquipments} element={<SearchAll />} />
+        <Route path={`${routes.type}/:type`} element={<SearchAll />} />
       </Routes>
     </Router>
   );
@@ -58,7 +66,7 @@ const muiTheme = createTheme({
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  
+
   a {
     text-decoration: none;
     color: inherit;
@@ -74,7 +82,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     text-decoration: none;
   }
-  
+
   html {
     font-family: 'Noto Sans KR', sans-serif;
   }
@@ -82,6 +90,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+  }
+
+  button {
+    padding: 0;
   }
 `;
 

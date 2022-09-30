@@ -12,7 +12,11 @@ function Category() {
         <Type
           key={item}
           onClick={() => {
-            navigate(`${routes.type}/${RENTEE_TYPES.URL[item]}`);
+            if (RENTEE_TYPES.URL[item] === "equipment") {
+              navigate(routes.searchEquipments);
+            } else {
+              navigate(`${routes.type}/${RENTEE_TYPES.URL[item]}`);
+            }
           }}
         >
           <TypeImg src={RENTEE_TYPES.ICON[item]} />
@@ -46,7 +50,7 @@ const TypeImg = styled.img`
 const TypeText = styled.div`
   margin-top: 10px;
   color: ${(props) => props.theme.black};
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 export default Category;

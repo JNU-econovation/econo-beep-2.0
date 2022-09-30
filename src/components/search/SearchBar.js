@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
-import BluePurpleGradient from "../styles/BluePurpleGradient";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import BluePurpleGradient from "../../styles/BluePurpleGradient";
 
 function SearchBar({ placeholder, searchApiUrl }) {
   const navigate = useNavigate();
   const [inputKeyword, setInputKeyword] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onEnterPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const keyword = inputKeyword.replace(/(\s*)/g, "");
+      if (keyword === "") {
+        return;
+      }
       navigate({
         pathname: searchApiUrl,
         search: `?keyword=${keyword}`,
       });
     }
   };
+
+  useEffect(() => {
+    if (searchParams.get("keyword")) {
+      setInputKeyword(searchParams.get("keyword"));
+    } else {
+      setInputKeyword("");
+    }
+  }, [searchParams]);
 
   return (
     <SearchBox onKeyPress={onEnterPress}>

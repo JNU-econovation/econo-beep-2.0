@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import Body from "../components/Body";
 import Header from "../components/header/Header";
 import PageTitle from "../components/PageTitle";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/search/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
@@ -37,17 +38,6 @@ function Home() {
   );
 }
 
-const Body = styled.div`
-  width: 100vw;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-color: ${(props) => props.theme.bgColor};
-`;
-
 const MainPage = styled.div`
   width: 100vw;
   height: 100vh;
@@ -61,6 +51,11 @@ const SearchBarBox = styled.div`
   position: absolute;
   top: 40%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   @media screen and (max-width: 767px) {
     left: 10vw;
     width: 80vw;
@@ -73,9 +68,7 @@ const SearchBarBox = styled.div`
 `;
 
 const Logo = styled(LogoStyle)`
-  display: flex;
-  justify-content: center;
-
+  text-align: center;
   font-size: 48px;
   margin-bottom: 5px;
 `;
