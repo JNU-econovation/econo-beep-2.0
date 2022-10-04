@@ -3,6 +3,7 @@ const Theme = {
   blue: "#001AFF",
   purple: "#8802FF",
   black: "#191A22",
+
   firstGray: "#7F7F7F",
   secondGray: "#B9B9BB",
 
@@ -20,6 +21,9 @@ const Theme = {
 
   fontFamilyLogo: "'Rajdhani', sans-serif",
   headerButtonSize: "32px",
+
+  managerBgColor: "#F9F9F9",
+  managerBoxShadow: "0px -5px 20px 4px rgba(0, 0, 0, 0.02)",
 };
 
 export default Theme;
