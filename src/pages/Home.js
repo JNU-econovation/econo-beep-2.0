@@ -70,7 +70,7 @@ const SearchBarBox = styled.div`
 const Logo = styled(LogoStyle)`
   text-align: center;
   font-size: 48px;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
 `;
 
 const ExpendPage = styled(MainPage)`
