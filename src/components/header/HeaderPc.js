@@ -38,6 +38,8 @@ const HeaderBox = styled.div`
 
     background-color: ${(props) => props.theme.bgColor};
     box-shadow: ${(props) => props.theme.boxShadow};
+
+    z-index: 1;
   }
 `;
 
