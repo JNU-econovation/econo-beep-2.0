@@ -118,7 +118,7 @@ const ModeButton = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.managerBorderRadius};
   color: ${(props) => (props.state === true ? "#FDFDFD" : "#001AFF")};
   background-color: ${(props) =>
     props.state === true ? "#001AFF" : "#CACFFF"};
@@ -134,7 +134,7 @@ const SearchBar = styled.form`
   display: flex;
   align-items: center;
 
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.managerBorderRadius};
   background-color: ${(props) => props.theme.bgColor};
 `;
 
@@ -150,15 +150,16 @@ const Icon = styled.div`
 `;
 
 const SearchInput = styled.input`
-  width: 85%;
+  width: 100%;
   margin: 4px 6px;
-  padding: 0 0 0 8px;
+  padding-left: 8px;
 
   border: none;
   border-left: 2px solid #c8c8c8;
 
   font-size: 16px;
   color: ${(props) => props.theme.black};
+  background-color: ${(props) => props.theme.bgColor};
 
   &:focus {
     outline: none;

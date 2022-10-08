@@ -4,6 +4,7 @@ import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
 import Header from "../components/header/Header";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
+import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
 
 function Manager() {
   const [isBookMode, setIsBookMode] = useState(true);
@@ -28,6 +29,7 @@ function Manager() {
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
         />
+        <ManagerRenteeInfoList />
       </ManagerSection>
     </Body>
   );

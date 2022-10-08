@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import routes from "../routes";
 import RENT_STATE from "../constant/RENT_STATE";
-import InfoListLayout from "../components/search/InfoListLayout";
+import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 import RENTEE_TYPES from "../constant/RENTEE_TYPES";
 
 function Types() {

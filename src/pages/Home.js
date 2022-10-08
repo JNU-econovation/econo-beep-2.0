@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Body from "../components/Body";
 import Header from "../components/header/Header";
 import PageTitle from "../components/PageTitle";
-import SearchBar from "../components/search/SearchBar";
+import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";

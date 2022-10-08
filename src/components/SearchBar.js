@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import BluePurpleGradient from "../../styles/BluePurpleGradient";
+import BluePurpleGradient from "../styles/BluePurpleGradient";
 
 function SearchBar({ placeholder, searchApiUrl }) {
   const navigate = useNavigate();
@@ -76,14 +76,16 @@ const Icon = styled.div`
 `;
 
 const Search = styled.input`
-  width: 85%;
-  padding: 0 0 0 10px;
+  width: 100%;
+  padding-left: 10px;
+  margin-right: 5px;
 
   border: none;
   border-left: 1.5px solid #c8c8c8;
 
   font-size: 16px;
   color: ${(props) => props.theme.black};
+  background-color: ${(props) => props.theme.bgColor};
 
   &:focus {
     outline: none;
