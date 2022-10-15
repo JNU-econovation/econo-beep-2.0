@@ -37,7 +37,7 @@ function Manager() {
 
 const ManagerSection = styled.section`
   width: 100vw;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   padding: 0 5%;
 
   background-color: ${(props) => props.theme.managerBgColor};

@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import ManagerRenteeInfoHolder from "./ManagerRenteeInfoHolder";
 
 function ManagerRenteeInfoList() {
   return (
     <Container>
       <InfoHeaderContainer>
-        <div className="black-space" />
+        <div className="blank-space" />
         <InfoHeader>
           <HeaderBox>제목</HeaderBox>
           <HeaderBox>저자</HeaderBox>
@@ -12,9 +14,28 @@ function ManagerRenteeInfoList() {
           <HeaderBox>출판일</HeaderBox>
           <HeaderBox>비고</HeaderBox>
         </InfoHeader>
-        <div className="black-space" />
+        <div className="blank-space" />
       </InfoHeaderContainer>
-      <ManagerRenteeInfo></ManagerRenteeInfo>
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <ManagerRenteeInfoHolder />
+      <RenteeLoadButton>
+        <button id="prev-button">
+          <FiChevronLeft />
+        </button>
+        <div id="current-page-number"> 1 </div>
+        <div> / </div>
+        <div id="max-page-number"> 3 </div>
+        <button id="next-button">
+          <FiChevronRight />
+        </button>
+      </RenteeLoadButton>
     </Container>
   );
 }
@@ -40,6 +61,7 @@ const InfoHeader = styled.div`
   color: ${(props) => props.theme.black};
   box-shadow: ${(props) => props.theme.managerBoxShadow};
   border-radius: ${(props) => props.theme.managerBorderRadius};
+  font-size: 14px;
 
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
@@ -56,19 +78,30 @@ const HeaderBox = styled.div`
   color: ${(props) => props.theme.firstGray};
 `;
 
-const ManagerRenteeInfo = styled.div`
-  width: 100%;
-  height: 46px;
+const RenteeLoadButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  background-color: ${(props) => props.theme.bgColor};
-  color: ${(props) => props.theme.black};
-  box-shadow: ${(props) => props.theme.managerBoxShadow};
-  border-radius: ${(props) => props.theme.managerBorderRadius};
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  :hover {
-    box-shadow: 0 5px 20px 4px rgba(0, 0, 0, 0.06);
-    transform: scale(1.015);
-    transition: 0.17s;
+    color: ${(props) => props.theme.firstGray};
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background-color: ${(props) => props.theme.managerBgColor};
+    color: ${(props) => props.theme.firstGray};
+
+    font-size: 20px;
+    text-align: center;
   }
 `;
 

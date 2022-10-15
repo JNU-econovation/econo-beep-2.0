@@ -90,7 +90,7 @@ const Container = styled.div`
   width: 100%;
   height: 42px;
 
-  margin-bottom: 42px;
+  margin-bottom: 30px;
 
   display: grid;
   align-items: center;
