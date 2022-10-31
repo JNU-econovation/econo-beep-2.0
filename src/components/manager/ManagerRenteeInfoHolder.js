@@ -3,10 +3,21 @@ import styled from "styled-components";
 import { RiDeleteBinLine, RiPencilFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-function ManagerRenteeInfoHolder() {
+function ManagerRenteeInfoHolder({ setEditRenteeInfo }) {
   const navigate = useNavigate();
 
-  const handleEditClick = () => {};
+  const handleEditClick = () => {
+    console.log("handleEditClick 101");
+    setEditRenteeInfo({
+      id: "101",
+      image: "http://image.yes24.com/goods/66913718/XL",
+      title: "제목이다",
+      author: "저자임",
+      publisher: "출판사아아아",
+      published_day: "출판일",
+      note: "비고",
+    });
+  };
 
   const handleDeleteClick = () => {
     if (!confirm("삭제하시겠습니까?")) {

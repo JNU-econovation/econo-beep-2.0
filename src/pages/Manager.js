@@ -5,12 +5,14 @@ import PageTitle from "../components/PageTitle";
 import Header from "../components/header/Header";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
+import ManagerRenteeInfoEdit from "../components/manager/ManagerRenteeInfoEdit";
 
 function Manager() {
   const [isBookMode, setIsBookMode] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
   const [lastRenteeId, setLastRenteeId] = useState(null);
+  const [editRenteeInfo, setEditRenteeInfo] = useState(null);
 
   const handleSearchPress = () => {};
 
@@ -29,7 +31,10 @@ function Manager() {
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
         />
-        <ManagerRenteeInfoList />
+        <ManagerRenteeSection>
+          <ManagerRenteeInfoList setEditRenteeInfo={setEditRenteeInfo} />
+          <ManagerRenteeInfoEdit editRenteeInfo={editRenteeInfo} />
+        </ManagerRenteeSection>
       </ManagerSection>
     </Body>
   );
@@ -46,6 +51,14 @@ const ManagerSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const ManagerRenteeSection = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: auto 400px;
 `;
 
 export default Manager;

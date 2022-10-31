@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import ManagerRenteeInfoHolder from "./ManagerRenteeInfoHolder";
 
-function ManagerRenteeInfoList() {
+function ManagerRenteeInfoList({ setEditRenteeInfo }) {
   return (
     <Container>
       <InfoHeaderContainer>
@@ -16,26 +16,15 @@ function ManagerRenteeInfoList() {
         </InfoHeader>
         <div className="blank-space" />
       </InfoHeaderContainer>
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <ManagerRenteeInfoHolder />
-      <RenteeLoadButton>
-        <button id="prev-button">
-          <FiChevronLeft />
-        </button>
-        <div id="current-page-number"> 1 </div>
-        <div> / </div>
-        <div id="max-page-number"> 3 </div>
-        <button id="next-button">
-          <FiChevronRight />
-        </button>
-      </RenteeLoadButton>
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
     </Container>
   );
 }

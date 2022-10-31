@@ -55,7 +55,6 @@ function ManagerButtonSearchHolder({
               setSortOrder(e.target.value);
               setLastRenteeId(null);
             }}
-            style={{ borderRadius: 20 }}
           >
             <MenuItem value={0}>최근에 추가된 순</MenuItem>
             <MenuItem value={1}>이전에 추가된 순</MenuItem>
@@ -106,6 +105,41 @@ const Holder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  .MuiInputBase-root {
+    border-radius: ${(props) => props.theme.managerBorderRadius};
+    background: linear-gradient(#fff, #fff) padding-box,
+    ${(props) => props.theme.bluePurple} border-box;
+    border: 2px solid transparent;
+    //border-radius: ${(props) => props.theme.managerBorderRadius};
+  }
+
+  .MuiSelect-outlined {
+    // background: linear-gradient(#fff, #fff) padding-box,
+    // ${(props) => props.theme.bluePurple} border-box;
+    // border: 2px solid transparent;
+    // border-radius: ${(props) => props.theme.managerBorderRadius};
+    
+    &:active {
+      border: none;
+    }
+  }
+}
+
+  .MuiSelect-select {
+    background: ${(props) => props.theme.bluePurple};
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 500;
+  }
+
+  .MuiSelect-icon > path{
+     color: red;
+    // background: ${(props) => props.theme.bluePurple};
+    // background-clip: text;
+    // -webkit-background-clip: text;
+    // color: transparent;
 `;
 
 const ModeButton = styled.div`
@@ -134,8 +168,10 @@ const SearchBar = styled.form`
   display: flex;
   align-items: center;
 
+  background: linear-gradient(#fff, #fff) padding-box,
+    ${(props) => props.theme.bluePurple} border-box;
+  border: 2px solid transparent;
   border-radius: ${(props) => props.theme.managerBorderRadius};
-  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Icon = styled.div`
