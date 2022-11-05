@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import Header from "../header/Header";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import RenteeInfo from "./RenteeInfo";
 import Body from "../Body";
 import theme from "../../styles/Theme";
