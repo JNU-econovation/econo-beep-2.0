@@ -6,9 +6,6 @@ import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
-import Category from "../components/home/Category";
-import RecommendBookSlider from "../components/home/RecommendBookSlider";
-import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -22,18 +19,6 @@ function Home() {
         </SearchBarBox>
         <PageBannerSlider />
       </MainPage>
-
-      <ExpendPage>
-        <Content>
-          <ContentTitle>카테고리</ContentTitle>
-          <Category />
-        </Content>
-        <Content>
-          <ContentTitle>추천 도서</ContentTitle>
-          <RecommendBookSlider />
-        </Content>
-        <Footer />
-      </ExpendPage>
     </Body>
   );
 }
