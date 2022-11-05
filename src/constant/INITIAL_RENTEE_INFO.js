@@ -5,6 +5,7 @@ const INITIAL_RENTEE_INFO = {
   author: "",
   publisher: "",
   publishedDay: "",
+  type: "",
   note: "",
 };
 

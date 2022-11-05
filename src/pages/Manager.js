@@ -6,13 +6,17 @@ import Header from "../components/header/Header";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
 import ManagerRenteeInfoEdit from "../components/manager/ManagerRenteeInfoEdit";
+import INITIAL_RENTEE_INFO from "../constant/INITIAL_RENTEE_INFO";
 
 function Manager() {
   const [isBookMode, setIsBookMode] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
+
   const [lastRenteeId, setLastRenteeId] = useState(null);
-  const [editRenteeInfo, setEditRenteeInfo] = useState(null);
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editRenteeInfo, setEditRenteeInfo] = useState(INITIAL_RENTEE_INFO);
 
   const handleSearchPress = () => {};
 
@@ -31,9 +35,19 @@ function Manager() {
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
         />
-        <ManagerRenteeSection>
-          <ManagerRenteeInfoList setEditRenteeInfo={setEditRenteeInfo} />
-          <ManagerRenteeInfoEdit editRenteeInfo={editRenteeInfo} />
+        <ManagerRenteeSection isEditMode={isEditMode}>
+          <ManagerRenteeInfoList
+            setEditRenteeInfo={setEditRenteeInfo}
+            isEditMode={isEditMode}
+            setIsEditMode={setIsEditMode}
+          />
+          {isEditMode ? (
+            <ManagerRenteeInfoEdit
+              editRenteeInfo={editRenteeInfo}
+              setEditRenteeInfo={setEditRenteeInfo}
+              setIsEditMode={setIsEditMode}
+            />
+          ) : null}
         </ManagerRenteeSection>
       </ManagerSection>
     </Body>
@@ -58,7 +72,8 @@ const ManagerRenteeSection = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: auto 400px;
+  grid-template-columns: ${(props) =>
+    props.isEditMode ? "auto 400px" : "auto"};
 `;
 
 export default Manager;

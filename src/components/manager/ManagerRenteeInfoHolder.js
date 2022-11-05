@@ -2,19 +2,22 @@
 import styled from "styled-components";
 import { RiDeleteBinLine, RiPencilFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { DateObjectToEpochSecond } from "../EpochConverter";
+import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 
-function ManagerRenteeInfoHolder({ setEditRenteeInfo }) {
+function ManagerRenteeInfoHolder({ setEditRenteeInfo, setIsEditMode }) {
   const navigate = useNavigate();
 
   const handleEditClick = () => {
-    console.log("handleEditClick 101");
+    setIsEditMode(true);
     setEditRenteeInfo({
       id: "101",
-      image: "http://image.yes24.com/goods/66913718/XL",
-      title: "제목이다",
-      author: "저자임",
+      thumbnail: "http://image.yes24.com/goods/66913718/XL",
+      title: "제목이당ㅇ아앙",
+      authorName: "이책의저자임",
       publisher: "출판사아아아",
-      published_day: "출판일",
+      publishedDay: DateObjectToEpochSecond(new Date()),
+      type: 0,
       note: "비고",
     });
   };

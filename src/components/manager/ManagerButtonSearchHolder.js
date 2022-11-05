@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 
@@ -35,14 +35,18 @@ function ManagerButtonSearchHolder({
           state={isBookMode}
           onClick={handleMoreButtonClick}
         >
-          도서
+          <div id="book" onClick={handleMoreButtonClick}>
+            도서
+          </div>
         </ModeButton>
         <ModeButton
           id="equipment"
           state={!isBookMode}
           onClick={handleMoreButtonClick}
         >
-          기자재
+          <div id="equipment" onClick={handleMoreButtonClick}>
+            기자재
+          </div>
         </ModeButton>
       </Holder>
       <Holder id="sort-order-button">
@@ -62,6 +66,7 @@ function ManagerButtonSearchHolder({
           </Select>
         </FormControl>
       </Holder>
+      <div className="blank-space" />
       <Holder id="search-bar">
         <SearchBar
           onKeyPress={(e) => {
@@ -87,14 +92,14 @@ function ManagerButtonSearchHolder({
 
 const Container = styled.div`
   width: 100%;
-  height: 42px;
+  height: 40px;
 
   margin-bottom: 30px;
 
   display: grid;
   align-items: center;
 
-  grid-template-columns: 1fr 1fr 3fr;
+  grid-template-columns: 1fr 1fr 2fr 380px;
 `;
 
 const Holder = styled.div`
@@ -105,41 +110,10 @@ const Holder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   .MuiInputBase-root {
     border-radius: ${(props) => props.theme.managerBorderRadius};
-    background: linear-gradient(#fff, #fff) padding-box,
-    ${(props) => props.theme.bluePurple} border-box;
-    border: 2px solid transparent;
-    //border-radius: ${(props) => props.theme.managerBorderRadius};
   }
-
-  .MuiSelect-outlined {
-    // background: linear-gradient(#fff, #fff) padding-box,
-    // ${(props) => props.theme.bluePurple} border-box;
-    // border: 2px solid transparent;
-    // border-radius: ${(props) => props.theme.managerBorderRadius};
-    
-    &:active {
-      border: none;
-    }
-  }
-}
-
-  .MuiSelect-select {
-    background: ${(props) => props.theme.bluePurple};
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    font-weight: 500;
-  }
-
-  .MuiSelect-icon > path{
-     color: red;
-    // background: ${(props) => props.theme.bluePurple};
-    // background-clip: text;
-    // -webkit-background-clip: text;
-    // color: transparent;
 `;
 
 const ModeButton = styled.div`
@@ -147,18 +121,44 @@ const ModeButton = styled.div`
   max-width: 100px;
   height: 100%;
   margin: 0 5%;
+  padding: 0;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: ${(props) => props.theme.managerBorderRadius};
-  color: ${(props) => (props.state === true ? "#FDFDFD" : "#001AFF")};
-  background-color: ${(props) =>
-    props.state === true ? "#001AFF" : "#CACFFF"};
-
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
+
+  border-radius: 15px;
+
+  ${(props) =>
+    props.state === false &&
+    css`
+      border: 2px solid transparent;
+      background-image: linear-gradient(
+          ${(props) => props.theme.managerBgColor},
+          ${(props) => props.theme.bgColor}
+        ),
+        ${(props) => props.theme.bluePurple};
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+
+      div {
+        background: ${(props) => props.theme.bluePurple};
+        color: transparent;
+        -webkit-background-clip: text;
+      }
+    `}
+
+  ${(props) =>
+    props.state === true &&
+    css`
+      background: ${(props) => props.theme.bluePurple};
+      border: none;
+      color: ${(props) => props.theme.bgColor};
+    `}
 `;
 
 const SearchBar = styled.form`

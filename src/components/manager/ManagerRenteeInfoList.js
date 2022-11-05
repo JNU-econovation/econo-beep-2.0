@@ -1,8 +1,13 @@
 import styled from "styled-components";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import ManagerRenteeInfoHolder from "./ManagerRenteeInfoHolder";
+import BluePurpleGradient from "../../styles/BluePurpleGradient";
 
-function ManagerRenteeInfoList({ setEditRenteeInfo }) {
+function ManagerRenteeInfoList({
+  setEditRenteeInfo,
+  isEditMode,
+  setIsEditMode,
+}) {
   return (
     <Container>
       <InfoHeaderContainer>
@@ -14,17 +19,57 @@ function ManagerRenteeInfoList({ setEditRenteeInfo }) {
           <HeaderBox>출판일</HeaderBox>
           <HeaderBox>비고</HeaderBox>
         </InfoHeader>
-        <div className="blank-space" />
+        <div className="blank-space">
+          {!isEditMode ? (
+            <AddRenteeButton
+              onClick={() => {
+                setIsEditMode(true);
+              }}
+            >
+              <BluePurpleGradient />
+              <AiOutlinePlusCircle
+                style={{ fill: "url(#blue-purple-gradient)" }}
+              />
+            </AddRenteeButton>
+          ) : null}
+        </div>
       </InfoHeaderContainer>
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
-      <ManagerRenteeInfoHolder setEditRenteeInfo={setEditRenteeInfo} />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
+      <ManagerRenteeInfoHolder
+        setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditMode={setIsEditMode}
+      />
     </Container>
   );
 }
@@ -65,6 +110,19 @@ const HeaderBox = styled.div`
   align-items: center;
 
   color: ${(props) => props.theme.firstGray};
+`;
+
+const AddRenteeButton = styled.div`
+  border-radius: 50%;
+  font-size: 28px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const RenteeLoadButton = styled.div`
