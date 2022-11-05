@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import HeaderSection from "./HeaderSection";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
 import { BiMenu, BiX } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -20,19 +21,6 @@ function HomeHeader() {
     </HeaderSection>
   );
 }
-
-const HeaderSection = styled.div`
-  width: 100%;
-  padding: 15px 10px 0 10px;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-
-  position: relative;
-  z-index: 1;
-`;
 
 const OpenMenuButton = styled.div`
   display: flex;
