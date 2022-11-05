@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import Body from "../components/Body";
-import Header from "../components/header/Header";
 import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
+import HomeHeader from "../components/home/HomeHeader";
 
 function Home() {
   return (
     <Body>
       <PageTitle title="Home" />
       <MainPage>
-        <Header />
+        <HomeHeader />
         <SearchBarBox>
           <Logo>econoBeep</Logo>
           <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
