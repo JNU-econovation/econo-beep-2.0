@@ -9,6 +9,7 @@ import RenteeInfo from "./RenteeInfo";
 import Body from "../Body";
 import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
+import InfoListHeader from "../header/InfoListHeader";
 
 function InfoListLayout({
   pageTitle,
@@ -64,7 +65,7 @@ function InfoListLayout({
   return (
     <Body>
       <PageTitle title={pageTitle} />
-      <Header />
+      <InfoListHeader listType={listType} />
       <SearchBarHolder>
         <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
       </SearchBarHolder>
