@@ -63,6 +63,8 @@ const SearchBox = styled.form`
     ${(props) => props.theme.bluePurple};
   background-origin: border-box;
   background-clip: content-box, border-box;
+
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const Icon = styled.div`

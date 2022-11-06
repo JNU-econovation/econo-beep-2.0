@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import HeaderSection from "./HeaderSection";
+import HeaderSection from "../../styles/HeaderSection";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
 import { BiMenu, BiX } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +30,8 @@ const OpenMenuButton = styled.div`
   padding: 14px;
   border: none;
   font-size: ${(props) => props.theme.headerButtonSize};
+
+  cursor: pointer;
 `;
 
 const ProfileButton = styled.div`
@@ -39,6 +41,8 @@ const ProfileButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `;
 
 export default HomeHeader;

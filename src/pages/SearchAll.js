@@ -15,6 +15,7 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책1",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.RENTED,
       },
       {
@@ -22,6 +23,7 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책2",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.RENTABLE,
       },
       {
@@ -29,12 +31,14 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책3",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.UNRENTABLE,
       },
       {
         id: "4",
         thumbnailUrl: "",
         title: "기자재4",
+        type: "인공지능",
         rentState: RENT_STATE.UNRENTABLE,
       },
     ]);
@@ -47,6 +51,7 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책5",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.RENTED,
       },
       {
@@ -54,6 +59,7 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책6",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.RENTABLE,
       },
       {
@@ -61,12 +67,14 @@ function SearchAll() {
         thumbnailUrl: "",
         title: "책7",
         authorName: "저자",
+        type: "인공지능",
         rentState: RENT_STATE.UNRENTABLE,
       },
       {
         id: "8",
         thumbnailUrl: "",
         title: "기자재8",
+        type: "인공지능",
         rentState: RENT_STATE.UNRENTABLE,
       },
     ];

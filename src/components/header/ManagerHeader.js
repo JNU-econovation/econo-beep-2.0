@@ -30,11 +30,13 @@ const HeaderSection = styled.div`
   box-shadow: ${(props) => props.theme.boxShadow};
 
   z-index: 1;
+  cursor: pointer;
 `;
 
 const Logo = styled(LogoStyle)`
   padding: 14px;
   font-size: 26px;
+  cursor: pointer;
 `;
 
 const ProfileButton = styled.div`
@@ -44,6 +46,7 @@ const ProfileButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export default ManagerHeader;
