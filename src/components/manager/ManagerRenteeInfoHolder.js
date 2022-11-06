@@ -167,7 +167,7 @@ const RenteeInfoButtonHolder = styled.div`
     cursor: pointer;
   }
   & #edit:hover {
-    color: ${(props) => props.theme.rentBlue};
+    color: ${(props) => props.theme.managerBlue};
   }
 
   & #delete:hover {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import RENT_STATE from "../../constant/RENT_STATE";
+import RentState from "./RentState";
 import { useNavigate } from "react-router-dom";
 
 function RenteeInfo({ src, id, title, authorName, rentState }) {
@@ -18,15 +19,7 @@ function RenteeInfo({ src, id, title, authorName, rentState }) {
           <RenteeTitle>{title}</RenteeTitle>
           {authorName ? <RenteeAuthor>{authorName}</RenteeAuthor> : null}
         </DetailInfo>
-        {rentState === RENT_STATE.RENTED ? (
-          <RentInfoRed>반납하기</RentInfoRed>
-        ) : null}
-        {rentState === RENT_STATE.RENTABLE ? (
-          <RentInfoBlue>대여하기</RentInfoBlue>
-        ) : null}
-        {rentState === RENT_STATE.UNRENTABLE ? (
-          <RentInfoGray>대여 불가</RentInfoGray>
-        ) : null}
+        <RentState rentState={rentState} />
       </InfoTextBox>
     </InfoHolder>
   );
@@ -38,7 +31,7 @@ const InfoHolder = styled.div`
   align-items: center;
 
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 5px;
   border-bottom: 0.2px solid darkgray;
 `;
 
@@ -46,7 +39,7 @@ const InfoImg = styled.img`
   border-radius: 10px;
   object-fit: cover;
 
-  width: 40%;
+  width: 35%;
   max-width: 140px;
 `;
 
