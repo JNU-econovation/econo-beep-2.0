@@ -2,11 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
-import Header from "../components/header/Header";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
 import ManagerRenteeInfoEdit from "../components/manager/ManagerRenteeInfoEdit";
 import INITIAL_RENTEE_INFO from "../constant/INITIAL_RENTEE_INFO";
+import ManagerHeader from "../components/header/ManagerHeader";
 
 function Manager() {
   const [isBookMode, setIsBookMode] = useState(true);
@@ -23,7 +23,7 @@ function Manager() {
   return (
     <Body>
       <PageTitle title="관리자" />
-      <Header />
+      <ManagerHeader />
       <ManagerSection>
         <ManagerButtonSearchHolder
           isBookMode={isBookMode}

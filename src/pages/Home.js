@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import Body from "../components/Body";
-import Header from "../components/header/Header";
 import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
+import HomeHeader from "../components/header/HomeHeader";
 
 function Home() {
   return (
     <Body>
       <PageTitle title="Home" />
       <MainPage>
-        <Header />
+        <HomeHeader />
         <SearchBarBox>
           <Logo>econoBeep</Logo>
           <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
@@ -56,26 +56,6 @@ const Logo = styled(LogoStyle)`
   text-align: center;
   font-size: 48px;
   margin-bottom: 25px;
-`;
-
-const ExpendPage = styled(MainPage)`
-  min-height: 100vh;
-`;
-
-const Content = styled.div`
-  width: 100%;
-  max-width: 750px;
-  margin-top: 60px;
-  padding: 0 30px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ContentTitle = styled.div`
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  color: ${(props) => props.theme.black};
 `;
 
 export default Home;

@@ -11,8 +11,9 @@ import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
 
 import Theme from "./styles/Theme";
-import Home from "./pages/Home";
 import routes from "./routes";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
 import SearchAll from "./pages/SearchAll";
 import Books from "./pages/Books";
 import Equipments from "./pages/Equipments";
@@ -24,6 +25,7 @@ function AppRouter() {
     <Router>
       <Routes>
         <Route path={routes.home} element={<Home />} />
+        <Route path={routes.menu} element={<Menu />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.searchBooks} element={<Books />} />
         <Route path={routes.searchEquipments} element={<Equipments />} />
