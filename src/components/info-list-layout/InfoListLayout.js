@@ -76,6 +76,7 @@ function InfoListLayout({
             id={rentee.id}
             title={rentee.title}
             authorName={rentee.authorName}
+            type={rentee.type}
             rentState={rentee.rentState}
           />
         ))}

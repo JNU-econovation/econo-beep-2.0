@@ -4,7 +4,7 @@ import RENT_STATE from "../../constant/RENT_STATE";
 import RentState from "./RentState";
 import { useNavigate } from "react-router-dom";
 
-function RenteeInfo({ src, id, title, authorName, rentState }) {
+function RenteeInfo({ src, id, title, authorName, type, rentState }) {
   const navigate = useNavigate();
   return (
     <InfoHolder
@@ -15,9 +15,11 @@ function RenteeInfo({ src, id, title, authorName, rentState }) {
       <InfoImg src="https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg" />
       <InfoTextBox>
         <DetailInfo>
-          <RenteeId>{id}</RenteeId>
-          <RenteeTitle>{title}</RenteeTitle>
           {authorName ? <RenteeAuthor>{authorName}</RenteeAuthor> : null}
+          <RenteeTitle>{title}</RenteeTitle>
+          <RenteeType>
+            <div>#{type}</div>
+          </RenteeType>
         </DetailInfo>
         <RentState rentState={rentState} />
       </InfoTextBox>
@@ -31,8 +33,7 @@ const InfoHolder = styled.div`
   align-items: center;
 
   width: 100%;
-  padding: 20px 5px;
-  border-bottom: 0.2px solid darkgray;
+  padding: 15px 5px;
 `;
 
 const InfoImg = styled.img`
@@ -41,6 +42,8 @@ const InfoImg = styled.img`
 
   width: 35%;
   max-width: 140px;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)); ;
 `;
 
 const InfoTextBox = styled.div`
@@ -49,7 +52,7 @@ const InfoTextBox = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 50%;
+  width: 55%;
   height: 100%;
   margin-left: 15px;
 `;
@@ -60,42 +63,41 @@ const DetailInfo = styled.div`
   text-align: left;
 `;
 
-const RenteeId = styled.div`
-  font-size: 0.3rem;
-  color: ${(props) => props.theme.secondGray};
-`;
-
-const RenteeTitle = styled.div`
-  font-size: 1rem;
-  padding: 0.3rem 0;
-
-  color: ${(props) => props.theme.black};
-`;
-
 const RenteeAuthor = styled.div`
-  font-size: 0.8rem;
+  font-size: 11px;
 
   color: ${(props) => props.theme.firstGray};
 `;
 
-const RentInfo = styled.div`
-  width: 100%;
-  text-align: right;
-  font-size: 0.8rem;
-
+const RenteeTitle = styled.div`
+  font-size: 16px;
   font-weight: 500;
+  padding: 5px 0 10px 0;
+
+  color: ${(props) => props.theme.black};
 `;
 
-const RentInfoRed = styled(RentInfo)`
-  color: ${(props) => props.theme.rentRed};
-`;
+const RenteeType = styled.div`
+  padding: 0;
+  display: inline-block;
 
-const RentInfoBlue = styled(RentInfo)`
-  color: ${(props) => props.theme.rentBlue};
-`;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background-image: linear-gradient(
+      ${(props) => props.theme.managerBgColor},
+      ${(props) => props.theme.bgColor}
+    ),
+    ${(props) => props.theme.bluePurple};
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 
-const RentInfoGray = styled(RentInfo)`
-  color: ${(props) => props.theme.rentGray};
+  div {
+    margin: 6px;
+    font-size: 10px;
+    background: ${(props) => props.theme.bluePurple};
+    color: transparent;
+    -webkit-background-clip: text;
+  }
 `;
 
 export default React.memo(RenteeInfo);

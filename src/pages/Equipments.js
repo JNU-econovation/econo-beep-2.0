@@ -18,30 +18,35 @@ function Equipments() {
         id: "100",
         title: "load search list",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
         id: "101",
         title: "load search list",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
         id: "102",
         title: "load search list",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
         id: "103",
         title: "load search list",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
         id: "104",
         title: "load search list",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
     ];
@@ -56,6 +61,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "기자재",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
@@ -63,6 +69,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "책2",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTABLE,
       },
       {
@@ -70,6 +77,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "책3",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.UNRENTABLE,
       },
     ]);
@@ -82,6 +90,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "책5",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTED,
       },
       {
@@ -89,6 +98,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "책6",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.RENTABLE,
       },
       {
@@ -96,6 +106,7 @@ function Equipments() {
         thumbnailUrl: "",
         title: "책7",
         authorName: "저자",
+        type: "기자재",
         rentState: RENT_STATE.UNRENTABLE,
       },
     ];

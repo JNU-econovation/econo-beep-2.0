@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import LogoStyle from "../../styles/LogoStyle";
-import HeaderSection from "./HeaderSection";
+import HeaderSection from "../../styles/HeaderSection";
 import routes from "../../routes";
 import styled from "styled-components";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
@@ -19,6 +19,7 @@ function InfoListHeader({ listType }) {
 const Logo = styled(LogoStyle)`
   padding: 14px;
   font-size: 24px;
+  cursor: pointer;
 `;
 
 const TypeText = styled.div`
