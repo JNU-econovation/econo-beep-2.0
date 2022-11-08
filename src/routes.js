@@ -5,6 +5,7 @@ const routes = {
   searchBooks: "/books",
   searchEquipments: "/equipments",
   manager: "/manager",
+  detail: "/detail",
   myPage: "/my-page",
 };
 Object.freeze(routes);

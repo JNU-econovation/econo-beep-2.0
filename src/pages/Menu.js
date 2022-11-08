@@ -6,7 +6,7 @@ import MenuHeader from "../components/header/MenuHeader";
 function Menu() {
   return (
     <Body>
-      <PageTitle title="Menu" />
+      <PageTitle title="메뉴" />
       <MainPage>
         <MenuHeader />
       </MainPage>
