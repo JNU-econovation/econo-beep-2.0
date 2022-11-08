@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
-import Body from "../components/Body";
-import PageTitle from "../components/PageTitle";
-import DetailHeader from "../components/header/DetailHeader";
 import styled from "styled-components";
 import { IoMdInformation } from "react-icons/io";
 import { IoHeart } from "react-icons/io5";
+import Body from "../components/Body";
+import PageTitle from "../components/PageTitle";
+import DetailHeader from "../components/header/DetailHeader";
+import waveImg from "../images/Detail-wave.svg";
 
 function Detail() {
   const id = useParams();
@@ -15,7 +16,7 @@ function Detail() {
       <PageTitle title="상세 정보" />
       <DetailHeader />
       <BasicInfoSection>
-        <img src="https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg" />
+        <RenteeImg src="https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg" />
         <InfoSection>
           <TextInfoSection>
             <div className="publisher">프리껙머시깽이</div>
@@ -34,6 +35,7 @@ function Detail() {
             </div>
           </ButtonSection>
         </InfoSection>
+        <Wave src={waveImg} />
       </BasicInfoSection>
     </Body>
   );
@@ -45,13 +47,15 @@ const BasicInfoSection = styled.div`
   padding: 20px;
   display: flex;
   justify-content: center;
+  position: relative;
+`;
 
-  img {
-    width: 40%;
-    object-fit: cover;
-    border-radius: 10px;
-    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
-  }
+const RenteeImg = styled.img`
+  width: 40%;
+  object-fit: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
+  z-index: 1;
 `;
 
 const InfoSection = styled.div`
@@ -60,6 +64,7 @@ const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
 `;
 
 const TextInfoSection = styled.div`
@@ -112,6 +117,7 @@ const ButtonSection = styled.div`
   justify-content: right;
   align-items: center;
   float: right;
+  z-index: 1;
 
   .button {
     width: 40px;
@@ -121,6 +127,7 @@ const ButtonSection = styled.div`
     justify-content: center;
     align-items: center;
 
+    background-color: ${(props) => props.theme.bgColor};
     border-radius: 1000px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -134,6 +141,17 @@ const ButtonSection = styled.div`
     font-size: 20px;
     color: ${(props) => props.theme.managerRed};
   }
+`;
+
+const Wave = styled.img`
+  width: 100%;
+
+  position: absolute;
+  bottom: 40px;
+  z-index: 0;
+
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export default Detail;
