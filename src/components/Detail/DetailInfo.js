@@ -5,68 +5,81 @@ import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
 
 function DetailInfo() {
-  const { data, loading, error } = useColor(
-    "https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg",
-    "hex",
-    {
-      crossOrigin: "Anonymous",
-    }
-  );
+  const IMG_URL = "https://image.yes24.com/goods/102347474/XL";
+
+  const { data, loading, error } = useColor(IMG_URL, "hex", {
+    crossOrigin: "Anonymous",
+  });
   // const waveColor = data;
 
   return (
-    <BasicInfoSection>
-      <RenteeImg src="https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg" />
-      <InfoSection>
-        <TextInfoSection>
-          <div className="publisher">프리껙머시깽이</div>
-          <div className="title">인공지능을 위한 수학이다 가나다라마다바</div>
-          <div className="author-name">저자저자저자저자</div>
-          <RenteeType>
-            <div>#인공지능</div>
-          </RenteeType>
-        </TextInfoSection>
-        <ButtonSection>
-          <div className="note button">
-            <IoMdInformation />
-          </div>
-          <div className="like button">
-            <IoHeart />
-          </div>
-        </ButtonSection>
-      </InfoSection>
-      <WaveSection>
-        <Wave
-          mask="url(#mask)"
-          fill={data}
-          paused={false}
-          options={{ height: 15, speed: 0.1, amplitude: 20, points: 4 }}
-        >
-          <defs>
-            <linearGradient id="gradient" gradientTransform="rotate(90)">
-              <stop offset="0" stopColor="white" />
-              <stop offset="0.3" stopColor="black" />
-            </linearGradient>
-            <mask id="mask">
-              <rect
-                x="0"
-                y="0"
-                width="2000"
-                height="200"
-                fill="url(#gradient)"
-              />
-            </mask>
-          </defs>
-        </Wave>
-      </WaveSection>
-    </BasicInfoSection>
+    <>
+      <BasicInfoSection>
+        <RenteeImg src={IMG_URL} />
+        <InfoSection>
+          <TextInfoSection>
+            <div className="publisher">프리껙머시깽이</div>
+            <div className="title">인공지능을 위한 수학이다 가나다라마다바</div>
+            <div className="author-name">저자저자저자저자</div>
+            <RenteeType>
+              <div>#인공지능</div>
+            </RenteeType>
+          </TextInfoSection>
+          <ButtonSection>
+            <div className="note button">
+              <IoMdInformation />
+            </div>
+            <div className="like button">
+              <IoHeart />
+            </div>
+          </ButtonSection>
+        </InfoSection>
+        <WaveSection>
+          <Wave
+            mask="url(#mask)"
+            fill={data}
+            paused={false}
+            options={{ height: 15, speed: 0.1, amplitude: 10, points: 3 }}
+          >
+            <defs>
+              <linearGradient id="gradient" gradientTransform="rotate(90)">
+                <stop offset="0" stopColor="white" />
+                <stop offset="0.3" stopColor="black" />
+              </linearGradient>
+              <mask id="mask">
+                <rect
+                  x="0"
+                  y="0"
+                  width="2000"
+                  height="200"
+                  fill="url(#gradient)"
+                />
+              </mask>
+            </defs>
+          </Wave>
+        </WaveSection>
+      </BasicInfoSection>
+      <AdditionalInfoSection>
+        <AdditionalInfo>
+          <div className="info">10</div>
+          <div className="title">아이디</div>
+        </AdditionalInfo>
+        <AdditionalInfo>
+          <div className="info">21</div>
+          <div className="title">즐겨찾기</div>
+        </AdditionalInfo>
+        <AdditionalInfo>
+          <div className="info">2</div>
+          <div className="title">대여</div>
+        </AdditionalInfo>
+      </AdditionalInfoSection>
+    </>
   );
 }
 
 const BasicInfoSection = styled.div`
   width: 100%;
-  max-width: 600px;
-  margin-top: 15px;
+  margin: 15px 0;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -75,6 +88,7 @@ const BasicInfoSection = styled.div`
 
 const RenteeImg = styled.img`
   width: 40%;
+  max-width: 200px;
   object-fit: cover;
   border-radius: 10px;
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
@@ -98,6 +112,8 @@ const TextInfoSection = styled.div`
   .publisher {
     color: ${(props) => props.theme.firstGray};
     font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.017em;
   }
 
   .title {
@@ -105,11 +121,14 @@ const TextInfoSection = styled.div`
     font-size: 18px;
     font-weight: 600;
     line-height: 25px;
+    letter-spacing: -0.017em;
   }
 
   .author-name {
     color: ${(props) => props.theme.firstGray};
     font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.017em;
   }
 `;
 
@@ -176,6 +195,37 @@ const WaveSection = styled.div`
   position: absolute;
   bottom: 70px;
   z-index: 0;
+`;
+
+const AdditionalInfoSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const AdditionalInfo = styled.div`
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .info {
+    color: ${(props) => props.theme.black};
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 35px;
+    letter-spacing: -0.017em;
+  }
+
+  .title {
+    color: ${(props) => props.theme.firstGray};
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.017em;
+  }
 `;
 
 export default DetailInfo;

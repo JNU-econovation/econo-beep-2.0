@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
@@ -9,12 +10,16 @@ function Detail() {
   console.log(id);
 
   return (
-    <Body>
+    <StyledBody>
       <PageTitle title="상세 정보" />
       <DetailHeader />
       <DetailInfo />
-    </Body>
+    </StyledBody>
   );
 }
+
+const StyledBody = styled(Body)`
+  max-width: 800px;
+`;
 
 export default Detail;
