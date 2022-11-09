@@ -12,7 +12,7 @@ function DetailInfo() {
       crossOrigin: "Anonymous",
     }
   );
-  const waveColor = data;
+  // const waveColor = data;
 
   return (
     <BasicInfoSection>
@@ -37,37 +37,27 @@ function DetailInfo() {
       </InfoSection>
       <WaveSection>
         <Wave
-          fill={waveColor}
+          mask="url(#mask)"
+          fill={data}
           paused={false}
-          options={{
-            height: 110,
-            amplitude: 10,
-            speed: 0.1,
-            points: 3,
-          }}
-        />
-        {/*<Wave*/}
-        {/*  mask="url(#mask)"*/}
-        {/*  fill={waveColor}*/}
-        {/*  paused={true}*/}
-        {/*  options={{ height: 0 }}*/}
-        {/*>*/}
-        {/*  <defs>*/}
-        {/*    <linearGradient id="gradient" gradientTransform="rotate(90)">*/}
-        {/*      <stop offset="0" stopColor="white" />*/}
-        {/*      <stop offset="0.3" stopColor="black" />*/}
-        {/*    </linearGradient>*/}
-        {/*    <mask id="mask">*/}
-        {/*      <rect*/}
-        {/*        x="0"*/}
-        {/*        y="0"*/}
-        {/*        width="2000"*/}
-        {/*        height="200"*/}
-        {/*        fill="url(#gradient)"*/}
-        {/*      />*/}
-        {/*    </mask>*/}
-        {/*  </defs>*/}
-        {/*</Wave>*/}
+          options={{ height: 15, speed: 0.1, amplitude: 20, points: 4 }}
+        >
+          <defs>
+            <linearGradient id="gradient" gradientTransform="rotate(90)">
+              <stop offset="0" stopColor="white" />
+              <stop offset="0.3" stopColor="black" />
+            </linearGradient>
+            <mask id="mask">
+              <rect
+                x="0"
+                y="0"
+                width="2000"
+                height="200"
+                fill="url(#gradient)"
+              />
+            </mask>
+          </defs>
+        </Wave>
       </WaveSection>
     </BasicInfoSection>
   );
@@ -76,6 +66,7 @@ function DetailInfo() {
 const BasicInfoSection = styled.div`
   width: 100%;
   max-width: 600px;
+  margin-top: 15px;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -112,6 +103,8 @@ const TextInfoSection = styled.div`
   .title {
     color: ${(props) => props.theme.black};
     font-size: 18px;
+    font-weight: 600;
+    line-height: 25px;
   }
 
   .author-name {
@@ -177,19 +170,12 @@ const ButtonSection = styled.div`
 
 const WaveSection = styled.div`
   width: 100vw;
+  height: 10%;
   padding: 0;
 
   position: absolute;
-  bottom: 40px;
+  bottom: 70px;
   z-index: 0;
-
-  border: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-
-  // 그라데이션
-  //height: 10%;
-  //bottom: 70px;
-  //box-shadow 없애기
 `;
 
 export default DetailInfo;
