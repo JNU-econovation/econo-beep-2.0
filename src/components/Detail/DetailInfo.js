@@ -1,17 +1,18 @@
 import { IoMdInformation } from "react-icons/io";
 import { IoHeart } from "react-icons/io5";
 import styled from "styled-components";
-// import { ReactComponent as Wave } from "../../images/Detail-wave.svg";
 import Wave from "react-wavify";
-import Color, { useColor } from "color-thief-react";
+import { useColor } from "color-thief-react";
 
 function DetailInfo() {
   const { data, loading, error } = useColor(
     "https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg",
     "hex",
-    { crossOrigin: "Anonymous" }
+    {
+      crossOrigin: "Anonymous",
+    }
   );
-  const imgMainColor = data;
+  const waveColor = data;
 
   return (
     <BasicInfoSection>
@@ -36,15 +37,37 @@ function DetailInfo() {
       </InfoSection>
       <WaveSection>
         <Wave
-          fill={imgMainColor}
-          paused={true}
+          fill={waveColor}
+          paused={false}
           options={{
             height: 110,
-            amplitude: 40,
+            amplitude: 10,
             speed: 0.1,
             points: 3,
           }}
         />
+        {/*<Wave*/}
+        {/*  mask="url(#mask)"*/}
+        {/*  fill={waveColor}*/}
+        {/*  paused={true}*/}
+        {/*  options={{ height: 0 }}*/}
+        {/*>*/}
+        {/*  <defs>*/}
+        {/*    <linearGradient id="gradient" gradientTransform="rotate(90)">*/}
+        {/*      <stop offset="0" stopColor="white" />*/}
+        {/*      <stop offset="0.3" stopColor="black" />*/}
+        {/*    </linearGradient>*/}
+        {/*    <mask id="mask">*/}
+        {/*      <rect*/}
+        {/*        x="0"*/}
+        {/*        y="0"*/}
+        {/*        width="2000"*/}
+        {/*        height="200"*/}
+        {/*        fill="url(#gradient)"*/}
+        {/*      />*/}
+        {/*    </mask>*/}
+        {/*  </defs>*/}
+        {/*</Wave>*/}
       </WaveSection>
     </BasicInfoSection>
   );
@@ -162,6 +185,11 @@ const WaveSection = styled.div`
 
   border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+  // 그라데이션
+  //height: 10%;
+  //bottom: 70px;
+  //box-shadow 없애기
 `;
 
 export default DetailInfo;
