@@ -1,16 +1,19 @@
 import { IoMdInformation } from "react-icons/io";
-import { IoHeart } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import styled from "styled-components";
 import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
+import { useState } from "react";
+import { Backdrop } from "@mui/material";
 
 function DetailInfo() {
+  const [noteOpen, setNoteOpen] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
   const IMG_URL = "https://image.yes24.com/goods/102347474/XL";
-
   const { data, loading, error } = useColor(IMG_URL, "hex", {
     crossOrigin: "Anonymous",
   });
-  // const waveColor = data;
 
   return (
     <>
@@ -26,11 +29,39 @@ function DetailInfo() {
             </RenteeType>
           </TextInfoSection>
           <ButtonSection>
-            <div className="note button">
+            <div
+              className="note button"
+              onClick={() => {
+                setNoteOpen(true);
+              }}
+            >
               <IoMdInformation />
             </div>
-            <div className="like button">
-              <IoHeart />
+            <Backdrop sx={{ color: "#fff" }} open={noteOpen}>
+              <NoteSection>
+                <div className="note-top">
+                  <div
+                    className="note-close"
+                    onClick={() => {
+                      setNoteOpen(false);
+                    }}
+                  >
+                    <IoCloseOutline />
+                  </div>
+                  <div className="note-title">비고</div>
+                </div>
+                <div className="note-content">
+                  이것은 비고란이다 우하하하하하하 가나다라마바상아자차카타파하
+                </div>
+              </NoteSection>
+            </Backdrop>
+            <div
+              className="bookmark button"
+              onClick={() => {
+                setBookmark((bookmark) => !bookmark);
+              }}
+            >
+              {bookmark ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
           </ButtonSection>
         </InfoSection>
@@ -79,7 +110,6 @@ function DetailInfo() {
 
 const BasicInfoSection = styled.div`
   width: 100%;
-  //margin: 15px 0;
   padding: 35px 20px;
   display: flex;
   justify-content: center;
@@ -179,10 +209,52 @@ const ButtonSection = styled.div`
     color: ${(props) => props.theme.firstGray};
   }
 
-  .like {
+  .bookmark {
     margin-left: 20px;
     font-size: 20px;
     color: ${(props) => props.theme.managerRed};
+  }
+`;
+
+const NoteSection = styled.div`
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+
+  padding: 40px;
+  border-radius: 20px;
+  background-color: ${(props) => props.theme.bgColor};
+
+  position: relative;
+  z-index: 10;
+
+  .note-top {
+    padding-bottom: 10px;
+    color: ${(props) => props.theme.firstGray};
+    border-bottom: 1px solid ${(props) => props.theme.borderGray};
+    position: relative;
+  }
+
+  .note-title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .note-close {
+    color: ${(props) => props.theme.firstGray};
+    font-size: 28px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+  }
+
+  .note-content {
+    padding: 20px 0;
+    font-size: 14px;
+    color: ${(props) => props.theme.black};
+    line-height: 1.5em;
+    text-align: justify;
   }
 `;
 

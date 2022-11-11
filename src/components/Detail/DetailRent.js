@@ -74,7 +74,7 @@ const RentTopSection = styled.div`
 `;
 
 const LoanButton = styled.button`
-  padding: 7.5px 15px;
+  padding: 7.5px 12.5px;
   background-color: ${(props) => props.theme.bgColor};
 
   border: 2px solid ${(props) => props.textColor};
@@ -169,6 +169,7 @@ const RentRecordState = styled.div`
   display: inline-block;
   float: right;
   position: relative;
+  z-index: 0;
 
   ${(props) =>
     props.value === RENT_STATES.RENTED &&
