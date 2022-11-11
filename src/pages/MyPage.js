@@ -3,6 +3,8 @@ import PageTitle from "../components/PageTitle";
 import MyPageHeader from "../components/header/MyPageHeader";
 import styled, { css } from "styled-components";
 import { useState } from "react";
+import RenteeInfo from "../components/info-list-layout/RenteeInfo";
+import RENTEE_TYPES from "../constant/RENTEE_TYPES";
 
 function MyPage() {
   const [button, setButton] = useState({
@@ -62,6 +64,20 @@ function MyPage() {
             <div className="rent-button-title">즐겨찾기</div>
           </RentButton>
         </RentButtonSection>
+        <RenteeInfoSection>
+          <RenteeInfo
+            id="2"
+            title="인공지능을 위한 수학책이다 하하하하"
+            authorName="저자저자저자"
+            type={RENTEE_TYPES.KOREAN.AI}
+          />
+          <RenteeInfo
+            id="2"
+            title="인공지능을 위한 수학책이다 하하하하"
+            authorName="저자저자저자"
+            type={RENTEE_TYPES.KOREAN.AI}
+          />
+        </RenteeInfoSection>
       </RentSection>
     </Body>
   );
@@ -112,6 +128,10 @@ const ProfileSection = styled.div`
 
 const RentSection = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: ${(props) => props.theme.bgColor};
 `;
 
@@ -153,6 +173,13 @@ const RentButton = styled.div`
     font-size: 12px;
     line-height: 16px;
   }
+`;
+
+const RenteeInfoSection = styled.div`
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 export default MyPage;
