@@ -11,6 +11,10 @@ const Theme = {
   rentGreen: "#5FCB99",
   rentGray: "#5D5E64",
 
+  rentPinkHighlight: "#FDEAEA",
+  rentGreenHighlight: "#D1FED0",
+  rentGrayHighlight: "#DBDBDB",
+
   borderGray: "#E8E8E8",
 
   placeholderColor: "#AEAEAE",

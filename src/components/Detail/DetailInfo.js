@@ -79,8 +79,8 @@ function DetailInfo() {
 
 const BasicInfoSection = styled.div`
   width: 100%;
-  margin: 15px 0;
-  padding: 20px;
+  //margin: 15px 0;
+  padding: 35px 20px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -113,7 +113,6 @@ const TextInfoSection = styled.div`
     color: ${(props) => props.theme.firstGray};
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.017em;
   }
 
   .title {
@@ -121,14 +120,12 @@ const TextInfoSection = styled.div`
     font-size: 18px;
     font-weight: 600;
     line-height: 25px;
-    letter-spacing: -0.017em;
   }
 
   .author-name {
     color: ${(props) => props.theme.firstGray};
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: -0.017em;
   }
 `;
 
@@ -174,6 +171,8 @@ const ButtonSection = styled.div`
     background-color: ${(props) => props.theme.bgColor};
     border-radius: 1000px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    cursor: pointer;
   }
   .note {
     font-size: 30px;
@@ -193,7 +192,7 @@ const WaveSection = styled.div`
   padding: 0;
 
   position: absolute;
-  bottom: 70px;
+  bottom: 80px;
   z-index: 0;
 `;
 
@@ -205,26 +204,35 @@ const AdditionalInfoSection = styled.div`
 
 const AdditionalInfo = styled.div`
   padding: 25px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .info {
-    color: ${(props) => props.theme.black};
     margin-bottom: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: ${(props) => props.theme.black};
     font-weight: 500;
     font-size: 26px;
     line-height: 35px;
-    letter-spacing: -0.017em;
   }
 
   .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     color: ${(props) => props.theme.firstGray};
+    text-align: center;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    letter-spacing: -0.017em;
   }
 `;
 

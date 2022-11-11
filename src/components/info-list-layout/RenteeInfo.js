@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import RENT_STATE from "../../constant/RENT_STATE";
+import RENT_STATE from "../../constant/RENT_STATES";
 import RentState from "./RentState";
 import { useNavigate } from "react-router-dom";
 import routes from "../../routes";
