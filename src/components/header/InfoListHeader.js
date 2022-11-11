@@ -3,7 +3,6 @@ import LogoStyle from "../../styles/LogoStyle";
 import HeaderSection from "../../styles/HeaderSection";
 import routes from "../../routes";
 import styled from "styled-components";
-import BluePurpleGradient from "../../styles/BluePurpleGradient";
 
 function InfoListHeader({ listType }) {
   const navigate = useNavigate();

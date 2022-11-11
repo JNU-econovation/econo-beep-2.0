@@ -19,6 +19,7 @@ import Books from "./pages/Books";
 import Equipments from "./pages/Equipments";
 import Detail from "./pages/Detail";
 import Manager from "./pages/Manager";
+import MyPage from "./pages/MyPage";
 
 function AppRouter() {
   return (
@@ -31,6 +32,7 @@ function AppRouter() {
         <Route path={routes.searchEquipments} element={<Equipments />} />
         <Route path={`${routes.detail}/:id`} element={<Detail />} />
         <Route path={routes.manager} element={<Manager />} />
+        <Route path={routes.myPage} element={<MyPage />} />
       </Routes>
     </Router>
   );
