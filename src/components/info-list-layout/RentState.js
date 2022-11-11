@@ -1,31 +1,13 @@
 import styled, { css } from "styled-components";
-import RENT_STATE from "../../constant/RENT_STATE";
+import RENT_STATES from "../../constant/RENT_STATES";
 import { useState } from "react";
 
 function RentState({ rentState }) {
-  let text;
-  let textColor;
-  let highlightColor;
-
-  if (rentState === RENT_STATE.RENTED) {
-    text = "대출 중";
-    textColor = (props) => props.theme.rentPink;
-    highlightColor = "#FDEAEA";
-  } else if (rentState === RENT_STATE.RENTABLE) {
-    text = "대출 가능";
-    textColor = (props) => props.theme.rentGreen;
-    highlightColor = "#D1FED0";
-  } else if (rentState === RENT_STATE.UNRENTABLE) {
-    text = "대출 불가";
-    textColor = (props) => props.theme.rentGray;
-    highlightColor = "#DBDBDB";
-  }
-
   return (
     <Section>
-      <Text textColor={textColor}>
-        <Highlight highlightColor={highlightColor} />
-        <span>{text}</span>
+      <Text value={rentState}>
+        <Highlight value={rentState} />
+        <span>{RENT_STATES.KOREAN[rentState]}</span>
       </Text>
     </Section>
   );
@@ -43,7 +25,23 @@ const Text = styled.div`
   float: right;
   position: relative;
 
-  color: ${(props) => props.textColor};
+  ${(props) =>
+    props.value === RENT_STATES.RENTED &&
+    css`
+      color: ${props.theme.rentPink};
+    `}
+
+  ${(props) =>
+    props.value === RENT_STATES.RENTABLE &&
+    css`
+      color: ${props.theme.rentGreen};
+    `}
+  
+  ${(props) =>
+    props.value === RENT_STATES.UNRENTABLE &&
+    css`
+      color: ${props.theme.rentGray};
+    `}
 
   span {
     position: relative;
@@ -52,13 +50,30 @@ const Text = styled.div`
 `;
 
 const Highlight = styled.div`
-  width: 110%;
+  width: 120%;
   height: 65%;
-  background-color: ${(props) => props.highlightColor};
 
   position: absolute;
   bottom: 0;
-  left: -5%;
+  left: -10%;
+
+  ${(props) =>
+    props.value === RENT_STATES.RENTED &&
+    css`
+      background-color: ${props.theme.rentPinkHighlight};
+    `}
+
+  ${(props) =>
+    props.value === RENT_STATES.RENTABLE &&
+    css`
+      background-color: ${props.theme.rentGreenHighlight};
+    `}
+
+  ${(props) =>
+    props.value === RENT_STATES.UNRENTABLE &&
+    css`
+      background-color: ${props.theme.rentGrayHighlight};
+    `}
 `;
 
 export default RentState;

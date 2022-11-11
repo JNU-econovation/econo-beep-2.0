@@ -17,7 +17,7 @@ import Menu from "./pages/Menu";
 import SearchAll from "./pages/SearchAll";
 import Books from "./pages/Books";
 import Equipments from "./pages/Equipments";
-import Types from "./pages/Types";
+import Detail from "./pages/Detail";
 import Manager from "./pages/Manager";
 
 function AppRouter() {
@@ -29,7 +29,7 @@ function AppRouter() {
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.searchBooks} element={<Books />} />
         <Route path={routes.searchEquipments} element={<Equipments />} />
-        <Route path={`${routes.type}/:type`} element={<Types />} />
+        <Route path={`${routes.detail}/:id`} element={<Detail />} />
         <Route path={routes.manager} element={<Manager />} />
       </Routes>
     </Router>
@@ -83,6 +83,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-decoration: none;
+    letter-spacing: -0.017em;
   }
 
   html {
