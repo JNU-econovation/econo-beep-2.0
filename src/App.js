@@ -28,8 +28,8 @@ function AppRouter() {
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.menu} element={<Menu />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
-        <Route path={routes.searchBooks} element={<Books />} />
-        <Route path={routes.searchEquipments} element={<Equipments />} />
+        <Route path={routes.books} element={<Books />} />
+        <Route path={routes.equipments} element={<Equipments />} />
         <Route path={`${routes.detail}/:id`} element={<Detail />} />
         <Route path={routes.manager} element={<Manager />} />
         <Route path={routes.myPage} element={<MyPage />} />
