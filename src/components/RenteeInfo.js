@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import React from "react";
-import RENT_STATE from "../../constant/RENT_STATES";
-import RentState from "./RentState";
+import RentState from "./info-list-layout/RentState";
 import { useNavigate } from "react-router-dom";
-import routes from "../../routes";
+import routes from "../routes";
 
 function RenteeInfo({ src, id, title, authorName, type, rentState }) {
   const navigate = useNavigate();

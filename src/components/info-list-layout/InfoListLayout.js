@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import SearchBar from "../SearchBar";
-import RenteeInfo from "./RenteeInfo";
+import RenteeInfo from "../RenteeInfo";
 import Body from "../Body";
 import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";

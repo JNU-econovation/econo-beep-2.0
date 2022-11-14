@@ -3,7 +3,7 @@ import PageTitle from "../components/PageTitle";
 import MyPageHeader from "../components/header/MyPageHeader";
 import styled, { css } from "styled-components";
 import { useState } from "react";
-import RenteeInfo from "../components/info-list-layout/RenteeInfo";
+import RenteeInfo from "../components/RenteeInfo";
 import RENTEE_TYPES from "../constant/RENTEE_TYPES";
 
 function MyPage() {
@@ -12,14 +12,6 @@ function MyPage() {
     returned: false,
     bookmarked: false,
   });
-
-  const resetButton = () => {
-    setButton({
-      rented: false,
-      returned: false,
-      bookmarked: false,
-    });
-  };
 
   return (
     <Body>
