@@ -6,7 +6,7 @@ const routes = {
   searchEquipments: "/equipments",
   manager: "/manager",
   detail: "/detail",
-  myPage: "/my-page",
+  myPage: "/mypage",
 };
 Object.freeze(routes);
 export default routes;
