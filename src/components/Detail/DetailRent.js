@@ -29,7 +29,11 @@ function DetailRent() {
           rentRecords.map((rentRecord) => (
             <RentRecordSection>
               <RentRecordLeft>
-                <img className="profile-img" src={rentRecord.profileImg} />
+                <img
+                  className="profile-img"
+                  src={rentRecord.profileImg}
+                  alt="profile"
+                />
                 <RentRecordCenter>
                   <div className="rent-name">{rentRecord.name}</div>
                   <div className="rent-date">

@@ -21,6 +21,7 @@ function MyPage() {
         <img
           className="profile-img"
           src="https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427__480.jpg"
+          alt="profile"
         />
         <div className="user-name">22기 경주원</div>
         <div className="user-email">joowon@gmail.com</div>

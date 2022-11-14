@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import HeaderSection from "../../styles/HeaderSection";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
-import { BiMenu, BiX } from "react-icons/bi";
+import { BiMenu } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import routes from "../../routes";
 import { AiOutlineUser } from "react-icons/ai";
