@@ -124,7 +124,7 @@ function Books() {
         searchParams.get("keyword") ? searchParams.get("keyword") : "도서"
       }
       listType="도서"
-      searchApiUrl={routes.searchBooks}
+      searchApiUrl={routes.books}
       rentees={rentees}
       initSearchList={initSearchList}
       loadSearchList={loadSearchList}
