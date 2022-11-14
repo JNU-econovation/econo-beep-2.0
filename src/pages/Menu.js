@@ -36,6 +36,7 @@ function Menu() {
             <div className="menu-text">도서</div>
           </MenuHolder>
           <MenuHolder
+            className="margin-bottom"
             onClick={() => {
               navigate(routes.equipments);
             }}
