@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import routes from "../routes";
 
 import Body from "../components/Body";
@@ -8,7 +8,6 @@ import MenuHeader from "../components/header/MenuHeader";
 
 import literature from "../images/menu-literature.png";
 import equipment from "../images/menu-equipment.png";
-import infinity from "../images/menu-infinity.png";
 import ranking from "../images/menu-ranking.png";
 import recent from "../images/menu-recent-rent.png";
 import email from "../images/menu-email.png";
@@ -33,7 +32,7 @@ function Menu() {
               navigate(routes.books);
             }}
           >
-            <img className="menu-icon" src={literature} />
+            <img className="menu-icon" src={literature} alt="도서" />
             <div className="menu-text">도서</div>
           </MenuHolder>
           <MenuHolder
@@ -41,12 +40,8 @@ function Menu() {
               navigate(routes.equipments);
             }}
           >
-            <img className="menu-icon" src={equipment} />
+            <img className="menu-icon" src={equipment} alt="기자재" />
             <div className="menu-text">기자재</div>
-          </MenuHolder>
-          <MenuHolder className="margin-bottom">
-            <img className="menu-icon" src={infinity} />
-            <div className="menu-text">전체</div>
           </MenuHolder>
 
           <MenuHolder
@@ -54,7 +49,7 @@ function Menu() {
               showAlert();
             }}
           >
-            <img className="menu-icon" src={ranking} />
+            <img className="menu-icon" src={ranking} alt="랭킹" />
             <div className="menu-text">랭킹</div>
           </MenuHolder>
           <MenuHolder
@@ -63,7 +58,7 @@ function Menu() {
               navigate(routes.myPage);
             }}
           >
-            <img className="menu-icon" src={recent} />
+            <img className="menu-icon" src={recent} alt="최근 대여 기록" />
             <div className="menu-text">최근 대여 기록</div>
           </MenuHolder>
 
@@ -72,7 +67,7 @@ function Menu() {
               window.open("mailto:sckwon770@gmail.com", "_blank");
             }}
           >
-            <img className="menu-icon" src={email} />
+            <img className="menu-icon" src={email} alt="버그 리포트" />
             <div className="menu-text">버그 리포트</div>
           </MenuHolder>
           <MenuHolder
@@ -83,7 +78,7 @@ function Menu() {
               );
             }}
           >
-            <img className="menu-icon" src={github} />
+            <img className="menu-icon" src={github} alt="깃허브" />
             <div className="menu-text">깃허브</div>
           </MenuHolder>
           <MenuHolder
@@ -91,7 +86,7 @@ function Menu() {
               navigate(routes.manager);
             }}
           >
-            <img className="menu-icon" src={admin} />
+            <img className="menu-icon" src={admin} alt="관리자 콘솔" />
             <div className="menu-text">관리자 콘솔</div>
           </MenuHolder>
         </MenuSection>
