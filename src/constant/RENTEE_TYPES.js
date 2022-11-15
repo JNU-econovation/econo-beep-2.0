@@ -6,6 +6,7 @@ const ARRAY = [
   "GAME",
   "DEVELOPMENT",
   "MAJOR",
+  "BOOK",
   "EQUIPMENT",
 ];
 
@@ -17,6 +18,7 @@ const RENTEE_TYPE = {
   GAME: "GAME",
   DEVELOPMENT: "DEVELOPMENT",
   MAJOR: "MAJOR",
+  BOOK: "BOOK",
   EQUIPMENT: "EQUIPMENT",
 };
 

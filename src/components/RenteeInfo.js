@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import React from "react";
-import RentState from "./info-list-layout/RentState";
 import { useNavigate } from "react-router-dom";
 import routes from "../routes";
+import RentState from "./info-list-layout/RentState";
+import RENTEE_TYPES from "../constant/RENTEE_TYPES";
 
-function RenteeInfo({ src, id, title, authorName, type, rentState }) {
+function RenteeInfo({
+  id,
+  thumbnailUrl,
+  name,
+  type,
+  bookArea,
+  bookAuthorName,
+  rentState,
+}) {
   const navigate = useNavigate();
   return (
     <InfoHolder
@@ -12,13 +21,20 @@ function RenteeInfo({ src, id, title, authorName, type, rentState }) {
         navigate(`${routes.detail}/${id}`);
       }}
     >
-      <InfoImg src="https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_311/3-2-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg" />
+      <InfoImg src={thumbnailUrl} />
       <InfoTextBox>
         <DetailInfo>
-          {authorName ? <RenteeAuthor>{authorName}</RenteeAuthor> : null}
-          <RenteeTitle>{title}</RenteeTitle>
+          {bookAuthorName ? (
+            <RenteeAuthor>{bookAuthorName}</RenteeAuthor>
+          ) : null}
+          <RenteeTitle>{name}</RenteeTitle>
           <RenteeType>
-            <div>#{type}</div>
+            <div>
+              #
+              {type === RENTEE_TYPES.BOOK
+                ? RENTEE_TYPES.KOREAN[bookArea]
+                : RENTEE_TYPES.KOREAN[type]}
+            </div>
           </RenteeType>
         </DetailInfo>
         <RentState rentState={rentState} />
