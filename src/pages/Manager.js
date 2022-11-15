@@ -4,7 +4,7 @@ import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
-import ManagerRenteeInfoEdit from "../components/manager/ManagerRenteeInfoEdit";
+import RenteeInfoEdit from "../components/manager/RenteeInfoEdit";
 import INITIAL_RENTEE_INFO from "../constant/INITIAL_RENTEE_INFO";
 import ManagerHeader from "../components/header/ManagerHeader";
 
@@ -42,7 +42,8 @@ function Manager() {
             setIsEditMode={setIsEditMode}
           />
           {isEditMode ? (
-            <ManagerRenteeInfoEdit
+            <RenteeInfoEdit
+              isBookMode={isBookMode}
               editRenteeInfo={editRenteeInfo}
               setEditRenteeInfo={setEditRenteeInfo}
               setIsEditMode={setIsEditMode}
@@ -57,7 +58,7 @@ function Manager() {
 const ManagerSection = styled.section`
   width: 100vw;
   min-height: calc(100vh - 60px);
-  padding: 0 5%;
+  padding: 20px 5%;
 
   background-color: ${(props) => props.theme.managerBgColor};
 

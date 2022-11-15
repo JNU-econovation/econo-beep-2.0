@@ -124,7 +124,7 @@ function Equipments() {
         searchParams.get("keyword") ? searchParams.get("keyword") : "기자재"
       }
       listType="기자재"
-      searchApiUrl={routes.equipments}
+      searchApiUrl={routes.device}
       rentees={rentees}
       initSearchList={initSearchList}
       loadSearchList={loadSearchList}

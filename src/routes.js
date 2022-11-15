@@ -3,7 +3,7 @@ const routes = {
   menu: "/menu",
   searchAll: "/search",
   books: "/books",
-  equipments: "/equipments",
+  device: "/equipments",
   manager: "/manager",
   detail: "/detail",
   myPage: "/mypage",

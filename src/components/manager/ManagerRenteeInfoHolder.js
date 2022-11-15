@@ -65,7 +65,7 @@ function ManagerRenteeInfoHolder({ setEditRenteeInfo, setIsEditMode }) {
 
 const Container = styled.div`
   width: 100%;
-  height: 46px;
+  padding: 2.5px 0;
   margin-bottom: 10px;
 
   display: grid;
