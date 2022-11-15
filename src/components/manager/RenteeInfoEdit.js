@@ -13,7 +13,8 @@ function RenteeInfoEdit({
   isBookMode,
   editRenteeInfo,
   setEditRenteeInfo,
-  setIsEditMode,
+  setIsEditOpen,
+  isEditMode,
 }) {
   const [inputInfo, setInputInfo] = useState(editRenteeInfo);
   const [thumbnail, setThumbnail] = useState("");
@@ -68,7 +69,7 @@ function RenteeInfoEdit({
         <div
           id="close-button"
           onClick={() => {
-            setIsEditMode(false);
+            setIsEditOpen(false);
             setEditRenteeInfo(INITIAL_RENTEE_INFO);
             setInputInfo(INITIAL_RENTEE_INFO);
           }}
@@ -160,7 +161,7 @@ function RenteeInfoEdit({
         </S.InfoBox>
       </MediumSection>
       <Button>
-        <div>수정하기</div>
+        <div>{!isEditMode ? "추가하기" : "수정하기"}</div>
       </Button>
     </Container>
   );

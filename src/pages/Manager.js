@@ -15,7 +15,8 @@ function Manager() {
 
   const [lastRenteeId, setLastRenteeId] = useState(null);
 
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(undefined);
   const [editRenteeInfo, setEditRenteeInfo] = useState(INITIAL_RENTEE_INFO);
 
   const handleSearchPress = () => {};
@@ -35,18 +36,21 @@ function Manager() {
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
         />
-        <ManagerRenteeSection isEditMode={isEditMode}>
+        <ManagerRenteeSection isEditOpen={isEditOpen}>
           <ManagerRenteeInfoList
             setEditRenteeInfo={setEditRenteeInfo}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
             isEditMode={isEditMode}
             setIsEditMode={setIsEditMode}
           />
-          {isEditMode ? (
+          {isEditOpen ? (
             <RenteeInfoEdit
               isBookMode={isBookMode}
+              isEditMode={isEditMode}
               editRenteeInfo={editRenteeInfo}
               setEditRenteeInfo={setEditRenteeInfo}
-              setIsEditMode={setIsEditMode}
+              setIsEditOpen={setIsEditOpen}
             />
           ) : null}
         </ManagerRenteeSection>
@@ -74,7 +78,7 @@ const ManagerRenteeSection = styled.div`
 
   display: grid;
   grid-template-columns: ${(props) =>
-    props.isEditMode ? "auto 400px" : "auto"};
+    props.isEditOpen ? "auto 400px" : "auto"};
 `;
 
 export default Manager;

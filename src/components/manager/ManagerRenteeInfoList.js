@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import ManagerRenteeInfoHolder from "./ManagerRenteeInfoHolder";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
+import { useState } from "react";
 
 function ManagerRenteeInfoList({
   setEditRenteeInfo,
+  isEditOpen,
+  setIsEditOpen,
   isEditMode,
   setIsEditMode,
 }) {
@@ -20,10 +23,11 @@ function ManagerRenteeInfoList({
           <HeaderBox>비고</HeaderBox>
         </InfoHeader>
         <div className="blank-space">
-          {!isEditMode ? (
+          {!isEditOpen ? (
             <AddRenteeButton
               onClick={() => {
-                setIsEditMode(true);
+                setIsEditOpen(true);
+                setIsEditMode(false);
               }}
             >
               <BluePurpleGradient />
@@ -36,38 +40,47 @@ function ManagerRenteeInfoList({
       </InfoHeaderContainer>
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
       <ManagerRenteeInfoHolder
         setEditRenteeInfo={setEditRenteeInfo}
+        setIsEditOpen={setIsEditOpen}
         setIsEditMode={setIsEditMode}
       />
     </Container>
