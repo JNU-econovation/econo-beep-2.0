@@ -1,14 +1,4 @@
-const ARRAY = [
-  "WEB",
-  "APP",
-  "LANGUAGE",
-  "AI",
-  "GAME",
-  "DEVELOPMENT",
-  "MAJOR",
-  "BOOK",
-  "DEVICE",
-];
+const ARRAY = ["BOOK", "DEVICE"];
 
 const BOOK_AREA_ARRAY = [
   "WEB",
@@ -20,6 +10,27 @@ const BOOK_AREA_ARRAY = [
   "MAJOR",
 ];
 
+const RENTEE_TYPE = {
+  BOOK: "BOOK",
+  DEVICE: "DEVICE",
+};
+
+// const INDEX = {
+//   WEB: 0,
+//   APP: 1,
+//   LANGUAGE: 2,
+//   AI: 3,
+//   GAME: 4,
+//   DEVELOPMENT: 5,
+//   MAJOR: 6,
+//   DEVICE: 7,
+// };
+
+const TYPE_KOREAN = {
+  BOOK: "책",
+  DEVICE: "기자재",
+};
+
 const BOOK_AREA_KOREAN = {
   WEB: "웹",
   APP: "앱",
@@ -30,52 +41,29 @@ const BOOK_AREA_KOREAN = {
   MAJOR: "전공 서적",
 };
 
-const RENTEE_TYPE = {
-  BOOK: "BOOK",
-  DEVICE: "DEVICE",
-};
-
-const INDEX = {
-  WEB: 0,
-  APP: 1,
-  LANGUAGE: 2,
-  AI: 3,
-  GAME: 4,
-  DEVELOPMENT: 5,
-  MAJOR: 6,
-  DEVICE: 7,
-};
-
-const TYPE_KOREAN = {
-  BOOK: "책",
-  DEVICE: "기자재",
-};
-
-const URL = {
-  WEB: "web",
-  APP: "app",
-  LANGUAGE: "language",
-  AI: "ai",
-  GAME: "game",
-  DEVELOPMENT: "development",
-  MAJOR: "major",
-  DEVICE: "equipment",
-};
+// const URL = {
+//   WEB: "web",
+//   APP: "app",
+//   LANGUAGE: "language",
+//   AI: "ai",
+//   GAME: "game",
+//   DEVELOPMENT: "development",
+//   MAJOR: "major",
+//   DEVICE: "equipment",
+// };
 
 Object.freeze(ARRAY);
 Object.freeze(BOOK_AREA_ARRAY);
 Object.freeze(BOOK_AREA_KOREAN);
 Object.freeze(RENTEE_TYPE);
-Object.freeze(INDEX);
+// Object.freeze(INDEX);
 Object.freeze(TYPE_KOREAN);
 Object.freeze(URL);
 
 export default {
+  ...RENTEE_TYPE,
   ARRAY,
   BOOK_AREA_ARRAY,
   BOOK_AREA_KOREAN,
-  ...RENTEE_TYPE,
-  INDEX,
   TYPE_KOREAN,
-  URL,
 };

@@ -32,8 +32,8 @@ function RenteeInfo({
             <div>
               #
               {type === RENTEE_TYPES.BOOK
-                ? RENTEE_TYPES.KOREAN[bookArea]
-                : RENTEE_TYPES.KOREAN[type]}
+                ? RENTEE_TYPES.BOOK_AREA_KOREAN[bookArea]
+                : RENTEE_TYPES.TYPE_KOREAN[type]}
             </div>
           </RenteeType>
         </DetailInfo>
