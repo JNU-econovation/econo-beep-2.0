@@ -3,12 +3,12 @@ import axios from "axios";
 import routes from "../routes";
 import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 
-function Books() {
+function Device() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const loadBookList = async ({ keyword, pageIndex, pageSize }) => {
+  const loadDeviceList = async ({ keyword, pageIndex, pageSize }) => {
     const response = await axios.get(
-      process.env.REACT_APP_BEEP_API + "api/rentee/search/book",
+      process.env.REACT_APP_BEEP_API + "api/rentee/search/device",
       {
         params: {
           name: keyword,
@@ -25,14 +25,14 @@ function Books() {
     <InfoListLayout
       key={
         searchParams.get("keyword") !== null
-          ? `book?${searchParams.get("keyword")}`
-          : "book"
+          ? `equipments?${searchParams.get("keyword")}`
+          : "equipments"
       }
-      listType="도서"
-      searchApiUrl={routes.books}
-      loadRenteeList={loadBookList}
+      listType="기자재"
+      searchApiUrl={routes.device}
+      loadRenteeList={loadDeviceList}
     />
   );
 }
 
-export default Books;
+export default Device;

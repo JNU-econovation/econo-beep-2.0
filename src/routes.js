@@ -3,10 +3,11 @@ const routes = {
   menu: "/menu",
   searchAll: "/search",
   books: "/books",
-  device: "/equipments",
+  device: "/device",
   manager: "/manager",
   detail: "/detail",
   myPage: "/mypage",
 };
+
 Object.freeze(routes);
 export default routes;

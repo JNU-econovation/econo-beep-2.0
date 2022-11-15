@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import SearchBar from "../SearchBar";
 import RenteeInfo from "../RenteeInfo";
@@ -10,40 +10,39 @@ import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";
 
-function InfoListLayout({ listType, searchApiUrl, rentees, loadRenteeList }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  // const [isInitLoaded, setIsInitLoaded] = useState(false);
+function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const target = useRef(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
+  const [lastPage, setLastPage] = useState(false);
 
-  // useEffect(() => {
-  //   if (searchParams.get("keyword") === null) {
-  //     initTypeList();
-  //     setIsInitLoaded(true);
-  //   } else if (searchParams.get("keyword")) {
-  //     initSearchList(pageIndex, pageSize);
-  //     setIsInitLoaded(true);
-  //   }
-  // }, [searchParams.get("keyword")]);
-  //
-  // const loadRenteeList = useCallback(() => {
-  //   if (searchParams.get("keyword") === null) {
-  //     loadTypeList();
-  //   } else if (searchParams.get("keyword")) {
-  //     loadSearchList();
-  //   }
-  // }, [searchParams.get("keyword")]);
+  const [rentees, setRentees] = useState([]);
 
   useEffect(() => {
+    const onLoad = async () => {
+      const loadRentees = await loadRenteeList({
+        keyword: searchParams?.get("keyword"),
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+      });
+
+      // setRentees((rentees) => [...rentees, ...loadRentees]);
+      // setPageIndex((pageIndex) => pageIndex + 1);
+
+      if (loadRentees.length !== 0) {
+        setRentees((rentees) => [...rentees, ...loadRentees]);
+        setPageIndex((pageIndex) => pageIndex + 1);
+      } else {
+        setLastPage(true);
+      }
+    };
+
     const onIntersect = async ([entry], observer) => {
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
-        await loadRenteeList({
-          keyword: searchParams?.get("keyword"),
-          pageIndex: pageIndex,
-          pageSize: pageSize,
-        });
+        await onLoad();
         observer.observe(entry.target);
       }
     };
@@ -72,24 +71,27 @@ function InfoListLayout({ listType, searchApiUrl, rentees, loadRenteeList }) {
       <ResultBox>
         {rentees.map((rentee) => (
           <RenteeInfo
-            key={rentee.id}
-            src={process.env.REACT_APP_BEEP_API + rentee.thumbnailUrl}
-            id={rentee.id}
-            title={rentee.title}
-            authorName={rentee.authorName}
-            type={rentee.type}
-            rentState={rentee.rentState}
+            key={rentee?.id}
+            thumbnailUrl={process.env.REACT_APP_BEEP_API + rentee.thumbnailUrl}
+            id={rentee?.id}
+            name={rentee?.name}
+            type={rentee?.type}
+            bookArea={rentee?.bookArea}
+            bookAuthorName={rentee?.bookAuthorName}
+            rentState={rentee?.rentState}
           />
         ))}
       </ResultBox>
-      <div ref={target} style={{ padding: "20px" }}>
-        <ReactLoading
-          type="spin"
-          color={theme.firstGray}
-          width="28px"
-          height="28px"
-        />
-      </div>
+      {lastPage !== true ? (
+        <div ref={target} style={{ padding: "20px" }}>
+          <ReactLoading
+            type="spin"
+            color={theme.firstGray}
+            width="28px"
+            height="28px"
+          />
+        </div>
+      ) : undefined}
     </Body>
   );
 }
