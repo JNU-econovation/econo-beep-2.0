@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import routes from "../routes";
-import RENT_STATE from "../constant/RENT_STATES";
-import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 import axios from "axios";
+import routes from "../routes";
+import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 
 function Device() {
   const [searchParams, setSearchParams] = useSearchParams();

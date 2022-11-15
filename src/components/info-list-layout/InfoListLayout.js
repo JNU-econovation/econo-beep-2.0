@@ -39,10 +39,10 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       }
     };
 
-    const onIntersect = ([entry], observer) => {
+    const onIntersect = async ([entry], observer) => {
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
-        onLoad();
+        await onLoad();
         observer.observe(entry.target);
       }
     };
