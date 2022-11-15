@@ -8,5 +8,6 @@ const routes = {
   detail: "/detail",
   myPage: "/mypage",
 };
+
 Object.freeze(routes);
 export default routes;

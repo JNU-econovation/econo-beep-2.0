@@ -5,10 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { DateObjectToEpochSecond } from "../EpochConverter";
 import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 
-function ManagerRenteeInfoHolder({ setEditRenteeInfo, setIsEditMode }) {
+function ManagerRenteeInfoHolder({
+  setEditRenteeInfo,
+  setIsEditOpen,
+  setIsEditMode,
+}) {
   const navigate = useNavigate();
 
   const handleEditClick = () => {
+    setIsEditOpen(true);
     setIsEditMode(true);
     setEditRenteeInfo({
       id: "101",
@@ -65,7 +70,7 @@ function ManagerRenteeInfoHolder({ setEditRenteeInfo, setIsEditMode }) {
 
 const Container = styled.div`
   width: 100%;
-  height: 46px;
+  padding: 2.5px 0;
   margin-bottom: 10px;
 
   display: grid;
