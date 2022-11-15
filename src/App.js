@@ -16,7 +16,7 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import SearchAll from "./pages/SearchAll";
 import Books from "./pages/Books";
-import Equipments from "./pages/Equipments";
+import Device from "./pages/Device";
 import Detail from "./pages/Detail";
 import Manager from "./pages/Manager";
 import MyPage from "./pages/MyPage";
@@ -29,7 +29,7 @@ function AppRouter() {
         <Route path={routes.menu} element={<Menu />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.books} element={<Books />} />
-        <Route path={routes.equipments} element={<Equipments />} />
+        <Route path={routes.device} element={<Device />} />
         <Route path={`${routes.detail}/:id`} element={<Detail />} />
         <Route path={routes.manager} element={<Manager />} />
         <Route path={routes.myPage} element={<MyPage />} />

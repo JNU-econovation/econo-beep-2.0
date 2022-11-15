@@ -5,10 +5,10 @@ import RENT_STATE from "../constant/RENT_STATES";
 import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 import axios from "axios";
 
-function Equipments() {
+function Device() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const loadEquipmentList = async ({ keyword, pageIndex, pageSize }) => {
+  const loadDeviceList = async ({ keyword, pageIndex, pageSize }) => {
     const response = await axios.get(
       process.env.REACT_APP_BEEP_API + "api/rentee/search/device",
       {
@@ -31,10 +31,10 @@ function Equipments() {
           : "equipments"
       }
       listType="기자재"
-      searchApiUrl={routes.equipments}
-      loadRenteeList={loadEquipmentList}
+      searchApiUrl={routes.device}
+      loadRenteeList={loadDeviceList}
     />
   );
 }
 
-export default Equipments;
+export default Device;

@@ -7,7 +7,7 @@ const ARRAY = [
   "DEVELOPMENT",
   "MAJOR",
   "BOOK",
-  "EQUIPMENT",
+  "DEVICE",
 ];
 
 const RENTEE_TYPE = {
@@ -19,7 +19,7 @@ const RENTEE_TYPE = {
   DEVELOPMENT: "DEVELOPMENT",
   MAJOR: "MAJOR",
   BOOK: "BOOK",
-  EQUIPMENT: "EQUIPMENT",
+  DEVICE: "DEVICE",
 };
 
 const INDEX = {
@@ -30,7 +30,7 @@ const INDEX = {
   GAME: 4,
   DEVELOPMENT: 5,
   MAJOR: 6,
-  EQUIPMENT: 7,
+  DEVICE: 7,
 };
 
 const KOREAN = {
@@ -41,7 +41,7 @@ const KOREAN = {
   GAME: "게임",
   DEVELOPMENT: "개발 교양",
   MAJOR: "전공 서적",
-  EQUIPMENT: "기자재",
+  DEVICE: "기자재",
 };
 
 const URL = {
@@ -52,7 +52,7 @@ const URL = {
   GAME: "game",
   DEVELOPMENT: "development",
   MAJOR: "major",
-  EQUIPMENT: "equipment",
+  DEVICE: "equipment",
 };
 
 Object.freeze(ARRAY);

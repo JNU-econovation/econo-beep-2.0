@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle";
 import MenuHeader from "../components/header/MenuHeader";
 
 import literature from "../images/menu-literature.png";
-import equipment from "../images/menu-equipment.png";
+import device from "../images/menu-device.png";
 import ranking from "../images/menu-ranking.png";
 import recent from "../images/menu-recent-rent.png";
 import email from "../images/menu-email.png";
@@ -38,10 +38,10 @@ function Menu() {
           <MenuHolder
             className="margin-bottom"
             onClick={() => {
-              navigate(routes.equipments);
+              navigate(routes.device);
             }}
           >
-            <img className="menu-icon" src={equipment} alt="기자재" />
+            <img className="menu-icon" src={device} alt="기자재" />
             <div className="menu-text">기자재</div>
           </MenuHolder>
 
