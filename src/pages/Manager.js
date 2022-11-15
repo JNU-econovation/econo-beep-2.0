@@ -4,7 +4,7 @@ import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";
-import ManagerRenteeInfoEdit from "../components/manager/ManagerRenteeInfoEdit";
+import RenteeInfoEdit from "../components/manager/RenteeInfoEdit";
 import INITIAL_RENTEE_INFO from "../constant/INITIAL_RENTEE_INFO";
 import ManagerHeader from "../components/header/ManagerHeader";
 
@@ -15,7 +15,8 @@ function Manager() {
 
   const [lastRenteeId, setLastRenteeId] = useState(null);
 
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(undefined);
   const [editRenteeInfo, setEditRenteeInfo] = useState(INITIAL_RENTEE_INFO);
 
   const handleSearchPress = () => {};
@@ -35,17 +36,21 @@ function Manager() {
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
         />
-        <ManagerRenteeSection isEditMode={isEditMode}>
+        <ManagerRenteeSection isEditOpen={isEditOpen}>
           <ManagerRenteeInfoList
             setEditRenteeInfo={setEditRenteeInfo}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
             isEditMode={isEditMode}
             setIsEditMode={setIsEditMode}
           />
-          {isEditMode ? (
-            <ManagerRenteeInfoEdit
+          {isEditOpen ? (
+            <RenteeInfoEdit
+              isBookMode={isBookMode}
+              isEditMode={isEditMode}
               editRenteeInfo={editRenteeInfo}
               setEditRenteeInfo={setEditRenteeInfo}
-              setIsEditMode={setIsEditMode}
+              setIsEditOpen={setIsEditOpen}
             />
           ) : null}
         </ManagerRenteeSection>
@@ -57,7 +62,7 @@ function Manager() {
 const ManagerSection = styled.section`
   width: 100vw;
   min-height: calc(100vh - 60px);
-  padding: 0 5%;
+  padding: 20px 5%;
 
   background-color: ${(props) => props.theme.managerBgColor};
 
@@ -73,7 +78,7 @@ const ManagerRenteeSection = styled.div`
 
   display: grid;
   grid-template-columns: ${(props) =>
-    props.isEditMode ? "auto 400px" : "auto"};
+    props.isEditOpen ? "auto 400px" : "auto"};
 `;
 
 export default Manager;
