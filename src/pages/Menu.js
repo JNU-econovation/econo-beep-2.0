@@ -38,7 +38,7 @@ function Menu() {
           <MenuHolder
             className="margin-bottom"
             onClick={() => {
-              navigate(routes.equipments);
+              navigate(routes.device);
             }}
           >
             <img className="menu-icon" src={equipment} alt="기자재" />

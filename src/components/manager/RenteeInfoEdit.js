@@ -2,23 +2,19 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers-pro";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MenuItem, Select, TextField } from "@mui/material";
 
 import INITIAL_RENTEE_INFO from "../../constant/INITIAL_RENTEE_INFO";
-import {
-  DateObjectToEpochSecond,
-  EpochSecondToDateObject,
-} from "../EpochConverter";
+import * as S from "../../styles/ManagerInfoEditStyle";
 import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
+import BookAdditionalInfoEdit from "./BookAdditionalInfoEdit";
 
-function ManagerRenteeInfoEdit({
+function RenteeInfoEdit({
+  isBookMode,
   editRenteeInfo,
   setEditRenteeInfo,
-  setIsEditMode,
+  setIsEditOpen,
+  isEditMode,
 }) {
   const [inputInfo, setInputInfo] = useState(editRenteeInfo);
   const [thumbnail, setThumbnail] = useState("");
@@ -58,7 +54,7 @@ function ManagerRenteeInfoEdit({
   return (
     <Container>
       <TopSection>
-        <TextInput
+        <S.TextInput
           className="title"
           type="text"
           placeholder="제목"
@@ -73,7 +69,7 @@ function ManagerRenteeInfoEdit({
         <div
           id="close-button"
           onClick={() => {
-            setIsEditMode(false);
+            setIsEditOpen(false);
             setEditRenteeInfo(INITIAL_RENTEE_INFO);
             setInputInfo(INITIAL_RENTEE_INFO);
           }}
@@ -82,8 +78,8 @@ function ManagerRenteeInfoEdit({
         </div>
       </TopSection>
       <MediumSection>
-        <InfoBox id="thumbnail-section">
-          <Label>표지</Label>
+        <S.InfoBox id="thumbnail-section">
+          <S.Label>표지</S.Label>
           <ImgBox>
             <label htmlFor="input-thumbnail">
               {!thumbnailPreview ? (
@@ -108,65 +104,15 @@ function ManagerRenteeInfoEdit({
               }}
             />
           </ImgBox>
-        </InfoBox>
-        <InfoBox>
-          <Label>저자</Label>
-          <TextInput
-            type="text"
-            placeholder="저자"
-            value={inputInfo?.authorName}
-            onChange={(e) => {
-              setInputInfo({
-                ...inputInfo,
-                authorName: e.target.value,
-              });
-            }}
+        </S.InfoBox>
+        {!isBookMode ? undefined : (
+          <BookAdditionalInfoEdit
+            inputInfo={inputInfo}
+            setInputInfo={setInputInfo}
           />
-        </InfoBox>
-        <InfoBox>
-          <Label>출판사</Label>
-          <TextInput
-            type="text"
-            placeholder="출판사"
-            value={inputInfo?.publisher}
-            onChange={(e) => {
-              setInputInfo({
-                ...inputInfo,
-                publisher: e.target.value,
-              });
-            }}
-          />
-        </InfoBox>
-        <InfoBox>
-          <Label>출판일</Label>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              inputFormat="yyyy-MM-dd"
-              value={EpochSecondToDateObject(inputInfo?.publishedDay)}
-              onChange={(e) => {
-                setInputInfo({
-                  ...inputInfo,
-                  publishedDay: DateObjectToEpochSecond(e),
-                });
-              }}
-              renderInput={(params) => (
-                <TextField
-                  size="small"
-                  sx={{
-                    ".MuiInputBase-input": {
-                      height: "14px",
-                      fontSize: "13px",
-                      padding: "10px 0 10px 5px",
-                    },
-                  }}
-                  {...params}
-                />
-              )}
-            />
-          </LocalizationProvider>
-        </InfoBox>
-        <InfoBox>
-          <Label>분야</Label>
+        )}
+        <S.InfoBox>
+          <S.Label>분야</S.Label>
           <Select
             labelId="SelectSortOrder"
             id="Select"
@@ -186,16 +132,22 @@ function ManagerRenteeInfoEdit({
             <MenuItem disabled value={-1}>
               <i>종류</i>
             </MenuItem>
-            {RENTEE_TYPE.ARRAY.map((element, index) => (
-              <MenuItem key={index} value={index}>
-                {RENTEE_TYPE.KOREAN[element]}
+            {!isBookMode ? (
+              <MenuItem key={0} value={0}>
+                {RENTEE_TYPE.TYPE_KOREAN.DEVICE}
               </MenuItem>
-            ))}
+            ) : (
+              RENTEE_TYPE.BOOK_AREA_ARRAY.map((element, index) => (
+                <MenuItem key={index} value={index}>
+                  {RENTEE_TYPE.BOOK_AREA_KOREAN[element]}
+                </MenuItem>
+              ))
+            )}
           </Select>
-        </InfoBox>
-        <InfoBox>
-          <Label>비고</Label>
-          <TextInput
+        </S.InfoBox>
+        <S.InfoBox>
+          <S.Label>비고</S.Label>
+          <S.TextInput
             type="text"
             placeholder="비고"
             value={inputInfo?.note}
@@ -206,10 +158,10 @@ function ManagerRenteeInfoEdit({
               });
             }}
           />
-        </InfoBox>
+        </S.InfoBox>
       </MediumSection>
       <Button>
-        <div>수정하기</div>
+        <div>{!isEditMode ? "추가하기" : "수정하기"}</div>
       </Button>
     </Container>
   );
@@ -251,21 +203,6 @@ const TopSection = styled.div`
   }
 `;
 
-const TextInput = styled.input`
-  outline: none;
-  border: none;
-  padding: 5px 0;
-  cursor: pointer;
-
-  :hover {
-    border-bottom: 1px solid ${(props) => props.theme.secondGray};
-  }
-
-  :focus {
-    border-bottom: 1px solid ${(props) => props.theme.blue};
-  }
-`;
-
 const MediumSection = styled.div`
   width: 100%;
   //height: 70%;
@@ -273,27 +210,6 @@ const MediumSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`;
-
-const InfoBox = styled.div`
-  width: 100%;
-  margin-top: 10px;
-
-  border: none;
-  outline: none;
-
-  display: grid;
-  grid-template-columns: 90px auto;
-
-  &#thumbnail-section {
-    height: 200px;
-  }
-`;
-
-const Label = styled.div`
-  font-size: 14px;
-  padding: 5px 0;
-  color: ${(props) => props.theme.firstGray};
 `;
 
 const ImgBox = styled.div`
@@ -352,4 +268,4 @@ const Button = styled.div`
   }
 `;
 
-export default ManagerRenteeInfoEdit;
+export default RenteeInfoEdit;

@@ -99,7 +99,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
 
-  grid-template-columns: 1fr 1fr 2fr 380px;
+  grid-template-columns: 1fr 1fr 1.5fr 380px;
 `;
 
 const Holder = styled.div`
@@ -117,8 +117,8 @@ const Holder = styled.div`
 `;
 
 const ModeButton = styled.div`
-  width: 50%;
-  max-width: 100px;
+  //width: 50%;
+  width: 80px;
   height: 100%;
   margin: 0 5%;
   padding: 0;
