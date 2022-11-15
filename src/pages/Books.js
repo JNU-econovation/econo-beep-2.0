@@ -7,7 +7,7 @@ import InfoListLayout from "../components/info-list-layout/InfoListLayout";
 function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const loadRenteeList = async ({ keyword, pageIndex, pageSize }) => {
+  const loadBookList = async ({ keyword, pageIndex, pageSize }) => {
     const response = await axios.get(
       process.env.REACT_APP_BEEP_API + "api/rentee/search/book",
       {
@@ -31,7 +31,7 @@ function Books() {
       }
       listType="도서"
       searchApiUrl={routes.books}
-      loadRenteeList={loadRenteeList}
+      loadRenteeList={loadBookList}
     />
   );
 }
