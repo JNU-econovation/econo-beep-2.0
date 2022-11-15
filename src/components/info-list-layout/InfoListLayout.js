@@ -10,43 +10,40 @@ import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";
 
-function InfoListLayout({
-  pageTitle,
-  listType,
-  searchApiUrl,
-  rentees,
-  initSearchList,
-  loadSearchList,
-  initTypeList,
-  loadTypeList,
-}) {
+function InfoListLayout({ listType, searchApiUrl, rentees, loadRenteeList }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isInitLoaded, setIsInitLoaded] = useState(false);
+  // const [isInitLoaded, setIsInitLoaded] = useState(false);
   const target = useRef(null);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageSize = 8;
 
-  useEffect(() => {
-    if (searchParams.get("keyword") === null) {
-      initTypeList();
-      setIsInitLoaded(true);
-    } else if (searchParams.get("keyword")) {
-      initSearchList();
-      setIsInitLoaded(true);
-    }
-  }, [searchParams.get("keyword")]);
-
-  const loadRenteeList = useCallback(() => {
-    if (searchParams.get("keyword") === null) {
-      loadTypeList();
-    } else if (searchParams.get("keyword")) {
-      loadSearchList();
-    }
-  }, [searchParams.get("keyword")]);
+  // useEffect(() => {
+  //   if (searchParams.get("keyword") === null) {
+  //     initTypeList();
+  //     setIsInitLoaded(true);
+  //   } else if (searchParams.get("keyword")) {
+  //     initSearchList(pageIndex, pageSize);
+  //     setIsInitLoaded(true);
+  //   }
+  // }, [searchParams.get("keyword")]);
+  //
+  // const loadRenteeList = useCallback(() => {
+  //   if (searchParams.get("keyword") === null) {
+  //     loadTypeList();
+  //   } else if (searchParams.get("keyword")) {
+  //     loadSearchList();
+  //   }
+  // }, [searchParams.get("keyword")]);
 
   useEffect(() => {
     const onIntersect = async ([entry], observer) => {
-      if (entry.isIntersecting && !isInitLoaded) {
+      if (entry.isIntersecting) {
         observer.unobserve(entry.target);
-        await loadRenteeList();
+        await loadRenteeList({
+          keyword: searchParams?.get("keyword"),
+          pageIndex: pageIndex,
+          pageSize: pageSize,
+        });
         observer.observe(entry.target);
       }
     };
@@ -59,11 +56,15 @@ function InfoListLayout({
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target, loadRenteeList]);
+  }, [target, loadRenteeList, pageIndex, pageSize, searchParams]);
 
   return (
     <Body>
-      <PageTitle title={pageTitle} />
+      <PageTitle
+        title={
+          searchParams.get("keyword") ? searchParams.get("keyword") : listType
+        }
+      />
       <InfoListHeader listType={listType} />
       <SearchBarHolder>
         <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
@@ -109,22 +110,5 @@ const ResultBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-// const MoreRenteeButton = styled.button`
-//   width: 85%;
-//   height: 40px;
-//   max-width: 400px;
-//
-//   margin: 15px 0;
-//
-//   border: 1px solid ${(props) => props.theme.firstGray};
-//   border-radius: 10px;
-//
-//   font-size: 16px;
-//   font-weight: 500;
-//   color: ${(props) => props.theme.firstGray};
-//   background-color: ${(props) => props.theme.bgColor};
-//   }
-// `;
 
 export default InfoListLayout;
