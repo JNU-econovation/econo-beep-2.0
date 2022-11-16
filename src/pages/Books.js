@@ -8,7 +8,7 @@ function Books() {
 
   const loadBookList = async ({ keyword, pageIndex, pageSize }) => {
     const response = await axios.get(
-      process.env.REACT_APP_BEEP_API + "api/rentee/search/book",
+      process.env.REACT_APP_BEEP_API + "/api/rentee/search/book",
       {
         params: {
           name: keyword,

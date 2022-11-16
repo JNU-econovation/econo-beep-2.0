@@ -6,26 +6,45 @@ import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
 import { useState } from "react";
 import { Backdrop } from "@mui/material";
+import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
 
-function DetailInfo() {
+function DetailInfo({
+  id,
+  type,
+  thumbnailUrl,
+  name,
+  bookArea,
+  bookAuthorName,
+  bookPublisherName,
+  rentCount,
+  note,
+  isBookmarked,
+  bookmarkCount,
+}) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [bookmark, setBookmark] = useState(false);
-  const IMG_URL = "https://image.yes24.com/goods/102347474/XL";
-  const { data, loading, error } = useColor(IMG_URL, "hex", {
+  const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
 
   return (
     <>
       <BasicInfoSection>
-        <RenteeImg src={IMG_URL} />
+        <RenteeImg
+          src={process.env.REACT_APP_BEEP_API + "/api" + thumbnailUrl}
+        />
         <InfoSection>
           <TextInfoSection>
-            <div className="publisher">프리껙머시깽이</div>
-            <div className="title">인공지능을 위한 수학이다 가나다라마다바</div>
-            <div className="author-name">저자저자저자저자</div>
+            <div className="publisher">{bookPublisherName}</div>
+            <div className="title">{name}</div>
+            <div className="author-name">{bookAuthorName}</div>
             <RenteeType>
-              <div>#인공지능</div>
+              <div>
+                #
+                {type === RENTEE_TYPES.BOOK
+                  ? RENTEE_TYPES.BOOK_AREA_KOREAN[bookArea]
+                  : RENTEE_TYPES.TYPE_KOREAN[type]}
+              </div>
             </RenteeType>
           </TextInfoSection>
           <ButtonSection>
@@ -50,9 +69,7 @@ function DetailInfo() {
                   </div>
                   <div className="note-title">비고</div>
                 </div>
-                <div className="note-content">
-                  이것은 비고란이다 우하하하하하하 가나다라마바상아자차카타파하
-                </div>
+                <div className="note-content">{note}</div>
               </NoteSection>
             </Backdrop>
             <div
@@ -71,9 +88,14 @@ function DetailInfo() {
             fill={data}
             paused={false}
             options={{ height: 15, speed: 0.1, amplitude: 10, points: 3 }}
+            filter="brightness(0.85)"
           >
             <defs>
-              <linearGradient id="gradient" gradientTransform="rotate(90)">
+              <linearGradient
+                id="gradient"
+                gradientTransform="rotate(90)"
+                filter="brightness(0.9)"
+              >
                 <stop offset="0" stopColor="white" />
                 <stop offset="0.3" stopColor="black" />
               </linearGradient>
@@ -92,15 +114,15 @@ function DetailInfo() {
       </BasicInfoSection>
       <AdditionalInfoSection>
         <AdditionalInfo>
-          <div className="info">10</div>
+          <div className="info">{id}</div>
           <div className="title">아이디</div>
         </AdditionalInfo>
         <AdditionalInfo>
-          <div className="info">21</div>
+          <div className="info">{bookmarkCount}</div>
           <div className="title">즐겨찾기</div>
         </AdditionalInfo>
         <AdditionalInfo>
-          <div className="info">2</div>
+          <div className="info">{rentCount}</div>
           <div className="title">대여</div>
         </AdditionalInfo>
       </AdditionalInfoSection>
