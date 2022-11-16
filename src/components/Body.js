@@ -6,10 +6,11 @@ function Body({ children }) {
 
 const BodyBox = styled.div`
   width: 100vw;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   background-color: ${(props) => props.theme.bgColor};
