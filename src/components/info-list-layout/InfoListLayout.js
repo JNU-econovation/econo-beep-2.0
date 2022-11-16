@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import SearchBar from "../SearchBar";
 import RenteeInfo from "../RenteeInfo";
-import Body from "../Body";
+import Body from "../../styles/Body";
 import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";

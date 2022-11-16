@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Body from "../components/Body";
+import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import routes from "../routes";

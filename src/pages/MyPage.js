@@ -1,4 +1,4 @@
-import Body from "../components/Body";
+import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import MyPageHeader from "../components/header/MyPageHeader";
 import styled, { css } from "styled-components";
@@ -62,13 +62,13 @@ function MyPage() {
             id="2"
             title="인공지능을 위한 수학책이다 하하하하"
             bookAuthorName="저자저자저자"
-            type={RENTEE_TYPES.KOREAN.AI}
+            type={RENTEE_TYPES.BOOK_AREA_KOREAN.AI}
           />
           <RenteeInfo
             id="2"
             title="인공지능을 위한 수학책이다 하하하하"
             bookAuthorName="저자저자저자"
-            type={RENTEE_TYPES.KOREAN.AI}
+            type={RENTEE_TYPES.BOOK_AREA_KOREAN.AI}
           />
         </RenteeInfoSection>
       </RentSection>
