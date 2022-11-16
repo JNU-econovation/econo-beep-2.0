@@ -8,7 +8,7 @@ function Device() {
 
   const loadDeviceList = async ({ keyword, pageIndex, pageSize }) => {
     const response = await axios.get(
-      process.env.REACT_APP_BEEP_API + "api/rentee/search/device",
+      process.env.REACT_APP_BEEP_API + "/api/rentee/search/device",
       {
         params: {
           name: keyword,
