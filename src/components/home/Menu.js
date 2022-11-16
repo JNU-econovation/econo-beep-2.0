@@ -1,20 +1,20 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import routes from "../routes";
+import routes from "../../routes";
 
-import Body from "../components/Body";
-import PageTitle from "../components/PageTitle";
-import MenuHeader from "../components/header/MenuHeader";
+import Body from "../Body";
+import PageTitle from "../PageTitle";
+import MenuHeader from "../header/MenuHeader";
 
-import literature from "../images/menu-literature.png";
-import device from "../images/menu-device.png";
-import ranking from "../images/menu-ranking.png";
-import recent from "../images/menu-recent-rent.png";
-import email from "../images/menu-email.png";
-import github from "../images/menu-github.png";
-import admin from "../images/menu-admin.png";
+import literature from "../../images/menu-literature.png";
+import device from "../../images/menu-device.png";
+import ranking from "../../images/menu-ranking.png";
+import recent from "../../images/menu-recent-rent.png";
+import email from "../../images/menu-email.png";
+import github from "../../images/menu-github.png";
+import admin from "../../images/menu-admin.png";
 
-function Menu() {
+function Menu({ setIsMenuOpen }) {
   const navigate = useNavigate();
 
   const showAlert = () => {
@@ -25,7 +25,7 @@ function Menu() {
     <Body>
       <PageTitle title="메뉴" />
       <MainPage>
-        <MenuHeader />
+        <MenuHeader setIsMenuOpen={setIsMenuOpen} />
         <MenuSection>
           <MenuHolder
             onClick={() => {
@@ -100,6 +100,7 @@ const MainPage = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,8 +109,8 @@ const MainPage = styled.div`
 `;
 
 const MenuSection = styled.div`
-  margin-left: 50px;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
   height: 100%;
   display: flex;
   flex-direction: column;
