@@ -6,18 +6,18 @@ import { useNavigate } from "react-router-dom";
 import routes from "../../routes";
 import { AiOutlineUser } from "react-icons/ai";
 
-function HomeHeader() {
+function HomeHeader({ setIsMenuOpen }) {
   const navigate = useNavigate();
   return (
     <HeaderSection>
-      <OpenMenuButton onClick={() => navigate(routes.menu)}>
-        <BluePurpleGradient />
-        <BiMenu style={{ fill: "url(#blue-purple-gradient)" }} />
-      </OpenMenuButton>
       <ProfileButton onClick={() => navigate(routes.myPage)}>
         <BluePurpleGradient />
         <AiOutlineUser style={{ fill: "url(#blue-purple-gradient)" }} />
       </ProfileButton>
+      <OpenMenuButton onClick={() => setIsMenuOpen(true)}>
+        <BluePurpleGradient />
+        <BiMenu style={{ fill: "url(#blue-purple-gradient)" }} />
+      </OpenMenuButton>
     </HeaderSection>
   );
 }

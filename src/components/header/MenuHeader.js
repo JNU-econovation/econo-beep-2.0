@@ -1,17 +1,14 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import HeaderSection from "../../styles/HeaderSection";
 import LogoStyle from "../../styles/LogoStyle";
-import routes from "../../routes";
 import { BiX } from "react-icons/bi";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
 
-function MenuHeader() {
-  const navigate = useNavigate();
+function MenuHeader({ setIsMenuOpen }) {
   return (
     <HeaderSection>
-      <Logo onClick={() => navigate(routes.home)}>econoBeep</Logo>
-      <CloseButton onClick={() => navigate(-1)}>
+      <Logo>econoBeep</Logo>
+      <CloseButton onClick={() => setIsMenuOpen(false)}>
         <BluePurpleGradient />
         <BiX style={{ fill: "url(#blue-purple-gradient)" }} />
       </CloseButton>

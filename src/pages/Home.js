@@ -6,20 +6,30 @@ import routes from "../routes";
 import LogoStyle from "../styles/LogoStyle";
 import PageBannerSlider from "../components/home/PageBannerSlider";
 import HomeHeader from "../components/header/HomeHeader";
+import { useState } from "react";
+import Menu from "../components/home/Menu";
 
 function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <Body>
-      <PageTitle title="Home" />
-      <MainPage>
-        <HomeHeader />
-        <SearchBarBox>
-          <Logo>econoBeep</Logo>
-          <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
-        </SearchBarBox>
-        <PageBannerSlider />
-      </MainPage>
-    </Body>
+    <>
+      {isMenuOpen ? (
+        <Menu setIsMenuOpen={setIsMenuOpen} />
+      ) : (
+        <Body>
+          <PageTitle title="Home" />
+          <MainPage>
+            <HomeHeader setIsMenuOpen={setIsMenuOpen} />
+            <SearchBarBox>
+              <Logo>econoBeep</Logo>
+              <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
+            </SearchBarBox>
+            <PageBannerSlider />
+          </MainPage>
+        </Body>
+      )}
+    </>
   );
 }
 
@@ -47,8 +57,8 @@ const SearchBarBox = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    left: 20vw;
-    width: 60vw;
+    left: 27.5vw;
+    width: 45vw;
   }
 `;
 

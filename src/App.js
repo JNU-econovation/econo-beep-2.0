@@ -13,7 +13,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Theme from "./styles/Theme";
 import routes from "./routes";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
 import SearchAll from "./pages/SearchAll";
 import Books from "./pages/Books";
 import Device from "./pages/Device";
@@ -26,7 +25,6 @@ function AppRouter() {
     <Router>
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.menu} element={<Menu />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.books} element={<Books />} />
         <Route path={routes.device} element={<Device />} />
