@@ -1,12 +1,13 @@
 import { IoMdInformation } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Backdrop } from "@mui/material";
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
+import axios from "axios";
 
 function DetailInfo({
   id,
@@ -18,14 +19,56 @@ function DetailInfo({
   bookPublisherName,
   rentCount,
   note,
-  isBookmarked,
+  bookmark,
   bookmarkCount,
 }) {
+  const localStorage = window.localStorage;
+
   const [noteOpen, setNoteOpen] = useState(false);
-  const [bookmark, setBookmark] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(bookmark);
+  const [isBookmarkedClicked, setIsBookmarkedClicked] = useState(0);
+
   const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
+
+  useEffect(() => {
+    if (isBookmarkedClicked === 0) {
+      return;
+    }
+
+    const putIsBookmarked = async () => {
+      const response = await axios.put(
+        process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
+        {
+          params: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      );
+
+      console.log(response);
+    };
+
+    const deleteIsBookmarked = async () => {
+      const response = await axios.delete(
+        process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
+        {
+          params: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      );
+
+      console.log(response);
+    };
+
+    if (!isBookmarked) {
+      deleteIsBookmarked();
+    } else {
+      putIsBookmarked();
+    }
+  }, [isBookmarkedClicked]);
 
   return (
     <>
@@ -75,10 +118,13 @@ function DetailInfo({
             <div
               className="bookmark button"
               onClick={() => {
-                setBookmark((bookmark) => !bookmark);
+                setIsBookmarkedClicked(
+                  (isBookmarkedClicked) => isBookmarkedClicked + 1
+                );
+                setIsBookmarked((bookmark) => !bookmark);
               }}
             >
-              {bookmark ? <RiHeart3Fill /> : <RiHeart3Line />}
+              {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
           </ButtonSection>
         </InfoSection>
@@ -131,16 +177,23 @@ function DetailInfo({
 }
 
 const BasicInfoSection = styled.div`
+  max-width: 600px;
   width: 100%;
   padding: 35px 20px;
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto;
+
   position: relative;
 `;
 
 const RenteeImg = styled.img`
-  width: 40%;
-  max-width: 200px;
+  //width: 40%;
+  width: 90%;
+  margin: 0 auto;
+  //padding-right: 20px;
+  max-width: 160px;
   object-fit: cover;
   border-radius: 10px;
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
@@ -285,9 +338,16 @@ const WaveSection = styled.div`
   height: 10%;
   padding: 0;
 
+  z-index: 0;
   position: absolute;
   bottom: 80px;
-  z-index: 0;
+  @media screen and (min-width: 601px) {
+    left: calc(300px - 50vw);
+  }
+
+  @media screen and (max-width: 600px) {
+    left: 0;
+  }
 `;
 
 const AdditionalInfoSection = styled.div`

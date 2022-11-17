@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import routes from "../../routes";
 
-import Body from "../Body";
+import Body from "../../styles/Body";
 import PageTitle from "../PageTitle";
 import MenuHeader from "../header/MenuHeader";
 
