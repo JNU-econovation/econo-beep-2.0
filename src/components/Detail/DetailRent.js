@@ -55,14 +55,13 @@ const RentSection = styled.div`
   width: 100%;
   height: 100%;
   max-width: 600px;
-  padding: 30px;
+  padding: 0 30px;
+
+  display: grid;
+  grid-template-rows: 80px auto;
 `;
 
 const RentTopSection = styled.div`
-  width: 100%;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,12 +109,9 @@ const LoanButton = styled.button`
 `;
 
 const RentBottomSection = styled.div`
-  width: 100%;
-  height: 100%;
-
   .no-record {
     width: 100%;
-    padding: 90px 0;
+    height: 100%;
 
     display: flex;
     justify-content: center;

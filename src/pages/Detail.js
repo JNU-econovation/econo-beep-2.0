@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Body from "../components/Body";
+import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
 import DetailInfo from "../components/Detail/DetailInfo";
@@ -15,7 +15,6 @@ function Detail() {
 
   const [renteeDetail, setRenteeDetail] = useState({});
   const [rentalHistories, setRentalHistories] = useState([]);
-  const [thumbnailUrl, setThumbnailUrl] = useState(undefined);
 
   useEffect(() => {
     setRenteeId(params.id);
@@ -52,7 +51,7 @@ function Detail() {
         bookPublisherName={renteeDetail?.bookPublisherName}
         rentCount={renteeDetail?.rentCount}
         note={renteeDetail?.note}
-        isBookmarked={renteeDetail?.isBookmarked}
+        bookmark={renteeDetail?.isBookmarked}
         bookmarkCount={renteeDetail?.bookmarkCount}
       />
       <DetailRent
