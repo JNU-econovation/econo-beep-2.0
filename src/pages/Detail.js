@@ -5,8 +5,9 @@ import Body from "../components/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
 import DetailInfo from "../components/Detail/DetailInfo";
-import DetailRent from "../components/Detail/DetailRent";
+import RentalHistories from "../components/Detail/RentalHistories";
 import axios from "axios";
+import RentButton from "../components/Detail/RentButton";
 
 function Detail() {
   const params = useParams();
@@ -39,7 +40,7 @@ function Detail() {
   }, [localStorage]);
 
   return (
-    <StyledBody>
+    <Body>
       <PageTitle title="상세 정보" />
       <DetailHeader />
       <DetailInfo
@@ -55,16 +56,43 @@ function Detail() {
         isBookmarked={renteeDetail?.isBookmarked}
         bookmarkCount={renteeDetail?.bookmarkCount}
       />
-      <DetailRent
-        rentalHistories={rentalHistories}
-        rentState={renteeDetail?.rentState}
-      />
-    </StyledBody>
+      <RentSection>
+        <RentTopSection>
+          <div className="title">대출 기록</div>
+          <RentButton
+            currentRentState={renteeDetail?.rentState}
+            renteeId={renteeDetail?.id}
+          />
+        </RentTopSection>
+        <RentalHistories rentalHistories={rentalHistories} />
+      </RentSection>
+    </Body>
   );
 }
 
-const StyledBody = styled(Body)`
-  height: 100vh;
+const RentSection = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  padding: 30px;
+`;
+
+const RentTopSection = styled.div`
+  width: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid ${(props) => props.theme.borderGray};
+
+  .title {
+    color: ${(props) => props.theme.black};
+    font-weight: 700;
+    font-size: 20px;
+  }
 `;
 
 export default Detail;

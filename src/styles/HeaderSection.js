@@ -10,7 +10,7 @@ const HeaderSection = styled.div`
   align-items: center;
 
   position: relative;
-  z-index: 1;
+  z-index: 0;
 `;
 
 export default HeaderSection;

@@ -7,6 +7,7 @@ import { useColor } from "color-thief-react";
 import { useState } from "react";
 import { Backdrop } from "@mui/material";
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
+import PopUp from "./PopUp";
 
 function DetailInfo({
   id,
@@ -56,22 +57,7 @@ function DetailInfo({
             >
               <IoMdInformation />
             </div>
-            <Backdrop sx={{ color: "#fff" }} open={noteOpen}>
-              <NoteSection>
-                <div className="note-top">
-                  <div
-                    className="note-close"
-                    onClick={() => {
-                      setNoteOpen(false);
-                    }}
-                  >
-                    <IoCloseOutline />
-                  </div>
-                  <div className="note-title">비고</div>
-                </div>
-                <div className="note-content">{note}</div>
-              </NoteSection>
-            </Backdrop>
+            <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div
               className="bookmark button"
               onClick={() => {
@@ -136,6 +122,7 @@ const BasicInfoSection = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  z-index: 0;
 `;
 
 const RenteeImg = styled.img`
