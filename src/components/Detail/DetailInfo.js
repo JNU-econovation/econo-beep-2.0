@@ -1,13 +1,14 @@
-import { IoMdInformation } from "react-icons/io";
-import { IoCloseOutline } from "react-icons/io5";
-import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
-import styled, { css } from "styled-components";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
 import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
-import { useEffect, useState } from "react";
-import { Backdrop } from "@mui/material";
+
+import { IoMdInformation } from "react-icons/io";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
+
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
-import axios from "axios";
+import PopUp from "./PopUp";
 
 function DetailInfo({
   id,
@@ -99,22 +100,7 @@ function DetailInfo({
             >
               <IoMdInformation />
             </div>
-            <Backdrop sx={{ color: "#fff" }} open={noteOpen}>
-              <NoteSection>
-                <div className="note-top">
-                  <div
-                    className="note-close"
-                    onClick={() => {
-                      setNoteOpen(false);
-                    }}
-                  >
-                    <IoCloseOutline />
-                  </div>
-                  <div className="note-title">비고</div>
-                </div>
-                <div className="note-content">{note}</div>
-              </NoteSection>
-            </Backdrop>
+            <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div
               className="bookmark button"
               onClick={() => {
@@ -186,6 +172,7 @@ const BasicInfoSection = styled.div`
   grid-template-columns: auto auto;
 
   position: relative;
+  z-index: 0;
 `;
 
 const RenteeImg = styled.img`
