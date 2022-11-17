@@ -1,9 +1,8 @@
-import styled, { css } from "styled-components";
-import RENT_STATES from "../../constant/RENT_STATES";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
-import { Backdrop } from "@mui/material";
+import axios from "axios";
+import styled, { css } from "styled-components";
+
+import RENT_STATES from "../../constant/RENT_STATES";
 import PopUp from "./PopUp";
 
 function RentButton({ currentRentState, renteeId }) {

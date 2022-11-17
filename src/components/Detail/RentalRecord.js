@@ -1,6 +1,6 @@
+import styled, { css } from "styled-components";
 import { EpochSecondToDateObject } from "../EpochConverter";
 import RENT_STATES from "../../constant/RENT_STATES";
-import styled, { css } from "styled-components";
 import no_profile from "../../images/no-profile.png";
 
 function RentalRecord({

@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import { Backdrop } from "@mui/material";
-import styled from "styled-components";
 
 function PopUp({ open, setOpen, text }) {
   return (

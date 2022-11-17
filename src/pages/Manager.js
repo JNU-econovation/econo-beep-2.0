@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Body from "../components/Body";
+import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import ManagerButtonSearchHolder from "../components/manager/ManagerButtonSearchHolder";
 import ManagerRenteeInfoList from "../components/manager/ManagerRenteeInfoList";

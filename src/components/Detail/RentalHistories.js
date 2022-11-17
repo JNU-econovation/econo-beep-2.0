@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import RENT_STATES from "../../constant/RENT_STATES";
-import { useState } from "react";
 import { EpochSecondToDateObject } from "../EpochConverter";
 import RentalRecord from "./RentalRecord";
 

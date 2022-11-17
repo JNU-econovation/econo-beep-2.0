@@ -1,4 +1,4 @@
-import Body from "../components/Body";
+import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import MyPageHeader from "../components/header/MyPageHeader";
 import styled, { css } from "styled-components";
