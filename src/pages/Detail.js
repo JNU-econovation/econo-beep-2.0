@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
-import DetailInfo from "../components/Detail/DetailInfo";
+import RenteeInfo from "../components/Detail/RenteeInfo";
 import RentalHistories from "../components/Detail/RentalHistories";
 import RentButton from "../components/Detail/RentButton";
 
@@ -43,7 +43,7 @@ function Detail() {
     <Body>
       <PageTitle title="상세 정보" />
       <DetailHeader />
-      <DetailInfo
+      <RenteeInfo
         id={renteeDetail?.id}
         type={renteeDetail?.type}
         thumbnailUrl={renteeDetail?.thumbnailUrl}

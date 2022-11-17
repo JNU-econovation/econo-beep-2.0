@@ -10,7 +10,7 @@ import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
 import PopUp from "./PopUp";
 
-function DetailInfo({
+function RenteeInfo({
   id,
   type,
   thumbnailUrl,
@@ -377,4 +377,4 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-export default DetailInfo;
+export default RenteeInfo;
