@@ -27,49 +27,35 @@ function RenteeInfo({
 
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
-  const [isBookmarkedClicked, setIsBookmarkedClicked] = useState(0);
 
   const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
 
+  const putIsBookmarked = async () => {
+    const response = await axios.put(
+      process.env.REACT_APP_BEEP_API +
+        "/api/rentee/" +
+        id +
+        "/bookmark?accessToken=" +
+        localStorage.getItem("accessToken")
+    );
+  };
+
+  const deleteIsBookmarked = async () => {
+    const response = await axios.delete(
+      process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
+      {
+        params: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      }
+    );
+  };
+
   useEffect(() => {
-    if (isBookmarkedClicked === 0) {
-      return;
-    }
-
-    const putIsBookmarked = async () => {
-      const response = await axios.put(
-        process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
-        {
-          params: {
-            accessToken: localStorage.getItem("accessToken"),
-          },
-        }
-      );
-
-      console.log(response);
-    };
-
-    const deleteIsBookmarked = async () => {
-      const response = await axios.delete(
-        process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
-        {
-          params: {
-            accessToken: localStorage.getItem("accessToken"),
-          },
-        }
-      );
-
-      console.log(response);
-    };
-
-    if (!isBookmarked) {
-      deleteIsBookmarked();
-    } else {
-      putIsBookmarked();
-    }
-  }, [isBookmarkedClicked]);
+    setIsBookmarked(bookmark);
+  }, [bookmark]);
 
   return (
     <>
@@ -104,9 +90,11 @@ function RenteeInfo({
             <div
               className="bookmark button"
               onClick={() => {
-                setIsBookmarkedClicked(
-                  (isBookmarkedClicked) => isBookmarkedClicked + 1
-                );
+                if (isBookmarked !== false) {
+                  deleteIsBookmarked();
+                } else {
+                  putIsBookmarked();
+                }
                 setIsBookmarked((bookmark) => !bookmark);
               }}
             >
