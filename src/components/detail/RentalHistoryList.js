@@ -1,14 +1,14 @@
 import styled, { css } from "styled-components";
 import RENT_STATES from "../../constant/RENT_STATES";
 import { EpochSecondToDateObject } from "../EpochConverter";
-import RentalRecord from "./RentalRecord";
+import RentalHistory from "./RentalHistory";
 
-function RentalHistories({ rentalHistories, rentState }) {
+function RentalHistoryList({ rentalHistories, rentState }) {
   return (
     <Section>
       {rentalHistories.length !== 0 ? (
         rentalHistories.map((rentalHistory, index) => (
-          <RentalRecord
+          <RentalHistory
             renterProfileImage={rentalHistory.renterProfileImage}
             renterName={rentalHistory.renterName}
             rentalEpochSecond={EpochSecondToDateObject(
@@ -50,4 +50,4 @@ const Section = styled.div`
     color: ${(props) => props.theme.firstGray};
   }
 `;
-export default RentalHistories;
+export default RentalHistoryList;

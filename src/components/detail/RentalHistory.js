@@ -3,7 +3,7 @@ import { EpochSecondToDateObject } from "../EpochConverter";
 import RENT_STATES from "../../constant/RENT_STATES";
 import no_profile from "../../images/no-profile.png";
 
-function RentalRecord({
+function RentalHistory({
   renterProfileImage,
   renterName,
   rentalEpochSecond,
@@ -140,4 +140,4 @@ const RentRecordState = styled.div`
   }
 `;
 
-export default RentalRecord;
+export default RentalHistory;

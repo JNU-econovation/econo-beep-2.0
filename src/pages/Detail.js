@@ -6,9 +6,9 @@ import styled from "styled-components";
 import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
-import RenteeInfo from "../components/Detail/RenteeInfo";
-import RentalHistories from "../components/Detail/RentalHistories";
-import RentButton from "../components/Detail/RentButton";
+import RenteeDetail from "../components/detail/RenteeDetail";
+import RentalHistoryList from "../components/detail/RentalHistoryList";
+import RentButton from "../components/detail/RentButton";
 
 function Detail() {
   const params = useParams();
@@ -43,7 +43,7 @@ function Detail() {
     <Body>
       <PageTitle title="상세 정보" />
       <DetailHeader />
-      <RenteeInfo
+      <RenteeDetail
         id={renteeDetail?.id}
         type={renteeDetail?.type}
         thumbnailUrl={renteeDetail?.thumbnailUrl}
@@ -64,7 +64,7 @@ function Detail() {
             renteeId={renteeDetail?.id}
           />
         </RentTopSection>
-        <RentalHistories rentalHistories={rentalHistories} />
+        <RentalHistoryList rentalHistories={rentalHistories} />
       </RentSection>
     </Body>
   );
