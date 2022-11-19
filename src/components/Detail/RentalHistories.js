@@ -4,17 +4,6 @@ import { EpochSecondToDateObject } from "../EpochConverter";
 import RentalRecord from "./RentalRecord";
 
 function RentalHistories({ rentalHistories, rentState }) {
-  const record = {
-    profileImg:
-      "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427__480.jpg",
-    name: "경주원",
-    rentState: "RENTED",
-    rentalDate: "2022.10.23",
-    returnDate: "2022.11.04",
-  };
-
-  // const [rentalHistories, setRentalHistories] = useState([record, record]);
-
   return (
     <Section>
       {rentalHistories.length !== 0 ? (

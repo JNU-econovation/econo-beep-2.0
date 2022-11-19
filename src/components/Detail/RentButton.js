@@ -8,10 +8,10 @@ import PopUp from "./PopUp";
 function RentButton({ currentRentState, renteeId }) {
   const localStorage = window.localStorage;
   const [rentState, setRentState] = useState(undefined);
-  const [unrentableNote, setUnrentableNote] = useState(true);
+  const [unrentableNote, setUnrentableNote] = useState(false);
 
   const rentRentee = async () => {
-    // setRentState(RENT_STATES.RENTED);
+    setRentState(RENT_STATES.RENTED);
 
     const response = await axios.put(
       process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId + "/rent",
@@ -24,7 +24,7 @@ function RentButton({ currentRentState, renteeId }) {
   };
 
   const returnRentee = async () => {
-    // setRentState(RENT_STATES.RENTABLE);
+    setRentState(RENT_STATES.RENTABLE);
 
     const response = await axios.put(
       process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId + "/return",
