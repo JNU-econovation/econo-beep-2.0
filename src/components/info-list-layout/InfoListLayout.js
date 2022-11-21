@@ -65,7 +65,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       />
       <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
       <SearchBarHolder>
-        <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
+        <SearchBar placeholder={SEARCH_TYPES.KOREAN[listType]} searchApiUrl={searchApiUrl} />
       </SearchBarHolder>
       <ResultBox>
         {rentees.map((rentee) => (

@@ -9,18 +9,15 @@ function RentalHistoryList({ rentalHistories, rentState }) {
       {rentalHistories.length !== 0 ? (
         rentalHistories.map((rentalHistory, index) => (
           <RentalHistory
-            renterProfileImage={rentalHistory.renterProfileImage}
-            renterName={rentalHistory.renterName}
-            rentalEpochSecond={EpochSecondToDateObject(
-              rentalHistory.rentalEpochSecond
-            )}
-            returnEpochSecond={EpochSecondToDateObject(
-              rentalHistory.returnEpochSecond
-            )}
+            key={index}
+            renterProfileImage={rentalHistory?.renterProfileImage}
+            renterName={rentalHistory?.renterName}
+            rentDate={EpochSecondToDateObject(rentalHistory?.rentalEpochSecond)}
+            returnDate={rentalHistory.returnEpochSecond ? EpochSecondToDateObject(rentalHistory?.returnEpochSecond) : undefined}
             rentState={
               index !== 0
-                ? RENT_STATES.RENTAL_RECORD.RENTABLE
-                : RENT_STATES.RENTAL_RECORD[rentState]
+                ? RENT_STATES.RENTABLE
+                : RENT_STATES[rentState]
             }
           />
         ))

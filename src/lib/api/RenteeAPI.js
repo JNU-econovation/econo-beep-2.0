@@ -82,6 +82,25 @@ const deleteBookmark = async (renteeId) => {
   return response;
 };
 
+const loadUserRole = async () => {
+  const response = await axios.get(process.env.REACT_APP_BEEP_API + "/api/user/role", {
+    headers: {
+      'Content-Type': "application/json",
+      Authorization: localStorage.getItem("accessToken"),
+    }, params: {
+      accessToken: localStorage.getItem("accessToken"),
+    }
+  });
 
+  return response.data;
+}
 
-export default {loadSearchList, loadBookList, loadDeviceList, loadRenteeDetail, putBookmark, deleteBookmark}
+export default {
+  loadSearchList,
+  loadBookList,
+  loadDeviceList,
+  loadRenteeDetail,
+  putBookmark,
+  deleteBookmark,
+  loadUserRole,
+}

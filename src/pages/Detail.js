@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
 
 import Body from "../styles/Body";
@@ -18,6 +17,7 @@ function Detail() {
 
   const [renteeDetail, setRenteeDetail] = useState({});
   const [rentalHistories, setRentalHistories] = useState([]);
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
     setRenteeId(params.id);
@@ -31,7 +31,7 @@ function Detail() {
     }
 
     loadData();
-  }, [localStorage]);
+  }, [localStorage, reload, renteeId]);
 
   return (
     <Body>
@@ -49,6 +49,7 @@ function Detail() {
         note={renteeDetail?.note}
         bookmark={renteeDetail?.isBookmarked}
         bookmarkCount={renteeDetail?.bookmarkCount}
+        setReload={() => setReload(reload => !reload)}
       />
       <RentSection>
         <RentTopSection>
@@ -56,9 +57,13 @@ function Detail() {
           <RentButton
             currentRentState={renteeDetail?.rentState}
             renteeId={renteeDetail?.id}
+            setReload={() => setReload(reload => !reload)}
           />
         </RentTopSection>
-        <RentalHistoryList rentalHistories={rentalHistories} />
+        <RentalHistoryList
+          rentalHistories={rentalHistories}
+          rentState={renteeDetail?.rentState}
+        />
       </RentSection>
     </Body>
   );
@@ -66,7 +71,7 @@ function Detail() {
 
 const RentSection = styled.div`
   width: 100%;
-  height: 100%;
+  //height: 100%;
   max-width: 600px;
   padding: 30px;
 `;

@@ -1,13 +1,13 @@
 import styled, { css } from "styled-components";
 import { EpochSecondToDateObject } from "../../lib/utils/EpochConverter";
 import RENT_STATES from "../../constant/RENT_STATES";
-import no_profile from "../../images/no-profile.png";
+import noProfile from "../../images/no-profile.png";
 
 function RentalHistory({
   renterProfileImage,
   renterName,
-  rentalEpochSecond,
-  returnEpochSecond,
+  rentDate,
+  returnDate,
   rentState,
 }) {
   return (
@@ -15,20 +15,23 @@ function RentalHistory({
       <RentRecordLeft>
         <img
           className="profile-img"
-          src={!renterProfileImage ? no_profile : renterProfileImage}
+          src={!renterProfileImage ? noProfile : process.env.REACT_APP_BEEP_API + renterProfileImage}
           alt="profile"
         />
         <RentRecordCenter>
           <div className="rent-name">{renterName}</div>
           <div className="rent-date">
-            {EpochSecondToDateObject(rentalEpochSecond)} ~{" "}
-            {EpochSecondToDateObject(returnEpochSecond)}
+            {rentDate.getFullYear()}-{rentDate.getMonth() + 1}-{rentDate.getDate()} {
+            returnDate ? (
+              ` ~ ${returnDate.getFullYear()}-${returnDate.getMonth()+1}-${returnDate.getDate()}`
+            ) : (undefined)
+          }
           </div>
         </RentRecordCenter>
       </RentRecordLeft>
       <RentRecordState value={rentState}>
         <div className="rent-highlight" />
-        <span>{RENT_STATES.KOREAN[rentState]}</span>
+        <span>{RENT_STATES.RENTAL_RECORD[rentState]}</span>
       </RentRecordState>
     </RentRecordSection>
   );

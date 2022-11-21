@@ -22,6 +22,7 @@ function RenteeDetail({
   note,
   bookmark,
   bookmarkCount,
+  setReload
 }) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
@@ -35,8 +36,9 @@ function RenteeDetail({
     if (isBookmarked !== false) {
 
       try {
-        await RenteeAPI.putBookmark(id);
-        return setIsBookmarked(isBookmarked => !isBookmarked);
+        await RenteeAPI.deleteBookmark(id);
+        setIsBookmarked(isBookmarked => !isBookmarked);
+        setReload();
       } catch (e) {
         setUnbookmarkableNote(true);
       }
@@ -44,8 +46,9 @@ function RenteeDetail({
     } else {
 
       try {
-        await RenteeAPI.deleteBookmark(id);
-        return setIsBookmarked(isBookmarked => !isBookmarked);
+        await RenteeAPI.putBookmark(id);
+        setIsBookmarked(isBookmarked => !isBookmarked);
+        setReload();
       } catch (e) {
         setUnbookmarkableNote(true);
       }

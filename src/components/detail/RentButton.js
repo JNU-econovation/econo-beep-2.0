@@ -5,7 +5,7 @@ import RENT_STATES from "../../constant/RENT_STATES";
 import PopUp from "./PopUp";
 import RentAPI from "../../lib/api/RentAPI";
 
-function RentButton({ currentRentState, renteeId }) {
+function RentButton({ currentRentState, renteeId, setReload }) {
   const [rentState, setRentState] = useState(undefined);
   const [rentNote, setRentNote] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -16,6 +16,7 @@ function RentButton({ currentRentState, renteeId }) {
         try {
           await RentAPI.rentRentee(renteeId);
           setRentState(RENT_STATES.RENTED);
+          setReload();
         } catch (e) {
           setIsLoggedIn(false);
           setRentNote(true);
@@ -27,6 +28,7 @@ function RentButton({ currentRentState, renteeId }) {
         try {
           await RentAPI.returnRentee(renteeId);
           setRentState(RENT_STATES.RENTABLE);
+          setReload();
         } catch (e) {
           setIsLoggedIn(false);
           setRentNote(true);
