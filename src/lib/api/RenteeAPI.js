@@ -66,7 +66,7 @@ const putBookmark = async (renteeId) => {
     localStorage.getItem("accessToken")
   );
 
-  return response.status;
+  return response;
 };
 
 const deleteBookmark = async (renteeId) => {
@@ -79,7 +79,7 @@ const deleteBookmark = async (renteeId) => {
     }
   );
 
-  return response.status;
+  return response;
 };
 
 

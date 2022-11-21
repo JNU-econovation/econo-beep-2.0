@@ -1,51 +1,47 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import styled, { css } from "styled-components";
 
 import RENT_STATES from "../../constant/RENT_STATES";
 import PopUp from "./PopUp";
+import RentAPI from "../../lib/api/RentAPI";
 
 function RentButton({ currentRentState, renteeId }) {
-  const localStorage = window.localStorage;
   const [rentState, setRentState] = useState(undefined);
-  const [unrentableNote, setUnrentableNote] = useState(false);
+  const [rentNote, setRentNote] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  const rentRentee = async () => {
-    setRentState(RENT_STATES.RENTED);
-
-    const response = await axios.put(
-      process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId + "/rent",
-      {
-        accessToken: localStorage.getItem("accessToken"),
+  const onButtonClick = async (rentState) => {
+    switch (rentState) {
+      case RENT_STATES.RENTABLE: {
+        try {
+          await RentAPI.rentRentee(renteeId);
+          setRentState(RENT_STATES.RENTED);
+        } catch (e) {
+          setIsLoggedIn(false);
+          setRentNote(true);
+        }
+        break;
       }
-    );
 
-    console.log(response);
-  };
-
-  const returnRentee = async () => {
-    setRentState(RENT_STATES.RENTABLE);
-
-    const response = await axios.put(
-      process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId + "/return",
-      {
-        accessToken: localStorage.getItem("accessToken"),
+      case RENT_STATES.RENTED: {
+        try {
+          await RentAPI.returnRentee(renteeId);
+          setRentState(RENT_STATES.RENTABLE);
+        } catch (e) {
+          setIsLoggedIn(false);
+          setRentNote(true);
+        }
+        break;
       }
-    );
 
-    console.log(response);
-  };
+      case RENT_STATES.UNRENTABLE: {
+        setRentNote(true);
+        break;
+      }
 
-  const onButtonClick = (rentState) => {
-    if (rentState === RENT_STATES.RENTABLE) {
-      setRentState(RENT_STATES.RENTED);
-      rentRentee();
-    } else if (rentState === RENT_STATES.RENTED) {
-      setRentState(RENT_STATES.RENTABLE);
-      returnRentee();
-    }
-    if (rentState === RENT_STATES.UNRENTABLE) {
-      setUnrentableNote(true);
+      default: {
+        break;
+      }
     }
   };
 
@@ -59,9 +55,9 @@ function RentButton({ currentRentState, renteeId }) {
         {RENT_STATES.RENT_BUTTON[rentState]}
       </Button>
       <PopUp
-        open={unrentableNote}
-        setOpen={setUnrentableNote}
-        text="현재 대출 불가"
+        open={rentNote}
+        setOpen={setRentNote}
+        text={!isLoggedIn ? "로그인 후 이용해주세요" :  "현재 이용 불가합니다"}
       />
     </>
   );
@@ -73,7 +69,6 @@ const Button = styled.button`
 
   border: 2px solid ${(props) => props.textColor};
   border-radius: 10000px;
-  //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
 
   font-weight: 600;
   font-size: 16px;

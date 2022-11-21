@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
@@ -26,23 +25,31 @@ function RenteeDetail({
 }) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
-  const [apiStatus, setApiStatus] = useState(undefined);
+  const [unbookmarkableNote, setUnbookmarkableNote] = useState(false);
 
   const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
 
-  const onBookmarkClick = () => {
+  const onBookmarkClick = async () => {
     if (isBookmarked !== false) {
-      const response = RenteeAPI.putBookmark(id);
-      setApiStatus(response);
-    } else {
-      const response = RenteeAPI.deleteBookmark(id)
-      setApiStatus(response);
-    }
 
-    if (apiStatus === 200) {
-      setIsBookmarked((isBookmarked) => !isBookmarked);
+      try {
+        await RenteeAPI.putBookmark(id);
+        return setIsBookmarked(isBookmarked => !isBookmarked);
+      } catch (e) {
+        setUnbookmarkableNote(true);
+      }
+
+    } else {
+
+      try {
+        await RenteeAPI.deleteBookmark(id);
+        return setIsBookmarked(isBookmarked => !isBookmarked);
+      } catch (e) {
+        setUnbookmarkableNote(true);
+      }
+
     }
   }
 
@@ -82,10 +89,11 @@ function RenteeDetail({
             <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div
               className="bookmark button"
-              onClick={  () => {onBookmarkClick();}}
+              onClick={  () => onBookmarkClick()}
             >
               {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
+            <PopUp open={unbookmarkableNote} setOpen={setUnbookmarkableNote} text="로그인 후 즐겨찾기 해주세요" />
           </ButtonSection>
         </InfoSection>
         <WaveSection>
@@ -245,48 +253,6 @@ const ButtonSection = styled.div`
     margin-left: 20px;
     font-size: 20px;
     color: ${(props) => props.theme.managerRed};
-  }
-`;
-
-const NoteSection = styled.div`
-  width: 100%;
-  max-width: 300px;
-  height: 300px;
-
-  padding: 40px;
-  border-radius: 20px;
-  background-color: ${(props) => props.theme.bgColor};
-
-  position: relative;
-  z-index: 10;
-
-  .note-top {
-    padding-bottom: 10px;
-    color: ${(props) => props.theme.firstGray};
-    border-bottom: 1px solid ${(props) => props.theme.borderGray};
-    position: relative;
-  }
-
-  .note-title {
-    width: 100%;
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  .note-close {
-    color: ${(props) => props.theme.firstGray};
-    font-size: 28px;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-  }
-
-  .note-content {
-    padding: 20px 0;
-    font-size: 14px;
-    color: ${(props) => props.theme.black};
-    line-height: 1.5em;
-    text-align: justify;
   }
 `;
 
