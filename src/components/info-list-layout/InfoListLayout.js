@@ -9,6 +9,8 @@ import Body from "../../styles/Body";
 import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";
+import SEARCH_TYPES from "../../constant/SEARCH_TYPES";
+import RenteeAPI from "../../lib/api/RenteeAPI";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const target = useRef(null);
@@ -27,9 +29,6 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
         pageIndex: pageIndex,
         pageSize: pageSize,
       });
-
-      // setRentees((rentees) => [...rentees, ...loadRentees]);
-      // setPageIndex((pageIndex) => pageIndex + 1);
 
       if (loadRentees.length !== 0) {
         setRentees((rentees) => [...rentees, ...loadRentees]);
@@ -64,7 +63,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
           searchParams.get("keyword") ? searchParams.get("keyword") : listType
         }
       />
-      <InfoListHeader listType={listType} />
+      <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
       <SearchBarHolder>
         <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
       </SearchBarHolder>

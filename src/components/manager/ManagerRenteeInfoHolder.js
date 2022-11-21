@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { RiDeleteBinLine, RiPencilFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { DateObjectToEpochSecond } from "../EpochConverter";
+import { DateObjectToEpochSecond } from "../../lib/utils/EpochConverter";
 import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 
 function ManagerRenteeInfoHolder({

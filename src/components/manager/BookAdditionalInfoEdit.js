@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import {
   DateObjectToEpochSecond,
   EpochSecondToDateObject,
-} from "../EpochConverter";
+} from "../../lib/utils/EpochConverter";
 import * as S from "../../styles/ManagerInfoEditStyle";
 
 function BookAdditionalInfoEdit({ inputInfo, setInputInfo }) {

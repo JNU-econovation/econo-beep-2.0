@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { EpochSecondToDateObject } from "../EpochConverter";
+import { EpochSecondToDateObject } from "../../lib/utils/EpochConverter";
 import RENT_STATES from "../../constant/RENT_STATES";
 import no_profile from "../../images/no-profile.png";
 

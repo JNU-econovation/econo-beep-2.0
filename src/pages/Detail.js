@@ -9,6 +9,7 @@ import DetailHeader from "../components/header/DetailHeader";
 import RenteeDetail from "../components/detail/RenteeDetail";
 import RentalHistoryList from "../components/detail/RentalHistoryList";
 import RentButton from "../components/detail/RentButton";
+import RenteeAPI from '../lib/api/RenteeAPI'
 
 function Detail() {
   const params = useParams();
@@ -22,21 +23,14 @@ function Detail() {
     setRenteeId(params.id);
   }, [params]);
 
-  useEffect(() => {
-    const loadRenteeDetail = async () => {
-      const response = await axios.get(
-        process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId,
-        {
-          params: {
-            accessToken: localStorage?.getItem("accessToken"),
-          },
-        }
-      );
-      setRenteeDetail(response.data);
-      setRentalHistories(response.data.rentalHistories);
-    };
+  useEffect( () => {
+    const loadData = async () => {
+      const data = await RenteeAPI.loadRenteeDetail(renteeId);
+      setRenteeDetail(data);
+      setRentalHistories(data.rentalHistories);
+    }
 
-    loadRenteeDetail();
+    loadData();
   }, [localStorage]);
 
   return (

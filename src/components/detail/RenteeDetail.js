@@ -9,6 +9,7 @@ import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
 import PopUp from "./PopUp";
+import RenteeAPI from "../../lib/api/RenteeAPI";
 
 function RenteeDetail({
   id,
@@ -23,35 +24,27 @@ function RenteeDetail({
   bookmark,
   bookmarkCount,
 }) {
-  const localStorage = window.localStorage;
-
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
+  const [apiStatus, setApiStatus] = useState(undefined);
 
   const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
 
-  const putIsBookmarked = async () => {
-    const response = await axios.put(
-      process.env.REACT_APP_BEEP_API +
-        "/api/rentee/" +
-        id +
-        "/bookmark?accessToken=" +
-        localStorage.getItem("accessToken")
-    );
-  };
+  const onBookmarkClick = () => {
+    if (isBookmarked !== false) {
+      const response = RenteeAPI.putBookmark(id);
+      setApiStatus(response);
+    } else {
+      const response = RenteeAPI.deleteBookmark(id)
+      setApiStatus(response);
+    }
 
-  const deleteIsBookmarked = async () => {
-    const response = await axios.delete(
-      process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
-      {
-        params: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      }
-    );
-  };
+    if (apiStatus === 200) {
+      setIsBookmarked((isBookmarked) => !isBookmarked);
+    }
+  }
 
   useEffect(() => {
     setIsBookmarked(bookmark);
@@ -89,14 +82,7 @@ function RenteeDetail({
             <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div
               className="bookmark button"
-              onClick={() => {
-                if (isBookmarked !== false) {
-                  deleteIsBookmarked();
-                } else {
-                  putIsBookmarked();
-                }
-                setIsBookmarked((bookmark) => !bookmark);
-              }}
+              onClick={  () => {onBookmarkClick();}}
             >
               {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
@@ -154,8 +140,6 @@ const BasicInfoSection = styled.div`
   max-width: 600px;
   width: 100%;
   padding: 35px 20px;
-  //display: flex;
-  //justify-content: space-between;
   display: grid;
   grid-template-columns: auto auto;
 
@@ -164,10 +148,8 @@ const BasicInfoSection = styled.div`
 `;
 
 const RenteeImg = styled.img`
-  //width: 40%;
   width: 90%;
   margin: 0 auto;
-  //padding-right: 20px;
   max-width: 160px;
   object-fit: cover;
   border-radius: 10px;
