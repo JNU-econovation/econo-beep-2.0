@@ -27,7 +27,7 @@ function RenteeInfo({
           {bookAuthorName ? (
             <RenteeAuthor>{bookAuthorName}</RenteeAuthor>
           ) : null}
-          <RenteeTitle>{name}</RenteeTitle>
+          <RenteeName>{name}</RenteeName>
           <RenteeType>
             <div>
               #
@@ -47,6 +47,8 @@ const InfoHolder = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+  cursor: pointer;
 
   width: 100%;
   padding: 15px 5px;
@@ -85,7 +87,7 @@ const RenteeAuthor = styled.div`
   color: ${(props) => props.theme.firstGray};
 `;
 
-const RenteeTitle = styled.div`
+const RenteeName = styled.div`
   font-size: 16px;
   font-weight: 500;
   padding: 5px 0 10px 0;

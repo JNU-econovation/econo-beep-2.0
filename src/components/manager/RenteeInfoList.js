@@ -4,12 +4,13 @@ import RenteeInfoHolder from "./RenteeInfoHolder";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
 import { useState } from "react";
 
-function ManagerRenteeInfoList({
+function RenteeInfoList({
   setEditRenteeInfo,
   isEditOpen,
   setIsEditOpen,
   isEditMode,
   setIsEditMode,
+  listedRentees
 }) {
   return (
     <Container>
@@ -38,51 +39,15 @@ function ManagerRenteeInfoList({
           ) : null}
         </div>
       </InfoHeaderContainer>
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
-      <RenteeInfoHolder
-        setEditRenteeInfo={setEditRenteeInfo}
-        setIsEditOpen={setIsEditOpen}
-        setIsEditMode={setIsEditMode}
-      />
+      {listedRentees.map((rentee) => (
+        <RenteeInfoHolder
+          key={rentee.id}
+          setEditRenteeInfo={setEditRenteeInfo}
+          setIsEditOpen={setIsEditOpen}
+          setIsEditMode={setIsEditMode}
+          rentee={rentee}
+        />
+        ))}
     </Container>
   );
 }
@@ -165,4 +130,4 @@ const RenteeLoadButton = styled.div`
   }
 `;
 
-export default ManagerRenteeInfoList;
+export default RenteeInfoList;

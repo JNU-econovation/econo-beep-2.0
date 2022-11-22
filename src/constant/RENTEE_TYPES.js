@@ -41,6 +41,16 @@ const BOOK_AREA_KOREAN = {
   MAJOR: "전공 서적",
 };
 
+const BOOK_AREA = {
+  WEB: "WEB",
+  APP: "APP",
+  LANGUAGE: "LANGUAGE",
+  AI: "AI",
+  GAME: "GAME",
+  DEVELOPMENT: "DEVELOPMENT",
+  MAJOR: "MAJOR",
+}
+
 // const URL = {
 //   WEB: "web",
 //   APP: "app",
@@ -55,6 +65,7 @@ const BOOK_AREA_KOREAN = {
 Object.freeze(ARRAY);
 Object.freeze(BOOK_AREA_ARRAY);
 Object.freeze(BOOK_AREA_KOREAN);
+Object.freeze(BOOK_AREA);
 Object.freeze(RENTEE_TYPE);
 // Object.freeze(INDEX);
 Object.freeze(TYPE_KOREAN);
@@ -64,6 +75,7 @@ export default {
   ...RENTEE_TYPE,
   ARRAY,
   BOOK_AREA_ARRAY,
+  BOOK_AREA,
   BOOK_AREA_KOREAN,
   TYPE_KOREAN,
 };

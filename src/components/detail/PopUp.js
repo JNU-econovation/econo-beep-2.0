@@ -30,7 +30,7 @@ const PopUpSection = styled.div`
   background-color: ${(props) => props.theme.bgColor};
 
   position: relative;
-  z-index: 10;
+  z-index: 100;
 
   .pop-up-content {
     padding: 10px 0;

@@ -44,12 +44,14 @@ const RentRecordSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  
+  position: relative;
+  z-index: -1;
+  
   .no-profile-img {
     width: 35px;
     height: 35px;
     border-radius: 1000%;
-    background-color: ;
   }
 
   .profile-img {
@@ -88,8 +90,7 @@ const RentRecordState = styled.div`
   display: inline-block;
   float: right;
   position: relative;
-  z-index: 0;
-
+  
   ${(props) =>
     props.value === RENT_STATES.RENTED &&
     css`
@@ -112,7 +113,6 @@ const RentRecordState = styled.div`
     font-size: 14px;
     font-weight: 500;
     position: relative;
-    z-index: 1;
   }
 
   .rent-highlight {

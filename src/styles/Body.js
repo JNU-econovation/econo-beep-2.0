@@ -12,6 +12,9 @@ const BodyBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  
+  position: relative;
+  z-index: 0;
 
   background-color: ${(props) => props.theme.bgColor};
 `;

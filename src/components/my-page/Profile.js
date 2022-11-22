@@ -19,8 +19,8 @@ function Profile({profile}){
         src={profile.profileImageUrl ? process.env.REACT_APP_BEEP_API + profile.profileImageUrl : noProfile }
         alt="profile"
       />
-      <div className="user-name">{profile.year}기 {profile.username}</div>
-      <div className="user-email">{profile.userEmail}</div>
+      <div className="user-name">{profile.year}기 {profile.name}</div>
+      <div className="user-email">{profile.email}</div>
       <div className="logout-button" onClick={onLogOutClick}>로그아웃</div>
     </ProfileSection>
   )

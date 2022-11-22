@@ -1,11 +1,12 @@
 const INITIAL_RENTEE_INFO = {
   id: "",
   thumbnail: "",
-  title: "",
-  author: "",
-  publisher: "",
-  publishedDay: "",
+  name: "",
+  bookAuthorName: "",
+  bookPublisherName: "",
+  bookPublishedDate: "",
   type: "",
+  bookArea: "",
   note: "",
 };
 

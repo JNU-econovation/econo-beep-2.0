@@ -64,7 +64,7 @@ function RenteeDetail({
     <>
       <BasicInfoSection>
         <RenteeImg
-          src={process.env.REACT_APP_BEEP_API + "/api" + thumbnailUrl}
+          src={process.env.REACT_APP_BEEP_API + thumbnailUrl}
         />
         <InfoSection>
           <TextInfoSection>
@@ -188,7 +188,7 @@ const TextInfoSection = styled.div`
     font-weight: 500;
   }
 
-  .title {
+  .name {
     color: ${(props) => props.theme.black};
     font-size: 18px;
     font-weight: 600;
@@ -231,7 +231,6 @@ const ButtonSection = styled.div`
   justify-content: right;
   align-items: center;
   float: right;
-  z-index: 1;
 
   .button {
     width: 40px;
@@ -303,7 +302,7 @@ const AdditionalInfo = styled.div`
     line-height: 35px;
   }
 
-  .title {
+  .name {
     display: flex;
     justify-content: center;
     align-items: center;

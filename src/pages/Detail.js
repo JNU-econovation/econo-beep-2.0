@@ -71,7 +71,7 @@ function Detail() {
 
 const RentSection = styled.div`
   width: 100%;
-  //height: 100%;
+  height: 100%;
   max-width: 600px;
   padding: 30px;
 `;

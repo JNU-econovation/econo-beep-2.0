@@ -2,9 +2,10 @@ import styled, { css } from "styled-components";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 
-function ManagerButtonSearchHolder({
+function ManagerTopBar({
   isBookMode,
   setIsBookMode,
+  setIsEditOpen,
   sortOrder,
   setSortOrder,
   setLastRenteeId,
@@ -16,9 +17,11 @@ function ManagerButtonSearchHolder({
     if (e.target.id === "book") {
       setIsBookMode(true);
       setKeyword("");
+      setIsEditOpen(false);
     } else if (e.target.id === "equipment") {
       setIsBookMode(false);
       setKeyword("");
+      setIsEditOpen(false);
     }
   };
 
@@ -60,9 +63,11 @@ function ManagerButtonSearchHolder({
               setLastRenteeId(null);
             }}
           >
-            <MenuItem value={0}>최근에 추가된 순</MenuItem>
-            <MenuItem value={1}>이전에 추가된 순</MenuItem>
-            <MenuItem value={2}>최근에 대여된 순</MenuItem>
+            <MenuItem value={0}>아이디 순</MenuItem>
+            <MenuItem value={1}>추가된 순</MenuItem>
+            <MenuItem value={2}>최근 추가된 순</MenuItem>
+            <MenuItem value={3}>이전에 대여된 순</MenuItem>
+            <MenuItem value={4}>최근 대여된 순</MenuItem>
           </Select>
         </FormControl>
       </Holder>
@@ -206,4 +211,4 @@ const SearchInput = styled.input`
   }
 `;
 
-export default ManagerButtonSearchHolder;
+export default ManagerTopBar;
