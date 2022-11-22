@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
+import axios from "axios";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import { MenuItem, Select } from "@mui/material";
 
 import INITIAL_RENTEE_INFO from "../../constant/INITIAL_RENTEE_INFO";
 import * as S from "../../styles/ManagerInfoEditStyle";
-import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 import BookAdditionalInfoEdit from "./BookAdditionalInfoEdit";
 import ManagementAPI from "../../lib/api/ManagementAPI";
+import RenteeTypeSelect from "./RenteeTypeSelect";
 
 function RenteeInfoEdit({
   isBookMode,
@@ -18,7 +18,7 @@ function RenteeInfoEdit({
   isEditMode,
   setReload,
 }) {
-  const [inputInfo, setInputInfo] = useState(editRenteeInfo);
+  const [inputInfo, setInputInfo] = useState(INITIAL_RENTEE_INFO);
   const [thumbnail, setThumbnail] = useState("");
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
@@ -41,6 +41,7 @@ function RenteeInfoEdit({
   const createForm = () => {
     const form = new FormData();
     form.append('thumbnail', thumbnail);
+    console.log(thumbnail);
     form.append('name', inputInfo.name);
     form.append('note', inputInfo.note);
 
@@ -122,7 +123,7 @@ function RenteeInfoEdit({
           onChange={(e) => {
             setInputInfo({
               ...inputInfo,
-              title: e.target.value,
+              name: e.target.value,
             });
           }}
         />
@@ -173,37 +174,7 @@ function RenteeInfoEdit({
         )}
         <S.InfoBox>
           <S.Label>분야</S.Label>
-          <Select
-            labelId="SelectSortOrder"
-            id="Select"
-            value={!isBookMode ? RENTEE_TYPE[inputInfo.type] : RENTEE_TYPE.BOOK_AREA[inputInfo.bookArea]}
-            onChange={(e) => {
-              setInputInfo({ ...inputInfo, type: e.target.value });
-            }}
-            size="small"
-            sx={{
-              ".MuiInputBase-input": {
-                height: "14px",
-                fontSize: "13px",
-                padding: "5px 0 10px 5px",
-              },
-            }}
-          >
-            <MenuItem disabled value={-1}>
-              <i>종류</i>
-            </MenuItem>
-            {!isBookMode ? (
-              <MenuItem key={0} value={RENTEE_TYPE.DEVICE}>
-                {RENTEE_TYPE.TYPE_KOREAN.DEVICE}
-              </MenuItem>
-            ) : (
-              RENTEE_TYPE.BOOK_AREA_ARRAY.map((element, index) => (
-                <MenuItem key={index} value={element}>
-                  {RENTEE_TYPE.BOOK_AREA_KOREAN[element]}
-                </MenuItem>
-              ))
-            )}
-          </Select>
+          <RenteeTypeSelect inputInfo={inputInfo} setInputInfo={setInputInfo} isBookMode={isBookMode} />
         </S.InfoBox>
         <S.InfoBox>
           <S.Label>비고</S.Label>

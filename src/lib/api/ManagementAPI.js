@@ -19,7 +19,7 @@ const loadBooks = async ({keyword, sort, pageIndex, pageSize}) => {
 }
 
 const createBook = async (bookForm) => {
-  return await axios.post(process.env.REACT_APP_BEEP_API + 'api/management/books', bookForm, {
+  return await axios.post(process.env.REACT_APP_BEEP_API + '/api/management/books', bookForm, {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: 'Bearer ' + localStorage.getItem('accessToken')

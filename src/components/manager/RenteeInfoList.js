@@ -8,7 +8,6 @@ function RenteeInfoList({
   setEditRenteeInfo,
   isEditOpen,
   setIsEditOpen,
-  isEditMode,
   setIsEditMode,
   listedRentees
 }) {
