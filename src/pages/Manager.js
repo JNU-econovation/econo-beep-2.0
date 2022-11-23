@@ -37,7 +37,7 @@ function Manager() {
       });
 
       setTotalCount(data.totalCount);
-      const rentees = data.bookManagementElementDtoList;
+      const rentees = data.deviceManagementElementDtos;
       setListedRentees([...rentees]);
     } else {
       const data = await ManagementAPI.loadBooks({
@@ -48,7 +48,7 @@ function Manager() {
       });
 
       setTotalCount(data.totalCount);
-      const rentees = data.bookManagementElementDtoList;
+      const rentees = data.bookManagementElementDtos;
       setListedRentees([...rentees]);
     }
   };
@@ -63,7 +63,7 @@ function Manager() {
         });
 
         setTotalCount(data.totalCount);
-        const rentees = data.bookManagementElementDtoList;
+        const rentees = data.deviceManagementElementDtos;
         setListedRentees([...rentees]);
       } else {
         const data = await ManagementAPI.loadBooks({
@@ -73,7 +73,7 @@ function Manager() {
         })
 
         setTotalCount(data.totalCount);
-        const rentees = data.bookManagementElementDtoList;
+        const rentees = data.bookManagementElementDtos;
         setListedRentees([...rentees]);
       }
     }
@@ -108,6 +108,7 @@ function Manager() {
             setPageIndex={setPageIndex}
             pageSize={pageSize}
             totalCount={totalCount}
+            setReload={() => setReload(reload => !reload)}
           />
           {isEditOpen ? (
             <RenteeInfoEdit

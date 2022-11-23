@@ -15,6 +15,7 @@ function RenteeInfoList({
   setPageIndex,
   pageSize,
   totalCount,
+  setReload,
 }) {
   return (
     <Container>
@@ -58,6 +59,7 @@ function RenteeInfoList({
           setIsEditMode={setIsEditMode}
           isBookMode={isBookmode}
           rentee={rentee}
+          setReload={() => setReload()}
         />
         ))}
       <Pagination

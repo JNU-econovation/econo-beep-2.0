@@ -13,7 +13,8 @@ function RenteeInfoHolder({
   setIsEditOpen,
   setIsEditMode,
   isBookMode,
-  rentee
+  rentee,
+  setReload,
 }) {
   const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ function RenteeInfoHolder({
       try {
         await ManagementAPI.deleteBook(rentee.id);
         alert(`${rentee.name}을 삭제했습니다.`);
-
+        setReload();
       } catch (e) {
         alert(`${rentee.name} 삭제를 실패했습니다`);
       }
@@ -49,6 +50,7 @@ function RenteeInfoHolder({
       try {
         const response = await ManagementAPI.deleteDevice(rentee.id);
         alert(`${rentee.name}을 삭제했습니다.`);
+        setReload();
       } catch (e) {
         alert(`${rentee.name} 삭제를 실패했습니다`);
       }

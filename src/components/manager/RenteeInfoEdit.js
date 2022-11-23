@@ -8,6 +8,7 @@ import * as S from "../../styles/ManagerInfoEditStyle";
 import BookAdditionalInfoEdit from "./BookAdditionalInfoEdit";
 import ManagementAPI from "../../lib/api/ManagementAPI";
 import RenteeTypeSelect from "./RenteeTypeSelect";
+import {DateObjectToEpochSecond} from "../../lib/utils/EpochConverter";
 
 function RenteeInfoEdit({
   isBookMode,
@@ -22,7 +23,13 @@ function RenteeInfoEdit({
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
   useEffect(() => {
-    setInputInfo({ ...editRenteeInfo });
+    if (!editRenteeInfo.bookPublishedDate) {
+      let today = new Date()
+      setInputInfo({...editRenteeInfo, bookPublishedDate: DateObjectToEpochSecond(today)})
+    } else {
+      setInputInfo({...editRenteeInfo})
+    }
+
     const loadThumbnail = async () => {
       if (!editRenteeInfo.thumbnail || editRenteeInfo.thumbnail === "") {
         return;
