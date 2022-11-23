@@ -13,9 +13,9 @@ import SEARCH_TYPES from "../../constant/SEARCH_TYPES";
 import RenteeAPI from "../../lib/api/RenteeAPI";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
-  const target = useRef();
-
+  const target = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
   const [lastPage, setLastPage] = useState(false);
@@ -24,14 +24,14 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 
   useEffect(() => {
     const onLoad = async () => {
-      const loadRentees = await loadRenteeList({
-        keyword: searchParams?.get("keyword"),
+      const loadedRentees = await loadRenteeList({
+        keyword: searchParams.get('keyword'),
         pageIndex: pageIndex,
         pageSize: pageSize,
       });
 
-      if (loadRentees.length !== 0) {
-        setRentees((rentees) => [...rentees, ...loadRentees]);
+      if (loadedRentees.length !== 0) {
+        setRentees((rentees) => [...rentees, ...loadedRentees]);
         setPageIndex((pageIndex) => pageIndex + 1);
       } else {
         setLastPage(true);
@@ -54,7 +54,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target, loadRenteeList, pageIndex, pageSize, searchParams.get('keyword')]);
+  }, [target, pageIndex]);
 
   return (
     <Body>
@@ -82,14 +82,14 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
         ))}
       </ResultBox>
       {lastPage !== true ? (
-        <Spin ref={target}>
+        <div ref={target} style={{ padding: "20px" }}>
           <ReactLoading
             type="spin"
             color={theme.firstGray}
             width="28px"
             height="28px"
           />
-        </Spin>
+        </div>
       ) : undefined}
     </Body>
   );

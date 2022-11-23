@@ -10,7 +10,7 @@ function Device() {
 
   return (
     <InfoListLayout
-      key="device"
+      key={`device-${searchParams.get('keyword')}`}
       listType={SEARCH_TYPES.DEVICE}
       searchApiUrl={routes.device}
       loadRenteeList={RenteeAPI.loadDeviceList}

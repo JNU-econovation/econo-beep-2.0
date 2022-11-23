@@ -10,7 +10,7 @@ function SearchAll() {
 
   return (
     <InfoListLayout
-      key="search-all"
+      key={`search-all-${searchParams.get('keyword')}`}
       listType={SEARCH_TYPES.ALL}
       searchApiUrl={routes.searchAll}
       loadRenteeList={RenteeAPI.loadSearchList}
