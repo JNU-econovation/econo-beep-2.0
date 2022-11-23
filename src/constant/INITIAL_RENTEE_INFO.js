@@ -1,3 +1,6 @@
+import BOOK_AREA_ARRAY from "../constant/RENTEE_TYPES"
+import RENTEE_TYPES from "../constant/RENTEE_TYPES";
+
 const INITIAL_RENTEE_INFO = {
   id: "",
   thumbnail: "",
@@ -6,7 +9,7 @@ const INITIAL_RENTEE_INFO = {
   bookPublisherName: "",
   bookPublishedDate: "",
   type: "",
-  bookArea: "",
+  bookArea: RENTEE_TYPES.BOOK_AREA_ARRAY[0],
   note: "",
 };
 
