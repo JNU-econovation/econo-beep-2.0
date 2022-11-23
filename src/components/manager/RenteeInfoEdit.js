@@ -55,7 +55,9 @@ function RenteeInfoEdit({
       form.append('bookArea', inputInfo.bookArea);
       form.append('bookAuthorName', inputInfo.bookAuthorName);
       form.append('bookPublisherName', inputInfo.bookPublisherName);
-      form.append('bookPublishedDateEpochSecond', inputInfo.bookPublishedDate);
+
+      const bookPublishedDate = inputInfo.bookPublishedDate;
+      form.append('bookPublishedDateEpochSecond', parseInt(bookPublishedDate));
     }
 
     return form;

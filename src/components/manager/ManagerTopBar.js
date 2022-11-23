@@ -61,11 +61,11 @@ function ManagerTopBar({
               setSortOrder(e.target.value);
             }}
           >
-            <MenuItem value={0}>아이디 순</MenuItem>
-            <MenuItem value={1}>추가된 순</MenuItem>
-            <MenuItem value={2}>최근 추가된 순</MenuItem>
-            <MenuItem value={3}>이전에 대여된 순</MenuItem>
-            <MenuItem value={4}>최근 대여된 순</MenuItem>
+            <MenuItem value={0}>아이디 오름차순</MenuItem>
+            <MenuItem value={1}>최신생성순</MenuItem>
+            <MenuItem value={2}>과거생성순</MenuItem>
+            <MenuItem value={3}>과거대여순</MenuItem>
+            <MenuItem value={4}>최근대여순</MenuItem>
           </Select>
         </FormControl>
       </Holder>
@@ -102,7 +102,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
 
-  grid-template-columns: 1fr 1fr 1.5fr 380px;
+  grid-template-columns: 1fr 170px 2fr 380px;
 `;
 
 const Holder = styled.div`
@@ -120,7 +120,6 @@ const Holder = styled.div`
 `;
 
 const ModeButton = styled.div`
-  //width: 50%;
   width: 80px;
   height: 100%;
   margin: 0 5%;
