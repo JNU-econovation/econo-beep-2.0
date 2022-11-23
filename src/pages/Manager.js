@@ -16,8 +16,6 @@ function Manager() {
   const [keyword, setKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
 
-  const [lastRenteeId, setLastRenteeId] = useState(null);
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(undefined);
   const [editRenteeInfo, setEditRenteeInfo] = useState(INITIAL_RENTEE_INFO);
@@ -25,7 +23,7 @@ function Manager() {
 
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
-  const [lastPage, setLastPage] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
 
   const [listedRentees, setListedRentees] = useState([])
 
@@ -38,7 +36,9 @@ function Manager() {
         pageSize: pageSize
       });
 
-      setListedRentees([...data]);
+      setTotalCount(data.totalCount);
+      const rentees = data.bookManagementElementDtoList;
+      setListedRentees([...rentees]);
     } else {
       const data = await ManagementAPI.loadBooks({
         keyword: keyword,
@@ -47,7 +47,9 @@ function Manager() {
         pageSize: pageSize
       });
 
-      setListedRentees([...data])
+      setTotalCount(data.totalCount);
+      const rentees = data.bookManagementElementDtoList;
+      setListedRentees([...rentees]);
     }
   };
 
@@ -60,7 +62,9 @@ function Manager() {
           pageSize: pageSize
         });
 
-        setListedRentees([...data]);
+        setTotalCount(data.totalCount);
+        const rentees = data.bookManagementElementDtoList;
+        setListedRentees([...rentees]);
       } else {
         const data = await ManagementAPI.loadBooks({
           sort: SORT_ORDER[sortOrder],
@@ -68,7 +72,9 @@ function Manager() {
           pageSize: pageSize
         })
 
-        setListedRentees([...data]);
+        setTotalCount(data.totalCount);
+        const rentees = data.bookManagementElementDtoList;
+        setListedRentees([...rentees]);
       }
     }
 
@@ -86,7 +92,6 @@ function Manager() {
           setIsEditOpen={setIsEditOpen}
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
-          setLastRenteeId={setLastRenteeId}
           keyword={keyword}
           setKeyword={setKeyword}
           handleSearchPress={handleSearchPress}
@@ -99,6 +104,10 @@ function Manager() {
             setIsEditMode={setIsEditMode}
             listedRentees={listedRentees}
             isBookmode={isBookMode}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+            pageSize={pageSize}
+            totalCount={totalCount}
           />
           {isEditOpen ? (
             <RenteeInfoEdit
@@ -137,5 +146,6 @@ const ManagerRenteeSection = styled.div`
   grid-template-columns: ${(props) =>
     props.isEditOpen ? "auto 400px" : "auto"};
 `;
+
 
 export default Manager;

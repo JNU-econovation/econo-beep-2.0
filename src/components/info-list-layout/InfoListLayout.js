@@ -10,7 +10,6 @@ import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";
 import SEARCH_TYPES from "../../constant/SEARCH_TYPES";
-import RenteeAPI from "../../lib/api/RenteeAPI";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const target = useRef(null);
@@ -54,7 +53,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target, pageIndex]);
+  }, [target, pageIndex, loadRenteeList, searchParams]);
 
   return (
     <Body>
@@ -110,10 +109,6 @@ const ResultBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Spin = styled.div`
-  padding: 20px;
 `;
 
 export default InfoListLayout;

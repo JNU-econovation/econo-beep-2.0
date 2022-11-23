@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import RenteeInfoHolder from "./RenteeInfoHolder";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
+import Pagination from "react-js-pagination";
 
 function RenteeInfoList({
   setEditRenteeInfo,
@@ -9,7 +10,11 @@ function RenteeInfoList({
   setIsEditOpen,
   setIsEditMode,
   listedRentees,
-  isBookmode
+  isBookmode,
+  pageIndex,
+  setPageIndex,
+  pageSize,
+  totalCount,
 }) {
   return (
     <Container>
@@ -55,12 +60,32 @@ function RenteeInfoList({
           rentee={rentee}
         />
         ))}
+      <Pagination
+        activeClass={`${pageIndex} + 1`}
+        itemsCountPerPage={pageSize}
+        totalItemsCount={totalCount}
+        pageRangeDisplayed={5}
+        onChange={(page) => setPageIndex(page - 1)}
+        prevPageText="‹"
+        nextPageText="›"
+      />
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 100%;
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${(props) => props.theme.firstGray};
+  }
+
+  .pagination li {
+    padding: 15px 20px;
+  }
 `;
 
 const InfoHeaderContainer = styled.div`

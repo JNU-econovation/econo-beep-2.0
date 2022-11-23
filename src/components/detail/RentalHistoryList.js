@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled  from "styled-components";
 import RENT_STATES from "../../constant/RENT_STATES";
 import { EpochSecondToDateObject } from "../../lib/utils/EpochConverter";
 import RentalHistory from "./RentalHistory";

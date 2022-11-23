@@ -8,7 +8,6 @@ function ManagerTopBar({
   setIsEditOpen,
   sortOrder,
   setSortOrder,
-  setLastRenteeId,
   keyword,
   setKeyword,
   handleSearchPress,
@@ -60,7 +59,6 @@ function ManagerTopBar({
             value={sortOrder}
             onChange={(e) => {
               setSortOrder(e.target.value);
-              setLastRenteeId(null);
             }}
           >
             <MenuItem value={0}>아이디 순</MenuItem>

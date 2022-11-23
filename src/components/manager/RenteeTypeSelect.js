@@ -1,6 +1,5 @@
 import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 import {MenuItem, Select} from "@mui/material";
-import {useEffect, useState} from "react";
 
 function RenteeTypeSelect({inputInfo, setInputInfo, isBookMode}) {
   return (
