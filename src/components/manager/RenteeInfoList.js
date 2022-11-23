@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import RenteeInfoHolder from "./RenteeInfoHolder";
 import BluePurpleGradient from "../../styles/BluePurpleGradient";
-import { useState } from "react";
 
 function RenteeInfoList({
   setEditRenteeInfo,
@@ -38,9 +37,9 @@ function RenteeInfoList({
           ) : null}
         </div>
       </InfoHeaderContainer>
-      {listedRentees.map((rentee) => (
+      {listedRentees.map((rentee, index) => (
         <RenteeInfoHolder
-          key={rentee.id}
+          key={index}
           setEditRenteeInfo={setEditRenteeInfo}
           setIsEditOpen={setIsEditOpen}
           setIsEditMode={setIsEditMode}
