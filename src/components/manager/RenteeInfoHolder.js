@@ -2,7 +2,8 @@
 import styled from "styled-components";
 import { RiDeleteBinLine, RiPencilFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import {DateObjectToEpochSecond, EpochSecondToDateObject} from "../../lib/utils/EpochConverter";
+
+import { EpochSecondToDateObject} from "../../lib/utils/EpochConverter";
 import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 import routes from "../../routes";
 import ManagementAPI from "../../lib/api/ManagementAPI";
@@ -11,6 +12,7 @@ function RenteeInfoHolder({
   setEditRenteeInfo,
   setIsEditOpen,
   setIsEditMode,
+  isBookMode,
   rentee
 }) {
   const navigate = useNavigate();
@@ -74,13 +76,20 @@ function RenteeInfoHolder({
             <img src={process.env.REACT_APP_BEEP_API + rentee?.thumbnailUrl} />
           </div>
         </IdImgBox>
-        <TextInfo>
-          <div id="name">{rentee?.name}</div>
-          <div id="author">{rentee?.bookAuthorName}</div>
-          <div id="publisher">{rentee?.bookPublisherName}</div>
-          <div id="published-day">{publishedDate}</div>
-          <div id="note">{rentee?.note}</div>
-        </TextInfo>
+        {!isBookMode ? (
+          <DeviceTextInfo>
+            <div id="name">{rentee?.name}</div>
+            <div id="note">{rentee?.note}</div>
+          </DeviceTextInfo>
+        ) : (
+          <BookTextInfo>
+            <div id="name">{rentee?.name}</div>
+            <div id="author">{rentee?.bookAuthorName}</div>
+            <div id="publisher">{rentee?.bookPublisherName}</div>
+            <div id="published-day">{publishedDate}</div>
+            <div id="note">{rentee?.note}</div>
+          </BookTextInfo>
+        )}
       </RenteeDetailButton>
       <RenteeInfoButtonHolder>
         <button id="edit" onClick={handleEditClick}>
@@ -157,7 +166,6 @@ const TextInfo = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
 
   div {
     width: 100%;
@@ -173,6 +181,14 @@ const TextInfo = styled.div`
     text-align: center;
     font-size: 14px;
   }
+`;
+
+const BookTextInfo = styled(TextInfo)`
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+`
+
+const DeviceTextInfo = styled(TextInfo)`
+  grid-template-columns: 1fr 1fr;
 `;
 
 const RenteeInfoButtonHolder = styled.div`

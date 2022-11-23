@@ -13,7 +13,7 @@ import SEARCH_TYPES from "../../constant/SEARCH_TYPES";
 import RenteeAPI from "../../lib/api/RenteeAPI";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
-  const target = useRef(null);
+  const target = useRef();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [pageIndex, setPageIndex] = useState(0);
@@ -54,13 +54,13 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target, loadRenteeList, pageIndex, pageSize, searchParams]);
+  }, [target, loadRenteeList, pageIndex, pageSize, searchParams.get('keyword')]);
 
   return (
     <Body>
       <PageTitle
         title={
-          searchParams.get("keyword") ? searchParams.get("keyword") : listType
+          searchParams.get("keyword") ? searchParams.get("keyword") : SEARCH_TYPES.KOREAN[listType]
         }
       />
       <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
@@ -82,14 +82,14 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
         ))}
       </ResultBox>
       {lastPage !== true ? (
-        <div ref={target} style={{ padding: "20px" }}>
+        <Spin ref={target}>
           <ReactLoading
             type="spin"
             color={theme.firstGray}
             width="28px"
             height="28px"
           />
-        </div>
+        </Spin>
       ) : undefined}
     </Body>
   );
@@ -110,6 +110,10 @@ const ResultBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const Spin = styled.div`
+  padding: 20px;
 `;
 
 export default InfoListLayout;

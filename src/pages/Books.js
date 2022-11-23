@@ -10,11 +10,7 @@ function Books() {
 
   return (
     <InfoListLayout
-      key={
-        searchParams.get("keyword") !== null
-          ? `book?${searchParams.get("keyword")}`
-          : "book"
-      }
+      key="books"
       listType={SEARCH_TYPES.BOOK}
       searchApiUrl={routes.books}
       loadRenteeList={RenteeAPI.loadBookList}

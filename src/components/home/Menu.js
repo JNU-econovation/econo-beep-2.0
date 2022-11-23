@@ -56,7 +56,7 @@ function Menu({ setIsMenuOpen }) {
           <MenuHolder
             className="margin-bottom"
             onClick={() => {
-              navigate(routes.myPage);
+              showAlert();
             }}
           >
             <img className="menu-icon" src={recent} alt="최근 대여 기록" />

@@ -96,9 +96,9 @@ function Manager() {
             setEditRenteeInfo={setEditRenteeInfo}
             isEditOpen={isEditOpen}
             setIsEditOpen={setIsEditOpen}
-            isEditMode={isEditMode}
             setIsEditMode={setIsEditMode}
             listedRentees={listedRentees}
+            isBookmode={isBookMode}
           />
           {isEditOpen ? (
             <RenteeInfoEdit

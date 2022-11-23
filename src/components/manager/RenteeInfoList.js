@@ -8,19 +8,27 @@ function RenteeInfoList({
   isEditOpen,
   setIsEditOpen,
   setIsEditMode,
-  listedRentees
+  listedRentees,
+  isBookmode
 }) {
   return (
     <Container>
       <InfoHeaderContainer>
         <div className="blank-space" />
-        <InfoHeader>
-          <HeaderBox>제목</HeaderBox>
-          <HeaderBox>저자</HeaderBox>
-          <HeaderBox>출판사</HeaderBox>
-          <HeaderBox>출판일</HeaderBox>
-          <HeaderBox>비고</HeaderBox>
-        </InfoHeader>
+          {!isBookmode ? (
+            <DeviceInfoHeader>
+              <HeaderBox>제목</HeaderBox>
+              <HeaderBox>비고</HeaderBox>
+            </DeviceInfoHeader>
+          ) : (
+            <BookInfoHeader>
+              <HeaderBox>제목</HeaderBox>
+              <HeaderBox>저자</HeaderBox>
+              <HeaderBox>출판사</HeaderBox>
+              <HeaderBox>출판일</HeaderBox>
+              <HeaderBox>비고</HeaderBox>
+            </BookInfoHeader>
+          )}
         <div className="blank-space">
           {!isEditOpen ? (
             <AddRenteeButton
@@ -43,6 +51,7 @@ function RenteeInfoList({
           setEditRenteeInfo={setEditRenteeInfo}
           setIsEditOpen={setIsEditOpen}
           setIsEditMode={setIsEditMode}
+          isBookMode={isBookmode}
           rentee={rentee}
         />
         ))}
@@ -74,7 +83,14 @@ const InfoHeader = styled.div`
   font-size: 14px;
 
   display: grid;
+`;
+
+const BookInfoHeader = styled(InfoHeader)`
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+`;
+
+const DeviceInfoHeader = styled(InfoHeader)`
+  grid-template-columns: 1fr 1fr;
 `;
 
 const HeaderBox = styled.div`
@@ -98,33 +114,6 @@ const AddRenteeButton = styled.div`
 
   :hover {
     cursor: pointer;
-  }
-`;
-
-const RenteeLoadButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: ${(props) => props.theme.firstGray};
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: none;
-    background-color: ${(props) => props.theme.managerBgColor};
-    color: ${(props) => props.theme.firstGray};
-
-    font-size: 20px;
-    text-align: center;
   }
 `;
 

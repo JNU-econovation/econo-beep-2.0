@@ -78,7 +78,7 @@ const RentSection = styled.div`
 
 const RentTopSection = styled.div`
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   margin-bottom: 10px;
 
   display: flex;

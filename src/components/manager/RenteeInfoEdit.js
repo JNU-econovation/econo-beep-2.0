@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
-import axios from "axios";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 
 import INITIAL_RENTEE_INFO from "../../constant/INITIAL_RENTEE_INFO";
