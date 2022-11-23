@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import Wave from "react-wavify";
 import { useColor } from "color-thief-react";
@@ -9,8 +8,9 @@ import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 
 import RENTEE_TYPES from "../../constant/RENTEE_TYPES";
 import PopUp from "./PopUp";
+import RenteeAPI from "../../lib/api/RenteeAPI";
 
-function RenteeInfo({
+function RenteeDetail({
   id,
   type,
   thumbnailUrl,
@@ -22,36 +22,39 @@ function RenteeInfo({
   note,
   bookmark,
   bookmarkCount,
+  setReload
 }) {
-  const localStorage = window.localStorage;
-
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
+  const [unbookmarkableNote, setUnbookmarkableNote] = useState(false);
 
   const { data, loading, error } = useColor(thumbnailUrl, "hex", {
     crossOrigin: "Anonymous",
   });
 
-  const putIsBookmarked = async () => {
-    const response = await axios.put(
-      process.env.REACT_APP_BEEP_API +
-        "/api/rentee/" +
-        id +
-        "/bookmark?accessToken=" +
-        localStorage.getItem("accessToken")
-    );
-  };
+  const onBookmarkClick = async () => {
+    if (isBookmarked !== false) {
 
-  const deleteIsBookmarked = async () => {
-    const response = await axios.delete(
-      process.env.REACT_APP_BEEP_API + "/api/rentee/" + id + "/bookmark",
-      {
-        params: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
+      try {
+        await RenteeAPI.deleteBookmark(id);
+        setIsBookmarked(isBookmarked => !isBookmarked);
+        setReload();
+      } catch (e) {
+        setUnbookmarkableNote(true);
       }
-    );
-  };
+
+    } else {
+
+      try {
+        await RenteeAPI.putBookmark(id);
+        setIsBookmarked(isBookmarked => !isBookmarked);
+        setReload();
+      } catch (e) {
+        setUnbookmarkableNote(true);
+      }
+
+    }
+  }
 
   useEffect(() => {
     setIsBookmarked(bookmark);
@@ -61,7 +64,7 @@ function RenteeInfo({
     <>
       <BasicInfoSection>
         <RenteeImg
-          src={process.env.REACT_APP_BEEP_API + "/api" + thumbnailUrl}
+          src={process.env.REACT_APP_BEEP_API + thumbnailUrl}
         />
         <InfoSection>
           <TextInfoSection>
@@ -89,17 +92,11 @@ function RenteeInfo({
             <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div
               className="bookmark button"
-              onClick={() => {
-                if (isBookmarked !== false) {
-                  deleteIsBookmarked();
-                } else {
-                  putIsBookmarked();
-                }
-                setIsBookmarked((bookmark) => !bookmark);
-              }}
+              onClick={  () => onBookmarkClick()}
             >
               {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
+            <PopUp open={unbookmarkableNote} setOpen={setUnbookmarkableNote} text="로그인 후 즐겨찾기 해주세요" />
           </ButtonSection>
         </InfoSection>
         <WaveSection>
@@ -154,8 +151,6 @@ const BasicInfoSection = styled.div`
   max-width: 600px;
   width: 100%;
   padding: 35px 20px;
-  //display: flex;
-  //justify-content: space-between;
   display: grid;
   grid-template-columns: auto auto;
 
@@ -164,10 +159,8 @@ const BasicInfoSection = styled.div`
 `;
 
 const RenteeImg = styled.img`
-  //width: 40%;
   width: 90%;
   margin: 0 auto;
-  //padding-right: 20px;
   max-width: 160px;
   object-fit: cover;
   border-radius: 10px;
@@ -195,7 +188,7 @@ const TextInfoSection = styled.div`
     font-weight: 500;
   }
 
-  .title {
+  .name {
     color: ${(props) => props.theme.black};
     font-size: 18px;
     font-weight: 600;
@@ -238,7 +231,6 @@ const ButtonSection = styled.div`
   justify-content: right;
   align-items: center;
   float: right;
-  z-index: 1;
 
   .button {
     width: 40px;
@@ -263,48 +255,6 @@ const ButtonSection = styled.div`
     margin-left: 20px;
     font-size: 20px;
     color: ${(props) => props.theme.managerRed};
-  }
-`;
-
-const NoteSection = styled.div`
-  width: 100%;
-  max-width: 300px;
-  height: 300px;
-
-  padding: 40px;
-  border-radius: 20px;
-  background-color: ${(props) => props.theme.bgColor};
-
-  position: relative;
-  z-index: 10;
-
-  .note-top {
-    padding-bottom: 10px;
-    color: ${(props) => props.theme.firstGray};
-    border-bottom: 1px solid ${(props) => props.theme.borderGray};
-    position: relative;
-  }
-
-  .note-title {
-    width: 100%;
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  .note-close {
-    color: ${(props) => props.theme.firstGray};
-    font-size: 28px;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-  }
-
-  .note-content {
-    padding: 20px 0;
-    font-size: 14px;
-    color: ${(props) => props.theme.black};
-    line-height: 1.5em;
-    text-align: justify;
   }
 `;
 
@@ -352,7 +302,7 @@ const AdditionalInfo = styled.div`
     line-height: 35px;
   }
 
-  .title {
+  .name {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -365,4 +315,4 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-export default RenteeInfo;
+export default RenteeDetail;

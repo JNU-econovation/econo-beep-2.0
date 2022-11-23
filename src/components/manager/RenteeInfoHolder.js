@@ -2,36 +2,66 @@
 import styled from "styled-components";
 import { RiDeleteBinLine, RiPencilFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { DateObjectToEpochSecond } from "../EpochConverter";
-import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 
-function ManagerRenteeInfoHolder({
+import { EpochSecondToDateObject} from "../../lib/utils/EpochConverter";
+import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
+import routes from "../../routes";
+import ManagementAPI from "../../lib/api/ManagementAPI";
+
+function RenteeInfoHolder({
   setEditRenteeInfo,
   setIsEditOpen,
   setIsEditMode,
+  isBookMode,
+  rentee,
+  setReload,
 }) {
   const navigate = useNavigate();
+
+  const date = EpochSecondToDateObject(rentee?.bookPublishedDateEpochSecond);
+  const publishedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
   const handleEditClick = () => {
     setIsEditOpen(true);
     setIsEditMode(true);
     setEditRenteeInfo({
-      id: "101",
-      thumbnail: "http://image.yes24.com/goods/66913718/XL",
-      title: "제목이당ㅇ아앙",
-      authorName: "이책의저자임",
-      publisher: "출판사아아아",
-      publishedDay: DateObjectToEpochSecond(new Date()),
-      type: 0,
-      note: "비고",
+      id: rentee?.id,
+      thumbnail: process.env.REACT_APP_BEEP_API + rentee?.thumbnailUrl,
+      name: rentee?.name,
+      bookAuthorName: rentee?.bookAuthorName,
+      bookPublisherName: rentee?.bookPublisherName,
+      bookPublishedDate: rentee?.bookPublishedDateEpochSecond,
+      type: rentee?.type,
+      bookArea: rentee?.bookArea,
+      note: rentee?.note,
     });
   };
 
-  const handleDeleteClick = () => {
-    if (!confirm("삭제하시겠습니까?")) {
+  const deleteRentee = async () => {
+    if (rentee.type === RENTEE_TYPE.BOOK) {
+      try {
+        await ManagementAPI.deleteBook(rentee.id);
+        alert(`${rentee.name}을 삭제했습니다.`);
+        setReload();
+      } catch (e) {
+        alert(`${rentee.name} 삭제를 실패했습니다`);
+      }
+    } else if (rentee.type === RENTEE_TYPE.DEVICE) {
+      try {
+        const response = await ManagementAPI.deleteDevice(rentee.id);
+        alert(`${rentee.name}을 삭제했습니다.`);
+        setReload();
+      } catch (e) {
+        alert(`${rentee.name} 삭제를 실패했습니다`);
+      }
+    }
+  }
+
+  const handleDeleteClick = async () => {
+    if (!confirm(`${rentee.name} 삭제하시겠습니까?`)) {
       return;
     } else {
-      // 삭제하기
+      await deleteRentee();
     }
   };
 
@@ -39,22 +69,29 @@ function ManagerRenteeInfoHolder({
     <Container>
       <RenteeDetailButton
         onClick={() => {
-          navigate(`/`);
+          navigate(`${routes.detail}/${rentee.id}`);
         }}
       >
         <IdImgBox>
-          <div id="id">101</div>
+          <div id="id">{rentee?.id}</div>
           <div id="image">
-            <img src="http://image.yes24.com/goods/66913718/XL" />
+            <img src={process.env.REACT_APP_BEEP_API + rentee?.thumbnailUrl} />
           </div>
         </IdImgBox>
-        <TextInfo>
-          <div id="title">제목이당ㄴㅇㄹㅁㄹㅇㄴㄹㅇㄴㅇㄴㄴㅇㄹ</div>
-          <div id="author">저자다</div>
-          <div id="publisher">출판사이이이이이이이이임</div>
-          <div id="published-day">출판일!!!!!!!!1</div>
-          <div id="note">비고비고비고비고</div>
-        </TextInfo>
+        {!isBookMode ? (
+          <DeviceTextInfo>
+            <div id="name">{rentee?.name}</div>
+            <div id="note">{rentee?.note}</div>
+          </DeviceTextInfo>
+        ) : (
+          <BookTextInfo>
+            <div id="name">{rentee?.name}</div>
+            <div id="author">{rentee?.bookAuthorName}</div>
+            <div id="publisher">{rentee?.bookPublisherName}</div>
+            <div id="published-day">{publishedDate}</div>
+            <div id="note">{rentee?.note}</div>
+          </BookTextInfo>
+        )}
       </RenteeDetailButton>
       <RenteeInfoButtonHolder>
         <button id="edit" onClick={handleEditClick}>
@@ -79,6 +116,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.black};
   box-shadow: ${(props) => props.theme.managerBoxShadow};
+  line-height: 100%;
   border-radius: ${(props) => props.theme.managerBorderRadius};
 
   :hover {
@@ -130,7 +168,6 @@ const TextInfo = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
 
   div {
     width: 100%;
@@ -146,6 +183,14 @@ const TextInfo = styled.div`
     text-align: center;
     font-size: 14px;
   }
+`;
+
+const BookTextInfo = styled(TextInfo)`
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+`
+
+const DeviceTextInfo = styled(TextInfo)`
+  grid-template-columns: 1fr 1fr;
 `;
 
 const RenteeInfoButtonHolder = styled.div`
@@ -180,4 +225,4 @@ const RenteeInfoButtonHolder = styled.div`
   }
 `;
 
-export default ManagerRenteeInfoHolder;
+export default RenteeInfoHolder;

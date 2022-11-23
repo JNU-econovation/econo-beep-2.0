@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import {
   DateObjectToEpochSecond,
   EpochSecondToDateObject,
-} from "../EpochConverter";
+} from "../../lib/utils/EpochConverter";
 import * as S from "../../styles/ManagerInfoEditStyle";
 
 function BookAdditionalInfoEdit({ inputInfo, setInputInfo }) {
@@ -16,11 +16,11 @@ function BookAdditionalInfoEdit({ inputInfo, setInputInfo }) {
         <S.TextInput
           type="text"
           placeholder="저자"
-          value={inputInfo?.authorName}
+          value={inputInfo?.bookAuthorName}
           onChange={(e) => {
             setInputInfo({
               ...inputInfo,
-              authorName: e.target.value,
+              bookAuthorName: e.target.value,
             });
           }}
         />
@@ -30,11 +30,11 @@ function BookAdditionalInfoEdit({ inputInfo, setInputInfo }) {
         <S.TextInput
           type="text"
           placeholder="출판사"
-          value={inputInfo?.publisher}
+          value={inputInfo?.bookPublisherName}
           onChange={(e) => {
             setInputInfo({
               ...inputInfo,
-              publisher: e.target.value,
+              bookPublisherName: e.target.value,
             });
           }}
         />
@@ -44,11 +44,11 @@ function BookAdditionalInfoEdit({ inputInfo, setInputInfo }) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             inputFormat="yyyy-MM-dd"
-            value={EpochSecondToDateObject(inputInfo?.publishedDay)}
+            value={EpochSecondToDateObject(inputInfo?.bookPublishedDate)}
             onChange={(e) => {
               setInputInfo({
                 ...inputInfo,
-                publishedDay: DateObjectToEpochSecond(e),
+                bookPublishedDate: DateObjectToEpochSecond(e),
               });
             }}
             renderInput={(params) => (

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
 
 import Body from "../styles/Body";
 import PageTitle from "../components/PageTitle";
 import DetailHeader from "../components/header/DetailHeader";
-import RenteeInfo from "../components/Detail/RenteeInfo";
-import RentalHistories from "../components/Detail/RentalHistories";
-import RentButton from "../components/Detail/RentButton";
+import RenteeDetail from "../components/detail/RenteeDetail";
+import RentalHistoryList from "../components/detail/RentalHistoryList";
+import RentButton from "../components/detail/RentButton";
+import RenteeAPI from '../lib/api/RenteeAPI'
 
 function Detail() {
   const params = useParams();
@@ -17,33 +17,27 @@ function Detail() {
 
   const [renteeDetail, setRenteeDetail] = useState({});
   const [rentalHistories, setRentalHistories] = useState([]);
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
     setRenteeId(params.id);
   }, [params]);
 
-  useEffect(() => {
-    const loadRenteeDetail = async () => {
-      const response = await axios.get(
-        process.env.REACT_APP_BEEP_API + "/api/rentee/" + renteeId,
-        {
-          params: {
-            accessToken: localStorage?.getItem("accessToken"),
-          },
-        }
-      );
-      setRenteeDetail(response.data);
-      setRentalHistories(response.data.rentalHistories);
-    };
+  useEffect( () => {
+    const loadData = async () => {
+      const data = await RenteeAPI.loadRenteeDetail(renteeId);
+      setRenteeDetail(data);
+      setRentalHistories(data.rentalHistories);
+    }
 
-    loadRenteeDetail();
-  }, [localStorage]);
+    loadData();
+  }, [localStorage, reload, renteeId]);
 
   return (
     <Body>
       <PageTitle title="상세 정보" />
       <DetailHeader />
-      <RenteeInfo
+      <RenteeDetail
         id={renteeDetail?.id}
         type={renteeDetail?.type}
         thumbnailUrl={renteeDetail?.thumbnailUrl}
@@ -55,6 +49,7 @@ function Detail() {
         note={renteeDetail?.note}
         bookmark={renteeDetail?.isBookmarked}
         bookmarkCount={renteeDetail?.bookmarkCount}
+        setReload={() => setReload(reload => !reload)}
       />
       <RentSection>
         <RentTopSection>
@@ -62,9 +57,13 @@ function Detail() {
           <RentButton
             currentRentState={renteeDetail?.rentState}
             renteeId={renteeDetail?.id}
+            setReload={() => setReload(reload => !reload)}
           />
         </RentTopSection>
-        <RentalHistories rentalHistories={rentalHistories} />
+        <RentalHistoryList
+          rentalHistories={rentalHistories}
+          rentState={renteeDetail?.rentState}
+        />
       </RentSection>
     </Body>
   );
@@ -79,7 +78,7 @@ const RentSection = styled.div`
 
 const RentTopSection = styled.div`
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   margin-bottom: 10px;
 
   display: flex;

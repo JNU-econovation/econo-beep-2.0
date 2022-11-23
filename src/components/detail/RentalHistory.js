@@ -1,13 +1,12 @@
 import styled, { css } from "styled-components";
-import { EpochSecondToDateObject } from "../EpochConverter";
 import RENT_STATES from "../../constant/RENT_STATES";
-import no_profile from "../../images/no-profile.png";
+import noProfile from "../../images/no-profile.png";
 
-function RentalRecord({
+function RentalHistory({
   renterProfileImage,
   renterName,
-  rentalEpochSecond,
-  returnEpochSecond,
+  rentDate,
+  returnDate,
   rentState,
 }) {
   return (
@@ -15,20 +14,23 @@ function RentalRecord({
       <RentRecordLeft>
         <img
           className="profile-img"
-          src={!renterProfileImage ? no_profile : renterProfileImage}
+          src={!renterProfileImage ? noProfile : process.env.REACT_APP_BEEP_API + renterProfileImage}
           alt="profile"
         />
         <RentRecordCenter>
           <div className="rent-name">{renterName}</div>
           <div className="rent-date">
-            {EpochSecondToDateObject(rentalEpochSecond)} ~{" "}
-            {EpochSecondToDateObject(returnEpochSecond)}
+            {rentDate.getFullYear()}-{rentDate.getMonth() + 1}-{rentDate.getDate()} {
+            returnDate ? (
+              ` ~ ${returnDate.getFullYear()}-${returnDate.getMonth()+1}-${returnDate.getDate()}`
+            ) : (undefined)
+          }
           </div>
         </RentRecordCenter>
       </RentRecordLeft>
       <RentRecordState value={rentState}>
         <div className="rent-highlight" />
-        <span>{RENT_STATES.KOREAN[rentState]}</span>
+        <span>{RENT_STATES.RENTAL_RECORD[rentState]}</span>
       </RentRecordState>
     </RentRecordSection>
   );
@@ -41,12 +43,14 @@ const RentRecordSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  
+  position: relative;
+  z-index: -1;
+  
   .no-profile-img {
     width: 35px;
     height: 35px;
     border-radius: 1000%;
-    background-color: ;
   }
 
   .profile-img {
@@ -85,8 +89,7 @@ const RentRecordState = styled.div`
   display: inline-block;
   float: right;
   position: relative;
-  z-index: 0;
-
+  
   ${(props) =>
     props.value === RENT_STATES.RENTED &&
     css`
@@ -109,7 +112,6 @@ const RentRecordState = styled.div`
     font-size: 14px;
     font-weight: 500;
     position: relative;
-    z-index: 1;
   }
 
   .rent-highlight {
@@ -140,4 +142,4 @@ const RentRecordState = styled.div`
   }
 `;
 
-export default RentalRecord;
+export default RentalHistory;

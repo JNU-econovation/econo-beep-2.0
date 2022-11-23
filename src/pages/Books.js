@@ -1,36 +1,18 @@
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
 import routes from "../routes";
 import InfoListLayout from "../components/info-list-layout/InfoListLayout";
+import SEARCH_TYPES from "../constant/SEARCH_TYPES";
+import RenteeAPI from "../lib/api/RenteeAPI";
 
 function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const loadBookList = async ({ keyword, pageIndex, pageSize }) => {
-    const response = await axios.get(
-      process.env.REACT_APP_BEEP_API + "/api/rentee/search/book",
-      {
-        params: {
-          name: keyword,
-          pageIndex: pageIndex,
-          pageSize: pageSize,
-        },
-      }
-    );
-
-    return response.data;
-  };
-
   return (
     <InfoListLayout
-      key={
-        searchParams.get("keyword") !== null
-          ? `book?${searchParams.get("keyword")}`
-          : "book"
-      }
-      listType="도서"
+      key={`books-${searchParams.get('keyword')}`}
+      listType={SEARCH_TYPES.BOOK}
       searchApiUrl={routes.books}
-      loadRenteeList={loadBookList}
+      loadRenteeList={RenteeAPI.loadBookList}
     />
   );
 }

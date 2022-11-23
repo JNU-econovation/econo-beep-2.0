@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import { MenuItem, Select, TextField } from "@mui/material";
 
 import INITIAL_RENTEE_INFO from "../../constant/INITIAL_RENTEE_INFO";
 import * as S from "../../styles/ManagerInfoEditStyle";
-import RENTEE_TYPE from "../../constant/RENTEE_TYPES";
 import BookAdditionalInfoEdit from "./BookAdditionalInfoEdit";
+import ManagementAPI from "../../lib/api/ManagementAPI";
+import RenteeTypeSelect from "./RenteeTypeSelect";
+import {DateObjectToEpochSecond} from "../../lib/utils/EpochConverter";
 
 function RenteeInfoEdit({
   isBookMode,
@@ -15,13 +16,19 @@ function RenteeInfoEdit({
   setEditRenteeInfo,
   setIsEditOpen,
   isEditMode,
+  setReload,
 }) {
-  const [inputInfo, setInputInfo] = useState(editRenteeInfo);
+  const [inputInfo, setInputInfo] = useState(INITIAL_RENTEE_INFO);
   const [thumbnail, setThumbnail] = useState("");
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
   useEffect(() => {
-    setInputInfo({ ...editRenteeInfo });
+    if (!editRenteeInfo.bookPublishedDate) {
+      let today = new Date()
+      setInputInfo({...editRenteeInfo, bookPublishedDate: DateObjectToEpochSecond(today)})
+    } else {
+      setInputInfo({...editRenteeInfo})
+    }
 
     const loadThumbnail = async () => {
       if (!editRenteeInfo.thumbnail || editRenteeInfo.thumbnail === "") {
@@ -37,6 +44,68 @@ function RenteeInfoEdit({
     loadThumbnail();
   }, [editRenteeInfo]);
 
+  const createForm = () => {
+    const form = new FormData();
+    form.append('thumbnail', thumbnail);
+    console.log(thumbnail);
+    form.append('name', inputInfo.name);
+    form.append('note', inputInfo.note);
+
+    if (isBookMode !== false) {
+      form.append('bookArea', inputInfo.bookArea);
+      form.append('bookAuthorName', inputInfo.bookAuthorName);
+      form.append('bookPublisherName', inputInfo.bookPublisherName);
+      form.append('bookPublishedDateEpochSecond', inputInfo.bookPublishedDate);
+    }
+
+    return form;
+  }
+
+  const onButtonClick = async () => {
+    const form = createForm();
+
+    if (isBookMode && !isEditMode) {
+      try {
+        await ManagementAPI.createBook(form);
+        alert(`${inputInfo.name}의 정보를 등록했습니다`);
+        setReload();
+      } catch (e) {
+        alert(`${inputInfo.name}의 정보 등록을 실패했습니다.`);
+      }
+    }
+
+    if (isBookMode && isEditMode) {
+      try {
+        await ManagementAPI.editBook(form, inputInfo.id);
+        alert(`${inputInfo.name}의 정보를 수정했습니다`);
+        setReload();
+      } catch (e) {
+        alert(`${inputInfo.name}의 정보 수정을 실패했습니다.`);
+      }
+    }
+
+    if (!isBookMode && !isEditMode) {
+      try {
+        await ManagementAPI.createDevice(form);
+        alert(`${inputInfo.name}의 정보를 등록했습니다`);
+        setReload();
+      } catch (e) {
+        alert(`${inputInfo.name}의 정보 등록을 실패했습니다.`);
+      }
+    }
+
+    if (!isBookMode && isEditMode) {
+      try {
+        await ManagementAPI.editDevice(form, inputInfo.id);
+        alert(`${inputInfo.name}의 정보를 수정했습니다`);
+        setReload();
+      } catch (e) {
+        alert(`${inputInfo.name}의 정보 수정을 실패했습니다.`);
+      }
+    }
+
+  }
+
   useEffect(() => {
     if (!thumbnail || thumbnail === "") {
       return;
@@ -47,8 +116,6 @@ function RenteeInfoEdit({
       setThumbnailPreview(e.target.result);
     };
     reader.readAsDataURL(thumbnail);
-
-    console.log(thumbnail);
   }, [thumbnail]);
 
   return (
@@ -58,11 +125,11 @@ function RenteeInfoEdit({
           className="title"
           type="text"
           placeholder="제목"
-          value={inputInfo?.title}
+          value={inputInfo?.name}
           onChange={(e) => {
             setInputInfo({
               ...inputInfo,
-              title: e.target.value,
+              name: e.target.value,
             });
           }}
         />
@@ -113,37 +180,7 @@ function RenteeInfoEdit({
         )}
         <S.InfoBox>
           <S.Label>분야</S.Label>
-          <Select
-            labelId="SelectSortOrder"
-            id="Select"
-            value={inputInfo.type}
-            onChange={(e) => {
-              setInputInfo({ ...inputInfo, type: e.target.value });
-            }}
-            size="small"
-            sx={{
-              ".MuiInputBase-input": {
-                height: "14px",
-                fontSize: "13px",
-                padding: "5px 0 10px 5px",
-              },
-            }}
-          >
-            <MenuItem disabled value={-1}>
-              <i>종류</i>
-            </MenuItem>
-            {!isBookMode ? (
-              <MenuItem key={0} value={0}>
-                {RENTEE_TYPE.TYPE_KOREAN.DEVICE}
-              </MenuItem>
-            ) : (
-              RENTEE_TYPE.BOOK_AREA_ARRAY.map((element, index) => (
-                <MenuItem key={index} value={index}>
-                  {RENTEE_TYPE.BOOK_AREA_KOREAN[element]}
-                </MenuItem>
-              ))
-            )}
-          </Select>
+          <RenteeTypeSelect inputInfo={inputInfo} setInputInfo={setInputInfo} isBookMode={isBookMode} />
         </S.InfoBox>
         <S.InfoBox>
           <S.Label>비고</S.Label>
@@ -160,7 +197,7 @@ function RenteeInfoEdit({
           />
         </S.InfoBox>
       </MediumSection>
-      <Button>
+      <Button onClick={onButtonClick}>
         <div>{!isEditMode ? "추가하기" : "수정하기"}</div>
       </Button>
     </Container>
@@ -168,6 +205,7 @@ function RenteeInfoEdit({
 }
 
 const Container = styled.div`
+  height: 100%;
   margin: 0 0 10px 30px;
   padding: 20px;
 
@@ -200,12 +238,18 @@ const TopSection = styled.div`
     margin-right: 10px;
     font-size: 18px;
     border: none;
+    :hover {
+      border-bottom: 1px solid ${(props) => props.theme.secondGray};
+    }
+
+    :focus {
+      border-bottom: 1px solid ${(props) => props.theme.blue};
+    }
   }
 `;
 
 const MediumSection = styled.div`
   width: 100%;
-  //height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -214,7 +258,6 @@ const MediumSection = styled.div`
 
 const ImgBox = styled.div`
   width: 80%;
-  height: 100%;
 
   display: flex;
   justify-content: center;
@@ -230,9 +273,10 @@ const ImgBox = styled.div`
   }
 
   & > label > img {
-    height: 200px;
+    height: 150px;
     object-fit: contain;
     border-radius: 10px;
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
     cursor: pointer;
   }
 `;
@@ -241,6 +285,7 @@ const Button = styled.div`
   width: 50%;
   max-width: 100px;
   height: 35px;
+  margin-top: 10px;
   padding: 0;
 
   font-size: 14px;

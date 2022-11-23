@@ -9,11 +9,12 @@ import Body from "../../styles/Body";
 import theme from "../../styles/Theme";
 import PageTitle from "../PageTitle";
 import InfoListHeader from "../header/InfoListHeader";
+import SEARCH_TYPES from "../../constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const target = useRef(null);
-
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
   const [lastPage, setLastPage] = useState(false);
@@ -22,17 +23,14 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 
   useEffect(() => {
     const onLoad = async () => {
-      const loadRentees = await loadRenteeList({
-        keyword: searchParams?.get("keyword"),
+      const loadedRentees = await loadRenteeList({
+        keyword: searchParams.get('keyword'),
         pageIndex: pageIndex,
         pageSize: pageSize,
       });
 
-      // setRentees((rentees) => [...rentees, ...loadRentees]);
-      // setPageIndex((pageIndex) => pageIndex + 1);
-
-      if (loadRentees.length !== 0) {
-        setRentees((rentees) => [...rentees, ...loadRentees]);
+      if (loadedRentees.length !== 0) {
+        setRentees((rentees) => [...rentees, ...loadedRentees]);
         setPageIndex((pageIndex) => pageIndex + 1);
       } else {
         setLastPage(true);
@@ -55,18 +53,18 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       observer.observe(target.current);
     }
     return () => observer && observer.disconnect();
-  }, [target, loadRenteeList, pageIndex, pageSize, searchParams]);
+  }, [target, pageIndex, loadRenteeList, searchParams]);
 
   return (
     <Body>
       <PageTitle
         title={
-          searchParams.get("keyword") ? searchParams.get("keyword") : listType
+          searchParams.get("keyword") ? searchParams.get("keyword") : SEARCH_TYPES.KOREAN[listType]
         }
       />
-      <InfoListHeader listType={listType} />
+      <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
       <SearchBarHolder>
-        <SearchBar placeholder={listType} searchApiUrl={searchApiUrl} />
+        <SearchBar placeholder={SEARCH_TYPES.KOREAN[listType]} searchApiUrl={searchApiUrl} />
       </SearchBarHolder>
       <ResultBox>
         {rentees.map((rentee) => (

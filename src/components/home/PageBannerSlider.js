@@ -7,13 +7,13 @@ function PageBannerSlider() {
   const bannerInfos = [
     {
       id: 1,
-      href: "https://econovation.kr/about",
+      url: "https://econovation.kr/about",
       bgColor: "black",
       text: "ECONOVATION",
     },
     {
       id: 2,
-      href: "https://econovation.kr/about",
+      url: "https://econovation.kr/about",
       bgColor: "#2269fa",
       text: "T-econo",
     },
@@ -32,7 +32,11 @@ function PageBannerSlider() {
       pauseOnHover={true}
     >
       {bannerInfos.map((item) => (
-        <PageBanner key={item.id} bgColor={item.bgColor} href={item.href}>
+        <PageBanner
+          key={item.id}
+          bgColor={item.bgColor}
+          onClick={() => { window.open(item.url, "_blank"); }}
+        >
           <PageText> {item.text} </PageText>
         </PageBanner>
       ))}
@@ -92,7 +96,7 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-const PageBanner = styled.a`
+const PageBanner = styled.div`
   width: 100%;
   height: 100px;
 
