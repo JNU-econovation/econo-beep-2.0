@@ -60,5 +60,6 @@
   "devDependencies": {
     "@iconify-icons/icons8": "^1.2.2",
     "prettier": "^2.7.1"
-  }
+  },
+  "homepage": "http://auth.econovation.kr/beep"
 }

@@ -1,13 +1,12 @@
 const ARRAY = ["BOOK", "DEVICE"];
 
 const BOOK_AREA_ARRAY = [
-  "WEB",
-  "APP",
-  "LANGUAGE",
+  "FRONTEND",
+  "BACKEND",
   "AI",
   "GAME",
-  "DEVELOPMENT",
-  "MAJOR",
+  "GENERAL_EDUCATION",
+  "TEXTBOOK",
 ];
 
 const RENTEE_TYPE = {
@@ -21,23 +20,21 @@ const TYPE_KOREAN = {
 };
 
 const BOOK_AREA_KOREAN = {
-  WEB: "웹",
-  APP: "앱",
-  LANGUAGE: "언어",
+  FRONTEND: "프론트엔드",
+  BACKEND: "백엔드",
   AI: "인공지능",
   GAME: "게임",
-  DEVELOPMENT: "개발 교양",
-  MAJOR: "전공 서적",
+  GENERAL_EDUCATION: "교양",
+  TEXTBOOK: "교제",
 };
 
 const BOOK_AREA = {
-  WEB: "WEB",
-  APP: "APP",
-  LANGUAGE: "LANGUAGE",
+  FRONTEND: "FRONTEND",
+  BACKEND: "BACKEND",
   AI: "AI",
   GAME: "GAME",
-  DEVELOPMENT: "DEVELOPMENT",
-  MAJOR: "MAJOR",
+  GENERAL_EDUCATION: "GENERAL_EDUCATION",
+  TEXTBOOK: "TEXTBOOK",
 }
 
 Object.freeze(ARRAY);

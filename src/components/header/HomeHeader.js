@@ -8,9 +8,15 @@ import { AiOutlineUser } from "react-icons/ai";
 
 function HomeHeader({ setIsMenuOpen }) {
   const navigate = useNavigate();
+
+  const profileButtonClick = async () => {
+    // eslint-disable-next-line no-restricted-globals
+    location.href = `http://auth.econovation.kr:8080/api/accounts/login?requestUrl=${location.href}`;
+  }
+
   return (
     <HeaderSection>
-      <ProfileButton onClick={() => navigate(routes.myPage)}>
+      <ProfileButton onClick={profileButtonClick}>
         <BluePurpleGradient />
         <AiOutlineUser style={{ fill: "url(#blue-purple-gradient)" }} />
       </ProfileButton>
