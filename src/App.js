@@ -1,4 +1,4 @@
-import { Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
@@ -22,9 +22,10 @@ import MyPage from "./pages/MyPage";
 
 function AppRouter() {
   return (
+    <BrowserRouter basename={"/beep"}>
       <Routes>
         <Route path={routes.home} element={<Home />} />
-	<Route path="/beep" element={<Home />} />
+        <Route path="/beep" element={<Home />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.books} element={<Books />} />
         <Route path={routes.device} element={<Device />} />
@@ -32,6 +33,7 @@ function AppRouter() {
         <Route path={routes.manager} element={<Manager />} />
         <Route path={routes.myPage} element={<MyPage />} />
       </Routes>
+    </BrowserRouter>
   );
 }
 
