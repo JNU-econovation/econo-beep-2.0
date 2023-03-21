@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wave from "react-wavify";
-import { useColor } from "color-thief-react";
+// import { useColor } from "color-thief-react";
 
 import { IoMdInformation } from "react-icons/io";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
@@ -22,39 +22,37 @@ function RenteeDetail({
   note,
   bookmark,
   bookmarkCount,
-  setReload
+  setReload,
 }) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
   const [unbookmarkableNote, setUnbookmarkableNote] = useState(false);
 
-  const { data, loading, error } = useColor(thumbnailUrl, "hex", {
-    crossOrigin: "Anonymous",
-  });
+  // const { data, loading, error } = useColor(thumbnailUrl, "hex", {
+  //   crossOrigin: "Anonymous",
+  // });
+
+  // TODO: color-thief-react가 아닌 color thief 패키지 사용해 색상 감지 후 Wave에 전달
 
   const onBookmarkClick = async () => {
     if (isBookmarked !== false) {
-
       try {
         await RenteeAPI.deleteBookmark(id);
-        setIsBookmarked(isBookmarked => !isBookmarked);
+        setIsBookmarked((isBookmarked) => !isBookmarked);
         setReload();
       } catch (e) {
         setUnbookmarkableNote(true);
       }
-
     } else {
-
       try {
         await RenteeAPI.putBookmark(id);
-        setIsBookmarked(isBookmarked => !isBookmarked);
+        setIsBookmarked((isBookmarked) => !isBookmarked);
         setReload();
       } catch (e) {
         setUnbookmarkableNote(true);
       }
-
     }
-  }
+  };
 
   useEffect(() => {
     setIsBookmarked(bookmark);
@@ -63,9 +61,7 @@ function RenteeDetail({
   return (
     <>
       <BasicInfoSection>
-        <RenteeImg
-          src={process.env.REACT_APP_BEEP_API + thumbnailUrl}
-        />
+        <RenteeImg src={process.env.REACT_APP_BEEP_API + thumbnailUrl} />
         <InfoSection>
           <TextInfoSection>
             <div className="publisher">{bookPublisherName}</div>
@@ -90,19 +86,20 @@ function RenteeDetail({
               <IoMdInformation />
             </div>
             <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
-            <div
-              className="bookmark button"
-              onClick={  () => onBookmarkClick()}
-            >
+            <div className="bookmark button" onClick={() => onBookmarkClick()}>
               {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
-            <PopUp open={unbookmarkableNote} setOpen={setUnbookmarkableNote} text="로그인 후 즐겨찾기 해주세요" />
+            <PopUp
+              open={unbookmarkableNote}
+              setOpen={setUnbookmarkableNote}
+              text="로그인 후 즐겨찾기 해주세요"
+            />
           </ButtonSection>
         </InfoSection>
         <WaveSection>
           <Wave
             mask="url(#mask)"
-            fill={data}
+            // fill={data}
             paused={false}
             options={{ height: 15, speed: 0.1, amplitude: 10, points: 3 }}
             filter="brightness(0.85)"
@@ -242,7 +239,7 @@ const ButtonSection = styled.div`
 
     background-color: ${(props) => props.theme.bgColor};
     border-radius: 1000px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     cursor: pointer;
   }
