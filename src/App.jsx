@@ -1,4 +1,4 @@
-import { Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
@@ -21,17 +21,31 @@ import Manager from "@/pages/Manager";
 import MyPage from "@/pages/MyPage";
 
 function AppRouter() {
+  const handleResize = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <Routes>
-      <Route path={routes.home} element={<Home />} />
-      <Route path="/beep" element={<Home />} />
-      <Route path={routes.searchAll} element={<SearchAll />} />
-      <Route path={routes.books} element={<Books />} />
-      <Route path={routes.device} element={<Device />} />
-      <Route path={`${routes.detail}/:id`} element={<Detail />} />
-      <Route path={routes.manager} element={<Manager />} />
-      <Route path={routes.myPage} element={<MyPage />} />
-    </Routes>
+    <BrowserRouter basename={"/beep"}>
+      <Routes>
+        <Route path={routes.home} element={<Home />} />
+        <Route path="/beep" element={<Home />} />
+        <Route path={routes.searchAll} element={<SearchAll />} />
+        <Route path={routes.books} element={<Books />} />
+        <Route path={routes.device} element={<Device />} />
+        <Route path={`${routes.detail}/:id`} element={<Detail />} />
+        <Route path={routes.manager} element={<Manager />} />
+        <Route path={routes.myPage} element={<MyPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
@@ -92,6 +106,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+  }
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   button {
