@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   ThemeProvider as StyledThemeProvider,
@@ -9,7 +10,20 @@ import {
 } from "@mui/material/styles";
 import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
+<<<<<<< HEAD:src/App.js
+
+import Theme from "./styles/Theme";
+import routes from "./routes";
+import Home from "./pages/Home";
+import SearchAll from "./pages/SearchAll";
+import Books from "./pages/Books";
+import Device from "./pages/Device";
+import Detail from "./pages/Detail";
+import Manager from "./pages/Manager";
+import MyPage from "./pages/MyPage";
+=======
 import { useEffect } from "react";
+>>>>>>> 034520789ecc8525a737f153da96063545c6e41d:src/App.jsx
 
 import Theme from "@/styles/Theme";
 import routes from "@/routes";
