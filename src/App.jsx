@@ -9,6 +9,7 @@ import {
 } from "@mui/material/styles";
 import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
+import { useEffect } from "react";
 
 import Theme from "@/styles/Theme";
 import routes from "@/routes";
