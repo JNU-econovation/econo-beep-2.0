@@ -34,7 +34,7 @@ function AppRouter() {
   }, []);
 
   return (
-    <BrowserRouter basename={"/beep"}>
+    <BrowserRouter>
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path="/beep" element={<Home />} />
