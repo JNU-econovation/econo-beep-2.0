@@ -19,8 +19,21 @@ import Device from "./pages/Device";
 import Detail from "./pages/Detail";
 import Manager from "./pages/Manager";
 import MyPage from "./pages/MyPage";
+import { useEffect } from "react";
 
 function AppRouter() {
+  const handleResize = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <BrowserRouter basename={"/beep"}>
       <Routes>
@@ -94,6 +107,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+  }
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   button {
