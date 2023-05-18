@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   ThemeProvider as StyledThemeProvider,
@@ -19,7 +20,6 @@ import Device from "./pages/Device";
 import Detail from "./pages/Detail";
 import Manager from "./pages/Manager";
 import MyPage from "./pages/MyPage";
-import { useEffect } from "react";
 
 function AppRouter() {
   const handleResize = () => {
