@@ -1,12 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
+
 import Body from "@/styles/Body";
-import PageTitle from "@/components/PageTitle";
-import SearchBar from "@/components/SearchBar";
+import PageTitle from "@/components/common/PageTitle";
+import SearchBar from "@/components/common/SearchBar";
 import routes from "@/routes";
 import LogoStyle from "@/styles/LogoStyle";
 import PageBannerSlider from "@/components/home/PageBannerSlider";
 import HomeHeader from "@/components/header/HomeHeader";
-import { useState } from "react";
 import Menu from "@/components/home/Menu";
 
 function Home() {

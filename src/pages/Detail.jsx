@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Body from "@/styles/Body";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/common/PageTitle";
 import DetailHeader from "@/components/header/DetailHeader";
 import RenteeDetail from "@/components/detail/RenteeDetail";
 import RentalHistoryList from "@/components/detail/RentalHistoryList";

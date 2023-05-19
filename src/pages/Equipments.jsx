@@ -5,7 +5,7 @@ import RENT_STATE from "@/constant/RENT_STATES";
 import InfoListLayout from "@/components/info-list-layout/InfoListLayout";
 
 function Equipments() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
   const [rentees, setRentees] = useState([]);
 
   const initSearchList = () => {

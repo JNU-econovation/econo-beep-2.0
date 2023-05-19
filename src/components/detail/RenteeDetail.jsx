@@ -7,7 +7,7 @@ import { IoMdInformation } from "react-icons/io";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 
 import RENTEE_TYPES from "@/constant/RENTEE_TYPES";
-import PopUp from "@/components/detail/PopUp";
+import Modal from "@/components/detail/Modal";
 import RenteeAPI from "@/lib/api/RenteeAPI";
 
 function RenteeDetail({
@@ -85,11 +85,11 @@ function RenteeDetail({
             >
               <IoMdInformation />
             </div>
-            <PopUp open={noteOpen} setOpen={setNoteOpen} text={note} />
+            <Modal open={noteOpen} setOpen={setNoteOpen} text={note} />
             <div className="bookmark button" onClick={() => onBookmarkClick()}>
               {isBookmarked ? <RiHeart3Fill /> : <RiHeart3Line />}
             </div>
-            <PopUp
+            <Modal
               open={unbookmarkableNote}
               setOpen={setUnbookmarkableNote}
               text="로그인 후 즐겨찾기 해주세요"

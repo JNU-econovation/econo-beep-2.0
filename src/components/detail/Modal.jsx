@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import { Backdrop } from "@mui/material";
 
-function PopUp({ open, setOpen, text }) {
+function Modal({ open, setOpen, text }) {
   return (
     <Backdrop sx={{ color: "#fff" }} open={open}>
       <PopUpSection>
@@ -49,4 +49,4 @@ const PopUpSection = styled.div`
     top: 10px;
   }
 `;
-export default PopUp;
+export default Modal;

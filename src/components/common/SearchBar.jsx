@@ -7,7 +7,7 @@ import BluePurpleGradient from "@/styles/BluePurpleGradient";
 function SearchBar({ placeholder, searchApiUrl }) {
   const navigate = useNavigate();
   const [inputKeyword, setInputKeyword] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
 
   const onEnterPress = (event) => {
     if (event.key === "Enter") {
@@ -64,7 +64,7 @@ const SearchBox = styled.form`
   background-origin: border-box;
   background-clip: content-box, border-box;
 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const Icon = styled.div`

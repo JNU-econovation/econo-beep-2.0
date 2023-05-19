@@ -5,7 +5,7 @@ import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 import RenteeAPI from "@/lib/api/RenteeAPI";
 
 function Device() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
 
   return (
     <InfoListLayout
