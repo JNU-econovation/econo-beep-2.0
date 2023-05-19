@@ -17,17 +17,11 @@ const GlobalStyle = createGlobalStyle`
     letter-spacing: -0.017em;
   }
 
-  html {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-
-  body {
+  html, body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
-  }
-
-  html, body {
     max-width: 100%;
+    min-height: calc(var(--vh, 1vh) * 100);
     overflow-x: hidden;
   }
 
