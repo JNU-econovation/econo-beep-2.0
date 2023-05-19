@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
 import RENT_STATES from "@/constant/RENT_STATES";
-import PopUp from "@/components/detail/PopUp";
+import Modal from "@/components/detail/Modal";
 import RentAPI from "@/lib/api/RentAPI";
 
 function RentButton({ currentRentState, renteeId, setReload }) {
@@ -56,7 +56,7 @@ function RentButton({ currentRentState, renteeId, setReload }) {
       <Button value={rentState} onClick={() => onButtonClick(rentState)}>
         {RENT_STATES.RENT_BUTTON[rentState]}
       </Button>
-      <PopUp
+      <Modal
         open={rentNote}
         setOpen={setRentNote}
         text={!isLoggedIn ? "로그인 후 이용해주세요" : "현재 이용 불가합니다"}
