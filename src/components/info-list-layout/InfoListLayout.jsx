@@ -3,11 +3,11 @@ import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
-import SearchBar from "@/components/SearchBar";
-import RenteeInfo from "@/components/RenteeInfo";
+import SearchBar from "@/components/common/SearchBar";
+import RenteeInfo from "@/components/common/RenteeInfo";
 import Body from "@/styles/Body";
 import theme from "@/styles/Theme";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/common/PageTitle";
 import InfoListHeader from "@/components/header/InfoListHeader";
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 

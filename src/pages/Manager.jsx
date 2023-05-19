@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Body from "@/styles/Body";
 
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/common/PageTitle";
 import ManagerTopBar from "@/components/manager/ManagerTopBar";
 import RenteeInfoList from "@/components/manager/RenteeInfoList";
 import RenteeInfoEdit from "@/components/manager/RenteeInfoEdit";

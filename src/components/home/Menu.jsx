@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import routes from "@/routes";
 
 import Body from "@/styles/Body";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/common/PageTitle";
 import MenuHeader from "@/components/header/MenuHeader";
 
 import literature from "@/assets/images/menu-literature.png";
