@@ -4,7 +4,7 @@ function Body({ children }) {
   return <BodyBox>{children}</BodyBox>;
 }
 
-const BodyBox = styled.div`
+const BodyBox = styled.section`
   width: 100vw;
   min-height: calc(var(--vh, 1vh) * 100);
 
@@ -17,6 +17,7 @@ const BodyBox = styled.div`
   z-index: 0;
 
   background-color: ${(props) => props.theme.bgColor};
+  overflow-y: hidden;
 `;
 
 export default Body;
