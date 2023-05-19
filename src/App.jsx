@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   ThemeProvider as StyledThemeProvider,
@@ -11,38 +11,19 @@ import {
 import reset from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
 
-import Theme from "./styles/Theme";
-import routes from "./routes";
-import Home from "./pages/Home";
-import SearchAll from "./pages/SearchAll";
-import Books from "./pages/Books";
-import Device from "./pages/Device";
-import Detail from "./pages/Detail";
-import Manager from "./pages/Manager";
-import MyPage from "./pages/MyPage";
-
-// import Theme from "@/styles/Theme";
-// import routes from "@/routes";
-// import Home from "@/pages/Home";
-// import SearchAll from "@/pages/SearchAll";
-// import Books from "@/pages/Books";
-// import Device from "@/pages/Device";
-// import Detail from "@/pages/Detail";
-// import Manager from "@/pages/Manager";
-// import MyPage from "@/pages/MyPage";
+import Theme from "@/styles/Theme";
+import routes from "@/routes";
+import Home from "@/pages/Home";
+import SearchAll from "@/pages/SearchAll";
+import Books from "@/pages/Books";
+import Device from "@/pages/Device";
+import Detail from "@/pages/Detail";
+import Manager from "@/pages/Manager";
+import MyPage from "@/pages/MyPage";
+import use100vh from "./hooks/use100vh";
 
 function AppRouter() {
-  const handleResize = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  use100vh();
 
   return (
     <BrowserRouter>
@@ -92,6 +73,10 @@ const muiTheme = createTheme({
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  
+  :root {
+    --vh: 1vh;
+  }
 
   a {
     text-decoration: none;
