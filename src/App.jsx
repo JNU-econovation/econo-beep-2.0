@@ -1,18 +1,14 @@
-// import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  ThemeProvider as StyledThemeProvider,
-  createGlobalStyle,
-} from "styled-components";
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider,
-} from "@mui/material/styles";
-import reset from "styled-reset";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { HelmetProvider } from "react-helmet-async";
 
-import Theme from "@/styles/Theme";
+import use100vh from "./hooks/use100vh";
 import routes from "@/routes";
+import Theme from "@/styles/Theme";
+import muiTheme from "@/styles/muiTheme";
+import GlobalStyle from "@/styles/GlobalStyle";
+
 import Home from "@/pages/Home";
 import SearchAll from "@/pages/SearchAll";
 import Books from "@/pages/Books";
@@ -20,7 +16,6 @@ import Device from "@/pages/Device";
 import Detail from "@/pages/Detail";
 import Manager from "@/pages/Manager";
 import MyPage from "@/pages/MyPage";
-import use100vh from "./hooks/use100vh";
 
 function AppRouter() {
   use100vh();
@@ -53,65 +48,5 @@ function App() {
     </HelmetProvider>
   );
 }
-
-const muiTheme = createTheme({
-  palette: {
-    info: {
-      light: Theme.black,
-      main: Theme.firstGray,
-      dark: Theme.black,
-    },
-  },
-  typography: {
-    fontFamily: '"Noto Sans KR", sans-serif',
-    fontWeightLight: 300,
-    fontWeightRegular: 300,
-    fontWeightMedium: 400,
-    fontWeightBold: 300,
-  },
-});
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  
-  :root {
-    --vh: 1vh;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  i {
-    color: ${Theme.placeholderColor};
-  }
-
-  * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-decoration: none;
-    letter-spacing: -0.017em;
-  }
-
-  html {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-  }
-
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  button {
-    padding: 0;
-  }
-`;
 
 export default App;
