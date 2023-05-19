@@ -13,7 +13,7 @@ import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const target = useRef(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
 
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
