@@ -3,6 +3,7 @@ import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
+import useThrottle from "../../hooks/useThrottle";
 import SearchBar from "@/components/common/SearchBar";
 import RenteeInfo from "@/components/common/RenteeInfo";
 import Body from "@/styles/Body";
@@ -21,31 +22,34 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 
   const [rentees, setRentees] = useState([]);
 
+  const getRenteeInfo = async () => {
+    const loadedRentees = await loadRenteeList({
+      keyword: searchParams.get("keyword"),
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    });
+
+    if (loadedRentees.length !== 0) {
+      setRentees((rentees) => [...rentees, ...loadedRentees]);
+      setPageIndex((pageIndex) => pageIndex + 1);
+    } else {
+      setLastPage(true);
+    }
+  };
+
+  const throttledGetRenteeInfo = useThrottle(getRenteeInfo(), 500);
+
+  const onIntersect = async ([entry], observer) => {
+    if (entry.isIntersecting) {
+      observer.unobserve(entry.target);
+      await throttledGetRenteeInfo();
+      observer.observe(entry.target);
+    }
+  };
+
   useEffect(() => {
-    const onLoad = async () => {
-      const loadedRentees = await loadRenteeList({
-        keyword: searchParams.get("keyword"),
-        pageIndex: pageIndex,
-        pageSize: pageSize,
-      });
-
-      if (loadedRentees.length !== 0) {
-        setRentees((rentees) => [...rentees, ...loadedRentees]);
-        setPageIndex((pageIndex) => pageIndex + 1);
-      } else {
-        setLastPage(true);
-      }
-    };
-
-    const onIntersect = async ([entry], observer) => {
-      if (entry.isIntersecting) {
-        observer.unobserve(entry.target);
-        await onLoad();
-        observer.observe(entry.target);
-      }
-    };
-
     let observer;
+
     if (target) {
       observer = new IntersectionObserver(onIntersect, {
         threshold: 0.5,
@@ -85,7 +89,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
           />
         ))}
       </ResultBox>
-      {lastPage !== true ? (
+      {lastPage !== true && (
         <div ref={target} style={{ padding: "20px" }}>
           <ReactLoading
             type="spin"
@@ -94,7 +98,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
             height="28px"
           />
         </div>
-      ) : undefined}
+      )}
     </Body>
   );
 }
