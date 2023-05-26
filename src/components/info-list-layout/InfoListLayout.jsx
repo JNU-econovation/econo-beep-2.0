@@ -1,26 +1,27 @@
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
-import useThrottle from "../../hooks/useThrottle";
 import SearchBar from "@/components/common/SearchBar";
 import RenteeInfo from "@/components/common/RenteeInfo";
 import Body from "@/styles/Body";
 import theme from "@/styles/Theme";
 import PageTitle from "@/components/common/PageTitle";
 import InfoListHeader from "@/components/header/InfoListHeader";
+
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
-  const target = useRef(null);
   const [searchParams, _] = useSearchParams();
-
-  const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 8;
+  const [pageIndex, setPageIndex] = useState(0);
+  const [rentees, setRentees] = useState([]);
   const [lastPage, setLastPage] = useState(false);
 
-  const [rentees, setRentees] = useState([]);
+  const observer = useIntersectionObserver(() => {setPageIndex(pageIndex => pageIndex + 1)});
+  const targetRef = useRef(null);
 
   const getRenteeInfo = async () => {
     const loadedRentees = await loadRenteeList({
@@ -29,35 +30,22 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       pageSize: pageSize,
     });
 
-    if (loadedRentees.length !== 0) {
-      setRentees((rentees) => [...rentees, ...loadedRentees]);
-      setPageIndex((pageIndex) => pageIndex + 1);
-    } else {
+    setRentees((rentees) => [...rentees, ...loadedRentees]);
+    if (loadedRentees.length === 0) {
       setLastPage(true);
     }
   };
 
-  const throttledGetRenteeInfo = useThrottle(getRenteeInfo(), 500);
-
-  const onIntersect = async ([entry], observer) => {
-    if (entry.isIntersecting) {
-      observer.unobserve(entry.target);
-      await throttledGetRenteeInfo();
-      observer.observe(entry.target);
+  useEffect(() => {
+    const unobserve = observer.observe(targetRef.current);
+    return () => {
+      observer && unobserve();
     }
-  };
+  }, [targetRef])
 
   useEffect(() => {
-    let observer;
-
-    if (target) {
-      observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.5,
-      });
-      observer.observe(target.current);
-    }
-    return () => observer && observer.disconnect();
-  }, [target, pageIndex, loadRenteeList, searchParams]);
+    if (!lastPage) getRenteeInfo();
+  }, [pageIndex, lastPage, pageSize, searchParams])
 
   return (
     <Body>
@@ -90,7 +78,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
         ))}
       </ResultBox>
       {lastPage !== true && (
-        <div ref={target} style={{ padding: "20px" }}>
+        <div ref={targetRef} style={{ padding: "20px" }}>
           <ReactLoading
             type="spin"
             color={theme.firstGray}

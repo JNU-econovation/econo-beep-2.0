@@ -47,16 +47,16 @@ const loadDeviceList = async ({ keyword, pageIndex, pageSize }) => {
 };
 
 const loadRenteeDetail = async (renteeId) => {
-  const localStorage = window.localStorage;
+  // const localStorage = window.localStorage;
 
   const response = await axios.get(
     import.meta.env.VITE_BEEP_API + "/api/rentees/" + renteeId,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
+    // {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    //   },
+    // }
   );
 
   return response.data;
