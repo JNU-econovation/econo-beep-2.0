@@ -8,14 +8,27 @@ function PageBannerSlider() {
     {
       id: 1,
       url: "https://econovation.kr/about",
-      bgColor: "black",
+      background: "black",
       text: "ECONOVATION",
     },
     {
       id: 2,
       url: "https://econovation.kr/about",
-      bgColor: "#2269fa",
+      background: "#2269fa",
       text: "T-econo",
+    },
+    {
+      id: 3,
+      url: "https://www.youtube.com/channel/UCepdmgc4w5EQIc1J0lqXVtA/featured",
+      background: "#c4302b",
+      text: "youtube",
+    },
+    {
+      id: 4,
+      url: "https://www.instagram.com/cnu_econovation/",
+      background:
+        "radial-gradient(circle at 10% 400%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
+      text: "instagram",
     },
   ];
 
@@ -24,18 +37,20 @@ function PageBannerSlider() {
       dots={true}
       arrows={false}
       infinite={true}
-      speed={500}
+      speed={1000}
       slidesToShow={1}
       slidesToScroll={1}
       autoplay={true}
-      autoplaySpeed={2500}
+      autoplaySpeed={3000}
       pauseOnHover={true}
     >
       {bannerInfos.map((item) => (
         <PageBanner
           key={item.id}
-          bgColor={item.bgColor}
-          onClick={() => { window.open(item.url, "_blank"); }}
+          background={item.background}
+          onClick={() => {
+            window.open(item.url, "_blank");
+          }}
         >
           <PageText> {item.text} </PageText>
         </PageBanner>
@@ -66,10 +81,9 @@ const StyledSlider = styled(Slider)`
     position: absolute;
     text-align: end;
 
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 
-    width: 100px;
     height: 30%;
   }
 
@@ -100,7 +114,7 @@ const PageBanner = styled.div`
   width: 100%;
   height: 100px;
 
-  background-color: ${(props) => props.bgColor};
+  background: ${(props) => props.background};
   border-radius: 20px;
 
   display: flex;
