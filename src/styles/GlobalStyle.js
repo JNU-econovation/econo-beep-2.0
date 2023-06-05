@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     max-width: 100%;
     min-height: calc(var(--vh, 1vh) * 100);
     overflow-x: hidden;
@@ -27,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     padding: 0;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
   }
 
   a {
