@@ -1,19 +1,16 @@
-import axios from "axios";
-const localStorage = window.localStorage;
+import ApiController from "./ApiController";
 
-const rentRentee = async (id) => {
-  return await axios.request({
-    url: import.meta.env.VITE_BEEP_API + "/api/rentees/" + id + "/rent",
-    method: "put",
-    headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+const rentRentee = async (renteeId) => {
+  return await ApiController({
+    url: `/api/rentees/${renteeId}/rent`,
+    method: "PUT",
   });
 };
 
-const returnRentee = async (id) => {
-  return await axios.request({
-    url: import.meta.env.VITE_BEEP_API + "/api/rentees/" + id + "/return",
-    method: "put",
-    headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+const returnRentee = async (renteeId) => {
+  return await ApiController({
+    url: `/api/rentees/${renteeId}/return`,
+    method: "PUT",
   });
 };
 

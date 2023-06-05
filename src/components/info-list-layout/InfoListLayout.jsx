@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import { useSearchParams } from "react-router-dom";
+import { PropTypes } from "prop-types";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 import SearchBar from "@/components/common/SearchBar";
@@ -20,7 +21,9 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const [rentees, setRentees] = useState([]);
   const [lastPage, setLastPage] = useState(false);
 
-  const observer = useIntersectionObserver(() => {setPageIndex(pageIndex => pageIndex + 1)});
+  const observer = useIntersectionObserver(() => {
+    setPageIndex((pageIndex) => pageIndex + 1);
+  });
   const targetRef = useRef(null);
 
   const getRenteeInfo = async () => {
@@ -40,12 +43,12 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
     const unobserve = observer.observe(targetRef.current);
     return () => {
       observer && unobserve();
-    }
-  }, [targetRef])
+    };
+  }, [targetRef]);
 
   useEffect(() => {
     if (!lastPage) getRenteeInfo();
-  }, [pageIndex, lastPage, pageSize, searchParams])
+  }, [pageIndex, lastPage, pageSize, searchParams]);
 
   return (
     <Body>
@@ -107,5 +110,11 @@ const ResultBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+InfoListLayout.propTypes = {
+  listType: PropTypes.string.isRequired,
+  searchApiUrl: PropTypes.string.isRequired,
+  loadRenteeList: PropTypes.func.isRequired,
+};
 
 export default InfoListLayout;

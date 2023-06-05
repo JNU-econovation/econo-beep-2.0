@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { HelmetProvider } from "react-helmet-async";
+import { CookiesProvider } from "react-cookie";
 
 import use100vh from "./hooks/use100vh";
 import routes from "@/routes";
@@ -19,18 +20,17 @@ import MyPage from "@/pages/MyPage";
 
 function AppRouter() {
   use100vh();
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path="/beep" element={<Home />} />
         <Route path={routes.searchAll} element={<SearchAll />} />
         <Route path={routes.books} element={<Books />} />
         <Route path={routes.device} element={<Device />} />
         <Route path={`${routes.detail}/:id`} element={<Detail />} />
         <Route path={routes.manager} element={<Manager />} />
         <Route path={routes.myPage} element={<MyPage />} />
+        <Route path="*" element={<div>error</div>} />
       </Routes>
     </BrowserRouter>
   );
@@ -39,12 +39,14 @@ function AppRouter() {
 function App() {
   return (
     <HelmetProvider>
-      <StyledThemeProvider theme={Theme}>
-        <MuiThemeProvider theme={muiTheme}>
-          <GlobalStyle />
-          <AppRouter />
-        </MuiThemeProvider>
-      </StyledThemeProvider>
+      <CookiesProvider>
+        <StyledThemeProvider theme={Theme}>
+          <MuiThemeProvider theme={muiTheme}>
+            <GlobalStyle />
+            <AppRouter />
+          </MuiThemeProvider>
+        </StyledThemeProvider>
+      </CookiesProvider>
     </HelmetProvider>
   );
 }

@@ -1,121 +1,79 @@
-import axios from "axios";
-
-const localStorage = window.localStorage;
+import ApiController from "./ApiController";
 
 const loadBooks = async ({ keyword, sort, pageIndex, pageSize }) => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/management/books",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-      params: {
-        name: keyword,
-        sort: sort,
-        pageIndex: pageIndex,
-        pageSize: pageSize,
-      },
-    }
-  );
+  const response = await ApiController({
+    url: "/api/management/books",
+    method: "GET",
+    params: {
+      name: keyword,
+      sort: sort,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    },
+  });
 
   return response.data;
 };
 
 const createBook = async (bookForm) => {
-  return await axios.post(
-    import.meta.env.VITE_BEEP_API + "/api/management/books",
-    bookForm,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/books",
+    method: "POST",
+    data: bookForm,
+  });
 };
 
 const editBook = async (bookForm, bookId) => {
-  return await axios.put(
-    import.meta.env.VITE_BEEP_API + "/api/management/books/" + bookId,
-    bookForm,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/books/" + bookId,
+    method: "PUT",
+    data: bookForm,
+  });
 };
 
 const deleteBook = async (bookId) => {
-  return await axios.delete(
-    import.meta.env.VITE_BEEP_API + "/api/management/books/" + bookId,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/books/" + bookId,
+    method: "DELETE",
+  });
 };
 
 const loadDevices = async ({ keyword, sort, pageIndex, pageSize }) => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/management/devices",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-      params: {
-        name: keyword,
-        sort: sort,
-        pageIndex: pageIndex,
-        pageSize: pageSize,
-      },
-    }
-  );
+  const response = await ApiController({
+    url: "/api/management/devices",
+    method: "GET",
+    params: {
+      name: keyword,
+      sort: sort,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    },
+  });
 
   return response.data;
 };
 
 const createDevice = async (deviceForm) => {
-  return await axios.post(
-    import.meta.env.VITE_BEEP_API + "/api/management/devices",
-    deviceForm,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/devices",
+    method: "POST",
+    data: deviceForm,
+  });
 };
 
 const editDevice = async (deviceForm, deviceId) => {
-  return await axios.put(
-    import.meta.env.VITE_BEEP_API + "/api/management/devices/" + deviceId,
-    deviceForm,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/devices/" + deviceId,
+    method: "PUT",
+    data: deviceForm,
+  });
 };
 
 const deleteDevice = async (deviceId) => {
-  return await axios.delete(
-    import.meta.env.VITE_BEEP_API + "/api/management/devices/" + deviceId,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  return await ApiController({
+    url: "/api/management/devices/" + deviceId,
+    method: "DELETE",
+  });
 };
 
 export default {

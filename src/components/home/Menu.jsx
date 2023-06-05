@@ -84,8 +84,8 @@ function Menu({ setIsMenuOpen }) {
           </MenuHolder>
           <MenuHolder
             onClick={() => {
-              //navigate(routes.manager);
-              alert("권한이 없습니다.");
+              navigate(routes.manager);
+              // alert("권한이 없습니다.");
             }}
           >
             <img className="menu-icon" src={admin} alt="관리자 콘솔" />
