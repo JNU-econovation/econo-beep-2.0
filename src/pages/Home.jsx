@@ -1,18 +1,20 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import {isMobile} from "react-device-detect";
 
 import Body from "@/styles/Body";
 import PageTitle from "@/components/common/PageTitle";
 import SearchBar from "@/components/common/SearchBar";
 import routes from "@/routes";
 import LogoStyle from "@/styles/LogoStyle";
+
 import PageBannerSlider from "@/components/home/PageBannerSlider";
-import HomeHeader from "@/components/header/HomeHeader";
+import HomeMobileHeader from "@/components/header/HomeMobileHeader";
+import DesktopHeader from "@/components/header/DesktopHeader";
 import Menu from "@/components/home/Menu";
 
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <>
       {isMenuOpen ? (
@@ -21,7 +23,7 @@ function Home() {
         <Body>
           <PageTitle title="Home" />
           <MainPage>
-            <HomeHeader setIsMenuOpen={setIsMenuOpen} />
+            {isMobile ? <HomeMobileHeader setIsMenuOpen={setIsMenuOpen} /> : <DesktopHeader />}
             <SearchBarBox>
               <Logo>econoBeep</Logo>
               <SearchBar searchApiUrl={routes.searchAll} placeholder="검색" />
