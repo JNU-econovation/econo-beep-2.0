@@ -2,15 +2,18 @@ import axios from "axios";
 import { getCookie } from "../utils/cookie";
 
 const apiController = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_API,
+  baseURL: import.meta.env.VITE_BEEP_API,
 });
 
 apiController.interceptors.request.use(
   function (config) {
     config.headers["Content-Type"] = "application/json";
-    config.headers["Authorization"] = `Bearer ${localStorage?.getItem(
-      "accessToken"
-    )}`;
+
+    if (localStorage.getItem("accessToken")) {
+      config.headers["Authorization"] = `Bearer ${localStorage?.getItem(
+        "accessToken"
+      )}`;
+    }
     return config;
   },
   function (error) {

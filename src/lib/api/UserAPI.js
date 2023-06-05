@@ -1,55 +1,46 @@
-import axios from "axios";
-
-const localStorage = window.localStorage;
+import ApiController from "./ApiController";
 
 const loadProfile = async () => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/user/my/profile",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }
-  );
+  const response = await ApiController({
+    url: "/api/user/my/profile",
+    method: "GET",
+  });
 
   return response.data;
 };
 
 const loadRented = async ({ userId }) => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/user/" + userId + "/rents"
-  );
+  const response = await ApiController({
+    url: `/api/user/${userId}/rents`,
+    method: "GET",
+  });
 
   return response.data;
 };
 
 const loadReturned = async ({ userId }) => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/user/" + userId + "/returns"
-  );
+  const response = await ApiController({
+    url: `/api/user/${userId}/returns`,
+    method: "GET",
+  });
 
   return response.data;
 };
 
 const loadBookmark = async ({ userId }) => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/user/" + userId + "/bookmarks"
-  );
+  const response = await ApiController({
+    url: `/api/user/${userId}/bookmarks`,
+    method: "GET",
+  });
 
   return response.data;
 };
 
 const loadUserRole = async () => {
-  const response = await axios.get(
-    import.meta.env.VITE_BEEP_API + "/api/user/my/role",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("accessToken"),
-      },
-    }
-  );
+  const response = await ApiController({
+    url: "/api/user/my/role",
+    method: "GET",
+  });
 
   return response.data;
 };
