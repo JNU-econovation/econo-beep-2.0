@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import UserAPI from "@/lib/api/UserAPI";
 
 import Body from "@/styles/Body";
-import PageTitle from "@/components/common/PageTitle";
+import PageTitle from "@/components/common/layout/PageTitle";
 import MyPageHeader from "@/components/header/MyPageHeader";
 import RenteeInfo from "@/components/common/RenteeInfo";
 import Profile from "@/components/my-page/Profile";

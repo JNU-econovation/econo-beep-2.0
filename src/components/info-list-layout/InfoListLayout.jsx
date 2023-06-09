@@ -9,7 +9,7 @@ import SearchBar from "@/components/common/SearchBar";
 import RenteeInfo from "@/components/common/RenteeInfo";
 import Body from "@/styles/Body";
 import theme from "@/styles/Theme";
-import PageTitle from "@/components/common/PageTitle";
+import PageTitle from "@/components/common/layout/PageTitle";
 import InfoListHeader from "@/components/header/InfoListHeader";
 
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
