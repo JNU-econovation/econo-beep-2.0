@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderSection from "../../styles/HeaderSection";
-import LogoStyle from "../../styles/LogoStyle";
+import HeaderSection from "../../../styles/HeaderSection";
+import LogoStyle from "../../../styles/LogoStyle";
 import { useNavigate } from "react-router-dom";
-import routes from "../../routes";
+import routes from "../../../routes";
 
 const Container = styled(HeaderSection)`
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.03);
@@ -33,7 +33,7 @@ const Button = styled.button`
   background-color: ${({ theme }) => theme.bgColor};
 `;
 
-function DesktopHeader() {
+function DesktopNavBar() {
   const navigate = useNavigate();
   return (
     <Container>
@@ -47,4 +47,4 @@ function DesktopHeader() {
   );
 }
 
-export default DesktopHeader;
+export default DesktopNavBar;
