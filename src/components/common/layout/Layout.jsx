@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { isMobile } from "react-device-detect";
+import { PropTypes } from "prop-types";
 
 import PageTitle from "@/components/common/layout/PageTitle";
 import DesktopNavBar from "@/components/common/layout/DesktopNavBar";
@@ -38,5 +39,19 @@ function Layout({ title, pageType, is100vh, children }) {
     </>
   );
 }
+
+Layout.propTypes = {
+  title: PropTypes.string,
+  pageType: PropTypes.string,
+  is100vh: PropTypes.bool,
+  children: PropTypes.node,
+};
+
+Layout.defaultTypes = {
+  title: undefined,
+  pageType: undefined,
+  is100vh: false,
+  children: undefined,
+};
 
 export default Layout;
