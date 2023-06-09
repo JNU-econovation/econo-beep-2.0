@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import PageTitle from "./PageTitle";
+import { isMobile } from "react-device-detect";
+
+import PageTitle from "@/components/common/layout/PageTitle";
+import DesktopNavBar from "@/components/common/layout/DesktopNavBar";
+import MobileNavBar from "@/components/common/layout/MobileNavBar";
 
 const Body = styled.section`
   width: 100vw;
@@ -19,15 +23,20 @@ const Body = styled.section`
 
   &is100vh {
     height: calc(var(--vh, 1vh) * 100);
+    overflow-y: hidden;
   }
 `;
 
-function Layout({ title, is100vh, mobileNavBar, children }) {
+function Layout({ title, is100vh, children }) {
   return (
     <>
       <PageTitle title={title} />
       <Body is100vh={is100vh}>
-        {mobileNavBar}
+        {isMobile ? (
+          <MobileNavBar title={title && !"Home"} />
+        ) : (
+          <DesktopNavBar />
+        )}
         {children}
       </Body>
     </>
