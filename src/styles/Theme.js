@@ -24,7 +24,7 @@ const Theme = {
 
   fontFamilyLogo: "'Rajdhani', sans-serif",
 
-  headerButtonSize: "32px",
+  headerButtonSize: "2rem",
   managerBgColor: "#F9F8F9",
 
   managerBoxShadow: "0px -5px 20px 4px rgba(0, 0, 0, 0.02)",
