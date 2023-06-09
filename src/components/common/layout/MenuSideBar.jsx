@@ -58,7 +58,7 @@ const MenuBtnSection = styled.div`
   height: 100%;
 `;
 
-function MenuModal({ isMenuOpen, setIsMenuOpen }) {
+function MenuSideBar({ isMenuOpen, setIsMenuOpen }) {
   const navigate = useNavigate();
 
   const showPreparingAlert = () => {
@@ -160,4 +160,4 @@ function MenuModal({ isMenuOpen, setIsMenuOpen }) {
   );
 }
 
-export default React.memo(MenuModal);
+export default React.memo(MenuSideBar);

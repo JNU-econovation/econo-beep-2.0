@@ -5,7 +5,7 @@ import { BiMenu } from "react-icons/bi";
 
 import BluePurpleGradient from "@/styles/BluePurpleGradient";
 import ModalPortal from "@/components/common/ModalPortal";
-import MenuModal from "@/components/common/layout/MenuModal";
+import MenuSideBar from "@/components/common/layout/MenuSideBar";
 
 const Container = styled.div`
   width: 100%;
@@ -51,7 +51,7 @@ function MobileNavBar({ title }) {
 
       {isMenuOpen && (
         <ModalPortal>
-          <MenuModal isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          <MenuSideBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         </ModalPortal>
       )}
     </Container>
