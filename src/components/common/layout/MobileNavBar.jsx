@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { BiMenu } from "react-icons/bi";
 
 import BluePurpleGradient from "@/styles/BluePurpleGradient";
-import ModalPortal from "@/components/common/ModalPortal";
+import ModalPortal from "@/components/common/CreatePortal";
 import MenuSideBar from "@/components/common/layout/MenuSideBar";
 
 const Container = styled.div`
