@@ -5,13 +5,10 @@ import { useSearchParams } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
+import Layout from "@/components/common/layout/Layout";
 import SearchBar from "@/components/common/SearchBar";
 import RenteeInfo from "@/components/common/RenteeInfo";
-import Body from "@/styles/Body";
 import theme from "@/styles/Theme";
-import PageTitle from "@/components/common/layout/PageTitle";
-import InfoListHeader from "@/components/header/InfoListHeader";
-
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
@@ -51,15 +48,14 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   }, [pageIndex, lastPage, pageSize, searchParams]);
 
   return (
-    <Body>
-      <PageTitle
-        title={
-          searchParams.get("keyword")
-            ? searchParams.get("keyword")
-            : SEARCH_TYPES.KOREAN[listType]
-        }
-      />
-      <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
+    <Layout
+      title={
+        searchParams.get("keyword")
+          ? searchParams.get("keyword")
+          : SEARCH_TYPES.KOREAN[listType]
+      }
+      pageType={SEARCH_TYPES.KOREAN[listType]}
+    >
       <SearchBarHolder>
         <SearchBar
           placeholder={SEARCH_TYPES.KOREAN[listType]}
@@ -90,21 +86,22 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
           />
         </div>
       )}
-    </Body>
+    </Layout>
   );
 }
 
 const SearchBarHolder = styled.div`
   width: 100%;
-  max-width: 750px;
-  padding: 0 15px;
-  margin: 20px 0;
+  max-width: 800px;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
 `;
 
 const ResultBox = styled.div`
   width: 100%;
   max-width: 800px;
-  padding: 0 15px;
+  padding: 0 1rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

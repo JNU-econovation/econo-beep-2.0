@@ -27,16 +27,12 @@ const Body = styled.section`
   }
 `;
 
-function Layout({ title, is100vh, children }) {
+function Layout({ title, pageType, is100vh, children }) {
   return (
     <>
       <PageTitle title={title} />
       <Body is100vh={is100vh}>
-        {isMobile ? (
-          <MobileNavBar title={title && !"Home"} />
-        ) : (
-          <DesktopNavBar />
-        )}
+        {isMobile ? <MobileNavBar title={pageType} /> : <DesktopNavBar />}
         {children}
       </Body>
     </>

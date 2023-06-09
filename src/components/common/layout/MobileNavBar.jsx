@@ -4,8 +4,8 @@ import { PropTypes } from "prop-types";
 import { BiMenu } from "react-icons/bi";
 
 import BluePurpleGradient from "@/styles/BluePurpleGradient";
-import ModalPortal from "../ModalPortal";
-import MenuModal from "../../home/MenuModal";
+import ModalPortal from "@/components/common/ModalPortal";
+import MenuModal from "@/components/common/layout/MenuModal";
 
 const Container = styled.div`
   width: 100%;
@@ -17,6 +17,15 @@ const Container = styled.div`
 
   position: relative;
   z-index: 0;
+`;
+
+const PageType = styled.div`
+  padding-left: 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: ${(props) => props.theme.bluePurple};
+  color: transparent;
+  -webkit-background-clip: text;
 `;
 
 const OpenMenuButton = styled.div`
@@ -33,7 +42,7 @@ function MobileNavBar({ title }) {
 
   return (
     <Container>
-      <div>{title}</div>
+      <PageType>{title}</PageType>
 
       <OpenMenuButton onClick={() => setIsMenuOpen(true)}>
         <BluePurpleGradient />
@@ -50,7 +59,7 @@ function MobileNavBar({ title }) {
 }
 
 MobileNavBar.propTypes = {
-  title: PropTypes.strings,
+  title: PropTypes.string,
 };
 
 MobileNavBar.defaultProps = {

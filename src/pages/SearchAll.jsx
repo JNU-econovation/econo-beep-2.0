@@ -1,3 +1,4 @@
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import routes from "@/routes";
 import InfoListLayout from "@/components/info-list-layout/InfoListLayout";

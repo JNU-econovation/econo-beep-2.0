@@ -5,7 +5,7 @@ import { Backdrop } from "@mui/material";
 import { BiX } from "react-icons/bi";
 
 import routes from "@/routes";
-import MenuButton from "@/components/home/MenuButton";
+import MenuButton from "@/components/common/layout/MenuButton";
 
 const Container = styled.div`
   width: 250px;
@@ -71,7 +71,6 @@ function MenuModal({ isMenuOpen, setIsMenuOpen }) {
       imgSrc: "https://img.icons8.com/color/48/home--v1.png",
       handleClick: () => {
         navigate(routes.home);
-        setIsMenuOpen(false);
       },
     },
     {
@@ -146,9 +145,13 @@ function MenuModal({ isMenuOpen, setIsMenuOpen }) {
         <MenuBtnSection>
           {MENU_INFO.map((menu) => (
             <MenuButton
+              key={menu.type}
               type={menu.type}
               imgSrc={menu.imgSrc}
-              handleClick={menu.handleClick}
+              handleClick={() => {
+                menu.handleClick();
+                setIsMenuOpen(false);
+              }}
             />
           ))}
         </MenuBtnSection>
@@ -157,4 +160,4 @@ function MenuModal({ isMenuOpen, setIsMenuOpen }) {
   );
 }
 
-export default MenuModal;
+export default React.memo(MenuModal);
