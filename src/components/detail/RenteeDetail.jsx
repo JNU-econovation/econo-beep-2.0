@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Wave from "react-wavify";
-// import { useColor } from "color-thief-react";
+import { useColor } from "color-thief-react";
 
 import { IoMdInformation } from "react-icons/io";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
@@ -27,12 +27,7 @@ function RenteeDetail({
   const [noteOpen, setNoteOpen] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
   const [unbookmarkableNote, setUnbookmarkableNote] = useState(false);
-
-  // const { data, loading, error } = useColor(thumbnailUrl, "hex", {
-  //   crossOrigin: "Anonymous",
-  // });
-
-  // TODO: color-thief-react가 아닌 color thief 패키지 사용해 색상 감지 후 Wave에 전달
+  const thumbnailRef = useRef();
 
   const onBookmarkClick = async () => {
     if (isBookmarked !== false) {
@@ -58,10 +53,26 @@ function RenteeDetail({
     setIsBookmarked(bookmark);
   }, [bookmark]);
 
+  const { data: thumbnailMainColor } = useColor(
+    thumbnailUrl && thumbnailRef.current.src,
+    "hex",
+    {
+      crossOrigin: "Anonymous",
+    }
+  );
+
+  useEffect(() => {
+    if (!thumbnailUrl) return;
+    console.log(thumbnailRef.current.src);
+  }, [thumbnailUrl, thumbnailRef]);
+
   return (
     <>
       <BasicInfoSection>
-        <RenteeImg src={import.meta.env.VITE_BEEP_API + thumbnailUrl} />
+        <RenteeImg
+          ref={thumbnailRef}
+          src={import.meta.env.VITE_BEEP_API + thumbnailUrl}
+        />
         <InfoSection>
           <TextInfoSection>
             <div className="publisher">{bookPublisherName}</div>
@@ -99,10 +110,10 @@ function RenteeDetail({
         <WaveSection>
           <Wave
             mask="url(#mask)"
-            // fill={data}
+            fill={thumbnailMainColor}
             paused={false}
             options={{ height: 15, speed: 0.1, amplitude: 10, points: 3 }}
-            filter="brightness(0.85)"
+            filter="brightness(0.95)"
           >
             <defs>
               <linearGradient

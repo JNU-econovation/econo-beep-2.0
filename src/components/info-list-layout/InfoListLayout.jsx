@@ -13,7 +13,7 @@ import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const [searchParams, _] = useSearchParams();
-  const pageSize = 8;
+  const PAGE_SIZE = 8;
   const [pageIndex, setPageIndex] = useState(0);
   const [rentees, setRentees] = useState([]);
   const [lastPage, setLastPage] = useState(false);
@@ -27,12 +27,13 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
     const loadedRentees = await loadRenteeList({
       keyword: searchParams.get("keyword"),
       pageIndex: pageIndex,
-      pageSize: pageSize,
+      pageSize: PAGE_SIZE,
     });
 
-    setRentees((rentees) => [...rentees, ...loadedRentees]);
     if (loadedRentees.length === 0) {
       setLastPage(true);
+    } else {
+      setRentees((rentees) => [...rentees, ...loadedRentees]);
     }
   };
 
@@ -45,7 +46,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 
   useEffect(() => {
     if (!lastPage) getRenteeInfo();
-  }, [pageIndex, lastPage, pageSize, searchParams]);
+  }, [pageIndex, lastPage, searchParams]);
 
   return (
     <Layout
@@ -62,7 +63,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
           searchApiUrl={searchApiUrl}
         />
       </SearchBarHolder>
-      <ResultBox>
+      <SearchResultContainer>
         {rentees.map((rentee) => (
           <RenteeInfo
             key={rentee?.id}
@@ -75,7 +76,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
             rentState={rentee?.rentState}
           />
         ))}
-      </ResultBox>
+      </SearchResultContainer>
       {lastPage !== true && (
         <div ref={targetRef} style={{ padding: "20px" }}>
           <ReactLoading
@@ -97,7 +98,7 @@ const SearchBarHolder = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ResultBox = styled.div`
+const SearchResultContainer = styled.div`
   width: 100%;
   max-width: 800px;
   padding: 0 1rem;

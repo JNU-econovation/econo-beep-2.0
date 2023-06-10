@@ -1,14 +1,37 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import Body from "@/styles/Body";
-import PageTitle from "@/components/common/layout/PageTitle";
-import DetailHeader from "@/components/header/DetailHeader";
 import RenteeDetail from "@/components/detail/RenteeDetail";
 import RentalHistoryList from "@/components/detail/RentalHistoryList";
 import RentButton from "@/components/detail/RentButton";
 import RenteeAPI from "@/lib/api/RenteeAPI";
+import Layout from "@/components/common/layout/Layout";
+
+const RentalHistoryContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  padding: 30px;
+`;
+
+const RentTopSection = styled.div`
+  width: 100%;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid ${(props) => props.theme.borderGray};
+
+  .title {
+    color: ${(props) => props.theme.black};
+    font-weight: 700;
+    font-size: 20px;
+  }
+`;
 
 function Detail() {
   const params = useParams();
@@ -34,9 +57,7 @@ function Detail() {
   }, [localStorage, reload, renteeId]);
 
   return (
-    <Body>
-      <PageTitle title="상세 정보" />
-      <DetailHeader />
+    <Layout title={renteeDetail?.name}>
       <RenteeDetail
         id={renteeDetail?.id}
         type={renteeDetail?.type}
@@ -51,7 +72,8 @@ function Detail() {
         bookmarkCount={renteeDetail?.bookmarkCount}
         setReload={() => setReload((reload) => !reload)}
       />
-      <RentSection>
+
+      <RentalHistoryContainer>
         <RentTopSection>
           <div className="title">대출 기록</div>
           <RentButton
@@ -64,34 +86,9 @@ function Detail() {
           rentalHistories={rentalHistories}
           rentState={renteeDetail?.rentState}
         />
-      </RentSection>
-    </Body>
+      </RentalHistoryContainer>
+    </Layout>
   );
 }
-
-const RentSection = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 600px;
-  padding: 30px;
-`;
-
-const RentTopSection = styled.div`
-  width: 100%;
-  padding-bottom: 15px;
-  margin-bottom: 10px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  border-bottom: 1px solid ${(props) => props.theme.borderGray};
-
-  .title {
-    color: ${(props) => props.theme.black};
-    font-weight: 700;
-    font-size: 20px;
-  }
-`;
 
 export default Detail;
