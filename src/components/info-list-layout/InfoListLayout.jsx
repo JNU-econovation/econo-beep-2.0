@@ -5,18 +5,15 @@ import { useSearchParams } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
+import Layout from "@/components/common/layout/Layout";
 import SearchBar from "@/components/common/SearchBar";
-import RenteeInfo from "@/components/common/RenteeInfo";
-import Body from "@/styles/Body";
+import RenteeInfoRow from "@/components/common/RenteeInfoRow";
 import theme from "@/styles/Theme";
-import PageTitle from "@/components/common/PageTitle";
-import InfoListHeader from "@/components/header/InfoListHeader";
-
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
 function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
   const [searchParams, _] = useSearchParams();
-  const pageSize = 8;
+  const PAGE_SIZE = 8;
   const [pageIndex, setPageIndex] = useState(0);
   const [rentees, setRentees] = useState([]);
   const [lastPage, setLastPage] = useState(false);
@@ -30,12 +27,13 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
     const loadedRentees = await loadRenteeList({
       keyword: searchParams.get("keyword"),
       pageIndex: pageIndex,
-      pageSize: pageSize,
+      pageSize: PAGE_SIZE,
     });
 
-    setRentees((rentees) => [...rentees, ...loadedRentees]);
     if (loadedRentees.length === 0) {
       setLastPage(true);
+    } else {
+      setRentees((rentees) => [...rentees, ...loadedRentees]);
     }
   };
 
@@ -48,27 +46,26 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 
   useEffect(() => {
     if (!lastPage) getRenteeInfo();
-  }, [pageIndex, lastPage, pageSize, searchParams]);
+  }, [pageIndex, lastPage, searchParams]);
 
   return (
-    <Body>
-      <PageTitle
-        title={
-          searchParams.get("keyword")
-            ? searchParams.get("keyword")
-            : SEARCH_TYPES.KOREAN[listType]
-        }
-      />
-      <InfoListHeader listType={SEARCH_TYPES.KOREAN[listType]} />
+    <Layout
+      title={
+        searchParams.get("keyword")
+          ? searchParams.get("keyword")
+          : SEARCH_TYPES.KOREAN[listType]
+      }
+      pageType={SEARCH_TYPES.KOREAN[listType]}
+    >
       <SearchBarHolder>
         <SearchBar
           placeholder={SEARCH_TYPES.KOREAN[listType]}
           searchApiUrl={searchApiUrl}
         />
       </SearchBarHolder>
-      <ResultBox>
+      <SearchResultContainer>
         {rentees.map((rentee) => (
-          <RenteeInfo
+          <RenteeInfoRow
             key={rentee?.id}
             thumbnailUrl={import.meta.env.VITE_BEEP_API + rentee.thumbnailUrl}
             id={rentee?.id}
@@ -79,7 +76,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
             rentState={rentee?.rentState}
           />
         ))}
-      </ResultBox>
+      </SearchResultContainer>
       {lastPage !== true && (
         <div ref={targetRef} style={{ padding: "20px" }}>
           <ReactLoading
@@ -90,21 +87,21 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
           />
         </div>
       )}
-    </Body>
+    </Layout>
   );
 }
 
 const SearchBarHolder = styled.div`
   width: 100%;
-  max-width: 750px;
-  padding: 0 15px;
-  margin: 20px 0;
+  max-width: 800px;
+  padding: 1rem;
 `;
 
-const ResultBox = styled.div`
+const SearchResultContainer = styled.div`
   width: 100%;
   max-width: 800px;
-  padding: 0 15px;
+  padding: 0 1rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -6,7 +6,7 @@ const routes = {
   device: "/device",
   manager: "/manager",
   detail: "/detail",
-  myPage: "/mypage",
+  myPage: "/my-page",
 };
 
 Object.freeze(routes);

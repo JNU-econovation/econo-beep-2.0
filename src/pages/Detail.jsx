@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 
-import Body from "@/styles/Body";
-import PageTitle from "@/components/common/PageTitle";
-import DetailHeader from "@/components/header/DetailHeader";
-import RenteeDetail from "@/components/detail/RenteeDetail";
-import RentalHistoryList from "@/components/detail/RentalHistoryList";
-import RentButton from "@/components/detail/RentButton";
 import RenteeAPI from "@/lib/api/RenteeAPI";
+import Layout from "@/components/common/layout/Layout";
+import RenteeInfo from "../components/detail/RenteeInfo";
+import RentalInfo from "../components/detail/RentalInfo";
+import RentalHistory from "../components/detail/RentalHistory";
 
 function Detail() {
   const params = useParams();
@@ -34,10 +31,8 @@ function Detail() {
   }, [localStorage, reload, renteeId]);
 
   return (
-    <Body>
-      <PageTitle title="상세 정보" />
-      <DetailHeader />
-      <RenteeDetail
+    <Layout title={renteeDetail?.name}>
+      <RenteeInfo
         id={renteeDetail?.id}
         type={renteeDetail?.type}
         thumbnailUrl={renteeDetail?.thumbnailUrl}
@@ -45,53 +40,29 @@ function Detail() {
         bookArea={renteeDetail?.bookArea}
         bookAuthorName={renteeDetail?.bookAuthorName}
         bookPublisherName={renteeDetail?.bookPublisherName}
-        rentCount={renteeDetail?.rentCount}
         note={renteeDetail?.note}
-        bookmark={renteeDetail?.isBookmarked}
-        bookmarkCount={renteeDetail?.bookmarkCount}
-        setReload={() => setReload((reload) => !reload)}
+        isBookmarked={renteeDetail?.isBookmarked}
+        setReload={() => {
+          setReload((reload) => !reload);
+        }}
       />
-      <RentSection>
-        <RentTopSection>
-          <div className="title">대출 기록</div>
-          <RentButton
-            currentRentState={renteeDetail?.rentState}
-            renteeId={renteeDetail?.id}
-            setReload={() => setReload((reload) => !reload)}
-          />
-        </RentTopSection>
-        <RentalHistoryList
-          rentalHistories={rentalHistories}
-          rentState={renteeDetail?.rentState}
-        />
-      </RentSection>
-    </Body>
+
+      <RentalInfo
+        id={renteeDetail?.id}
+        bookmarkCount={renteeDetail?.bookmarkCount}
+        rentCount={renteeDetail?.rentCount}
+      />
+
+      <RentalHistory
+        id={renteeDetail?.id}
+        rentState={renteeDetail?.rentState}
+        rentalHistories={rentalHistories}
+        setReload={() => {
+          setReload((reload) => !reload);
+        }}
+      />
+    </Layout>
   );
 }
-
-const RentSection = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 600px;
-  padding: 30px;
-`;
-
-const RentTopSection = styled.div`
-  width: 100%;
-  padding-bottom: 15px;
-  margin-bottom: 10px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  border-bottom: 1px solid ${(props) => props.theme.borderGray};
-
-  .title {
-    color: ${(props) => props.theme.black};
-    font-weight: 700;
-    font-size: 20px;
-  }
-`;
 
 export default Detail;

@@ -9,7 +9,11 @@ function PageTitle({ title }) {
   );
 }
 PageTitle.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+};
+
+PageTitle.defaultProps = {
+  title: "로딩 중",
 };
 
 export default PageTitle;

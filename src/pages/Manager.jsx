@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Body from "@/styles/Body";
 
-import PageTitle from "@/components/common/PageTitle";
 import ManagerTopBar from "@/components/manager/ManagerTopBar";
 import RenteeInfoList from "@/components/manager/RenteeInfoList";
 import RenteeInfoEdit from "@/components/manager/RenteeInfoEdit";
 import INITIAL_RENTEE_INFO from "@/constant/INITIAL_RENTEE_INFO";
-import ManagerHeader from "@/components/header/ManagerHeader";
 import ManagementAPI from "@/lib/api/ManagementAPI";
 import SORT_ORDER from "@/constant/SORT_ORDER";
+import Layout from "@/components/common/layout/Layout";
 
 function Manager() {
   const [isBookMode, setIsBookMode] = useState(true);
@@ -82,9 +80,7 @@ function Manager() {
   }, [isBookMode, sortOrder, reload, pageIndex]);
 
   return (
-    <Body>
-      <PageTitle title="관리자" />
-      <ManagerHeader />
+    <Layout title="관리자 콘솔" paddingBottom={true}>
       <ManagerSection>
         <ManagerTopBar
           isBookMode={isBookMode}
@@ -122,7 +118,7 @@ function Manager() {
           ) : null}
         </ManagerRenteeSection>
       </ManagerSection>
-    </Body>
+    </Layout>
   );
 }
 
