@@ -5,7 +5,7 @@ import UserAPI from "@/lib/api/UserAPI";
 import Body from "@/styles/Body";
 import PageTitle from "@/components/common/layout/PageTitle";
 import MyPageHeader from "@/components/header/MyPageHeader";
-import RenteeInfo from "@/components/common/RenteeInfo";
+import RenteeInfoRow from "@/components/common/RenteeInfoRow";
 import Profile from "@/components/my-page/Profile";
 import Button from "@/components/my-page/Button";
 
@@ -83,7 +83,7 @@ function MyPage() {
         />
         <RenteeInfoSection>
           {showRentees.map((rentee) => (
-            <RenteeInfo
+            <RenteeInfoRow
               id={rentee?.id}
               thumbnailUrl={
                 import.meta.env.VITE_BEEP_API + rentee?.thumbnailUrl

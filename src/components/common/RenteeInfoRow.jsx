@@ -3,9 +3,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "@/routes";
 import RentState from "@/components/info-list-layout/RentState";
-import RENTEE_TYPES from "@/constant/RENTEE_TYPES";
+import RenteeTypeHashtag from "@/components/common/RenteeTypeHashtag";
 
-function RenteeInfo({
+function RenteeInfoRow({
   id,
   thumbnailUrl,
   name,
@@ -28,14 +28,7 @@ function RenteeInfo({
             <RenteeAuthor>{bookAuthorName}</RenteeAuthor>
           ) : null}
           <RenteeName>{name}</RenteeName>
-          <RenteeType>
-            <div>
-              #
-              {type === RENTEE_TYPES.BOOK
-                ? RENTEE_TYPES.BOOK_AREA_KOREAN[bookArea]
-                : RENTEE_TYPES.TYPE_KOREAN[type]}
-            </div>
-          </RenteeType>
+          <RenteeTypeHashtag type={type} bookArea={bookArea} />
         </DetailInfo>
         <RentState rentState={rentState} />
       </InfoTextBox>
@@ -95,27 +88,4 @@ const RenteeName = styled.div`
   color: ${(props) => props.theme.black};
 `;
 
-const RenteeType = styled.div`
-  padding: 0;
-  display: inline-block;
-
-  border: 1px solid transparent;
-  border-radius: 20px;
-  background-image: linear-gradient(
-      ${(props) => props.theme.managerBgColor},
-      ${(props) => props.theme.bgColor}
-    ),
-    ${(props) => props.theme.bluePurple};
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-
-  div {
-    margin: 6px;
-    font-size: 10px;
-    background: ${(props) => props.theme.bluePurple};
-    color: transparent;
-    -webkit-background-clip: text;
-  }
-`;
-
-export default React.memo(RenteeInfo);
+export default React.memo(RenteeInfoRow);
