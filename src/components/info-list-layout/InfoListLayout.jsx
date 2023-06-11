@@ -94,8 +94,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
 const SearchBarHolder = styled.div`
   width: 100%;
   max-width: 800px;
-  padding: 0 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
 `;
 
 const SearchResultContainer = styled.div`

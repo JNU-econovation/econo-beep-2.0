@@ -28,12 +28,16 @@ const Body = styled.section`
   }
 `;
 
-function Layout({ title, pageType, is100vh, children }) {
+function Layout({ title, pageType, is100vh, paddingBottom, children }) {
   return (
     <>
       <PageTitle title={title} />
       <Body is100vh={is100vh}>
-        {isMobile ? <MobileNavBar title={pageType} /> : <DesktopNavBar />}
+        {isMobile ? (
+          <MobileNavBar pageType={pageType} paddingBottom={paddingBottom} />
+        ) : (
+          <DesktopNavBar />
+        )}
         {children}
       </Body>
     </>
@@ -45,6 +49,7 @@ Layout.propTypes = {
   pageType: PropTypes.string,
   is100vh: PropTypes.bool,
   children: PropTypes.node,
+  paddingBottom: PropTypes.bool,
 };
 
 Layout.defaultTypes = {
@@ -52,6 +57,7 @@ Layout.defaultTypes = {
   pageType: undefined,
   is100vh: false,
   children: undefined,
+  paddingBottom: false,
 };
 
 export default Layout;

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import routes from "../../../routes";
 
 const Container = styled(HeaderSection)`
-  margin-bottom: 1.25rem;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.03);
 `;
 
