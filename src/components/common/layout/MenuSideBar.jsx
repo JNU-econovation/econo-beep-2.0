@@ -43,6 +43,7 @@ const UserBtn = styled.button`
 
   &:hover {
     text-decoration: underline;
+    text-underline-position: under;
   }
 `;
 

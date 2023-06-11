@@ -7,7 +7,7 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 import Layout from "@/components/common/layout/Layout";
 import SearchBar from "@/components/common/SearchBar";
-import RenteeInfo from "@/components/common/RenteeInfo";
+import RenteeInfoRow from "@/components/common/RenteeInfoRow";
 import theme from "@/styles/Theme";
 import SEARCH_TYPES from "@/constant/SEARCH_TYPES";
 
@@ -65,7 +65,7 @@ function InfoListLayout({ listType, searchApiUrl, loadRenteeList }) {
       </SearchBarHolder>
       <SearchResultContainer>
         {rentees.map((rentee) => (
-          <RenteeInfo
+          <RenteeInfoRow
             key={rentee?.id}
             thumbnailUrl={import.meta.env.VITE_BEEP_API + rentee.thumbnailUrl}
             id={rentee?.id}
