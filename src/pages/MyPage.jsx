@@ -2,12 +2,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import UserAPI from "@/lib/api/UserAPI";
 
-import Body from "@/styles/Body";
-import PageTitle from "@/components/common/layout/PageTitle";
-import MyPageHeader from "@/components/header/MyPageHeader";
 import RenteeInfoRow from "@/components/common/RenteeInfoRow";
 import Profile from "@/components/my-page/Profile";
 import Button from "@/components/my-page/Button";
+import Layout from "@/components/common/layout/Layout";
 
 function MyPage() {
   const [profile, setProfile] = useState({});
@@ -64,9 +62,7 @@ function MyPage() {
   }, [userId]);
 
   return (
-    <Body>
-      <PageTitle title="마이 페이지" />
-      <MyPageHeader />
+    <Layout title={`${profile.username} 님의 마이 페이지`} paddingBottom={true}>
       <Profile profile={profile} />
       <RentSection>
         <Button
@@ -97,7 +93,41 @@ function MyPage() {
           ))}
         </RenteeInfoSection>
       </RentSection>
-    </Body>
+    </Layout>
+    // <Body>
+    //   <PageTitle title="마이 페이지" />
+    //   <MyPageHeader />
+    //   <Profile profile={profile} />
+    //   <RentSection>
+    //     <Button
+    //       numRentees={numRentees}
+    //       onRentClick={() => {
+    //         setShowRentees(rentedRentees);
+    //       }}
+    //       onReturnClick={() => {
+    //         setShowRentees(returnedRentees);
+    //       }}
+    //       onBookmarkClick={() => {
+    //         setShowRentees(bookmarkedRentees);
+    //       }}
+    //     />
+    //     <RenteeInfoSection>
+    //       {showRentees.map((rentee) => (
+    //         <RenteeInfoRow
+    //           id={rentee?.id}
+    //           thumbnailUrl={
+    //             import.meta.env.VITE_BEEP_API + rentee?.thumbnailUrl
+    //           }
+    //           type={rentee?.type}
+    //           name={rentee?.name}
+    //           bookArea={rentee?.bookArea}
+    //           bookAuthorName={rentee?.bookAuthorName}
+    //           rentState={rentee?.rentState}
+    //         />
+    //       ))}
+    //     </RenteeInfoSection>
+    //   </RentSection>
+    // </Body>
   );
 }
 
