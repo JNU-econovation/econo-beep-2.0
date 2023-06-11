@@ -1,151 +1,89 @@
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import RENT_STATES from "@/constant/RENT_STATES";
-import noProfile from "@/assets/images/no-profile.png";
+import { EpochSecondToDateObject } from "@/lib/utils/EpochConverter";
+import RentalHistoryRow from "@/components/detail/RentalHistoryRow";
+import RentButton from "@/components/detail/RentButton";
 
-function RentalHistory({
-  renterProfileImage,
-  renterName,
-  rentDate,
-  returnDate,
-  rentState,
-}) {
-  return (
-    <RentRecordSection>
-      <RentRecordLeft>
-        <img
-          className="profile-img"
-          src={
-            !renterProfileImage
-              ? noProfile
-              : import.meta.env.VITE_BEEP_API + renterProfileImage
-          }
-          alt="profile"
-        />
-        <RentRecordCenter>
-          <div className="rent-name">{renterName}</div>
-          <div className="rent-date">
-            {rentDate.getFullYear()}-{rentDate.getMonth() + 1}-
-            {rentDate.getDate()}{" "}
-            {returnDate
-              ? ` ~ ${returnDate.getFullYear()}-${
-                  returnDate.getMonth() + 1
-                }-${returnDate.getDate()}`
-              : undefined}
-          </div>
-        </RentRecordCenter>
-      </RentRecordLeft>
-      <RentRecordState value={rentState}>
-        <div className="rent-highlight" />
-        <span>{RENT_STATES.RENTAL_RECORD[rentState]}</span>
-      </RentRecordState>
-    </RentRecordSection>
-  );
-}
-
-const RentRecordSection = styled.div`
+const Container = styled.div`
   width: 100%;
-  padding: 15px 0;
+  height: 100%;
+  max-width: 600px;
+  padding: 30px;
+`;
+
+const NavBar = styled.div`
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-bottom: 0.75rem;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  position: relative;
-  z-index: -1;
+  border-bottom: 1px solid ${(props) => props.theme.borderGray};
 
-  .no-profile-img {
-    width: 35px;
-    height: 35px;
-    border-radius: 1000%;
-  }
-
-  .profile-img {
-    width: 35px;
-    height: 35px;
-    object-fit: cover;
-    border-radius: 1000%;
-  }
-`;
-
-const RentRecordLeft = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RentRecordCenter = styled.div`
-  height: 100%;
-  padding-left: 15px;
-  .rent-name {
-    padding-bottom: 5px;
+  .title {
     color: ${(props) => props.theme.black};
     font-weight: 600;
-    font-size: 16px;
-  }
-
-  .rent-date {
-    color: ${(props) => props.theme.firstGray};
-    font-weight: 600;
-    font-size: 12px;
+    font-size: 1.25rem;
   }
 `;
 
-const RentRecordState = styled.div`
+const HistorySection = styled.div`
+  width: 100%;
   height: 100%;
-  margin-right: 10px;
-  display: inline-block;
-  float: right;
-  position: relative;
-
-  ${(props) =>
-    props.value === RENT_STATES.RENTED &&
-    css`
-      color: ${props.theme.rentPink};
-    `}
-
-  ${(props) =>
-    props.value === RENT_STATES.RENTABLE &&
-    css`
-      color: ${props.theme.rentGreen};
-    `}
-
-  ${(props) =>
-    props.value === RENT_STATES.UNRENTABLE &&
-    css`
-      color: ${props.theme.rentGray};
-    `}
-
-  span {
-    font-size: 14px;
-    font-weight: 500;
-    position: relative;
-  }
-
-  .rent-highlight {
-    width: 120%;
-    height: 65%;
-
-    position: absolute;
-    bottom: 0;
-    left: -10%;
-
-    ${(props) =>
-      props.value === RENT_STATES.RENTED &&
-      css`
-        background-color: ${props.theme.rentPinkHighlight};
-      `}
-
-    ${(props) =>
-      props.value === RENT_STATES.RENTABLE &&
-      css`
-        background-color: ${props.theme.rentGreenHighlight};
-      `}
-
-    ${(props) =>
-      props.value === RENT_STATES.UNRENTABLE &&
-      css`
-        background-color: ${props.theme.rentGrayHighlight};
-      `}
-  }
 `;
+
+const NoRecord = styled.div`
+  width: 100%;
+  padding: 5rem 0;
+
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 25px;
+
+  text-align: center;
+  color: ${(props) => props.theme.firstGray};
+`;
+
+function RentalHistory({ id, rentState, rentalHistories, setReload }) {
+  return (
+    <Container>
+      <NavBar>
+        <div className="title">대출 기록</div>
+        <RentButton
+          currentRentState={rentState}
+          renteeId={id}
+          onClick={() => setReload()}
+        />
+      </NavBar>
+      <HistorySection>
+        {rentalHistories && rentalHistories.length !== 0 ? (
+          rentalHistories.map((rentalHistory, index) => (
+            <RentalHistoryRow
+              key={index}
+              renterProfileImage={rentalHistory?.renterProfileImage}
+              renterName={rentalHistory?.renterName}
+              rentDate={EpochSecondToDateObject(
+                rentalHistory?.rentalEpochSecond
+              )}
+              returnDate={
+                rentalHistory.returnEpochSecond
+                  ? EpochSecondToDateObject(rentalHistory?.returnEpochSecond)
+                  : undefined
+              }
+              rentState={
+                index !== 0 ? RENT_STATES.RENTABLE : RENT_STATES[rentState]
+              }
+            />
+          ))
+        ) : (
+          <NoRecord>아직 대출 이력이 없어요 😱</NoRecord>
+        )}
+      </HistorySection>
+    </Container>
+  );
+}
 
 export default RentalHistory;
