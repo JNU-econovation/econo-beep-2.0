@@ -1,6 +1,8 @@
 import axios from "axios";
 import { getCookie } from "../utils/cookie";
 
+const IS_DEBUG_MODE = true;
+
 const apiController = axios.create({
   baseURL: import.meta.env.VITE_BEEP_API,
 });
@@ -10,9 +12,11 @@ apiController.interceptors.request.use(
     config.headers["Content-Type"] = "application/json";
 
     if (localStorage.getItem("accessToken")) {
-      config.headers["Authorization"] = `Bearer ${localStorage?.getItem(
-        "accessToken"
-      )}`;
+      config.headers["Authorization"] = `Bearer ${
+        IS_DEBUG_MODE
+          ? import.meta.env.VITE_ADMIN_DEBUG_TOKEN
+          : localStorage?.getItem("accessToken")
+      }`;
     }
     return config;
   },
