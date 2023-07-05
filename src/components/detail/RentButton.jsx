@@ -7,7 +7,7 @@ import RentAPI from "@/lib/api/RentAPI";
 
 function RentButton({ currentRentState, renteeId, setReload }) {
   const [rentState, setRentState] = useState(undefined);
-  const [rentNote, setRentNote] = useState(false);
+  const [isRentBtnModalOpen, setIsRentBtnModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const onButtonClick = async (rentState) => {
@@ -19,7 +19,7 @@ function RentButton({ currentRentState, renteeId, setReload }) {
           setReload();
         } catch (e) {
           setIsLoggedIn(false);
-          setRentNote(true);
+          setIsRentBtnModalOpen(true);
         }
         break;
       }
@@ -31,13 +31,13 @@ function RentButton({ currentRentState, renteeId, setReload }) {
           setReload();
         } catch (e) {
           setIsLoggedIn(false);
-          setRentNote(true);
+          setIsRentBtnModalOpen(true);
         }
         break;
       }
 
       case RENT_STATES.UNRENTABLE: {
-        setRentNote(true);
+        setIsRentBtnModalOpen(true);
         break;
       }
 
@@ -56,9 +56,10 @@ function RentButton({ currentRentState, renteeId, setReload }) {
       <Button value={rentState} onClick={() => onButtonClick(rentState)}>
         {RENT_STATES.RENT_BUTTON[rentState]}
       </Button>
+
       <Modal
-        open={rentNote}
-        setOpen={setRentNote}
+        open={isRentBtnModalOpen}
+        setOpen={setIsRentBtnModalOpen}
         text={!isLoggedIn ? "로그인 후 이용해주세요" : "현재 이용 불가합니다"}
       />
     </>

@@ -203,11 +203,7 @@ function RenteeInfo({
         </ButtonSection>
       </RightBox>
 
-      {isModalOpen && (
-        <CreatePortal>
-          <Modal open={isModalOpen} setOpen={setIsModalOpen} text={modalText} />
-        </CreatePortal>
-      )}
+      <Modal open={isModalOpen} setOpen={setIsModalOpen} text={modalText} />
 
       <WaveSection>
         <ColorWave color={thumbnailMainColor} />

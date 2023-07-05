@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import { Backdrop } from "@mui/material";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import CreatePortal from "../common/CreatePortal";
 
 const ModalContainer = styled.div`
   width: auto;
@@ -21,14 +22,19 @@ const TextContent = styled.div`
 `;
 
 function Modal({ open, setOpen, text }) {
+  if (!open) return;
+
   const modalRef = useRef();
   useOutsideClick(modalRef, () => setOpen(false));
+
   return (
-    <Backdrop sx={{ color: "#fff" }} open={open}>
-      <ModalContainer ref={modalRef}>
-        <TextContent>{text}</TextContent>
-      </ModalContainer>
-    </Backdrop>
+    <CreatePortal>
+      <Backdrop sx={{ color: "#fff" }} open={open}>
+        <ModalContainer ref={modalRef}>
+          <TextContent>{text}</TextContent>
+        </ModalContainer>
+      </Backdrop>
+    </CreatePortal>
   );
 }
 export default Modal;
